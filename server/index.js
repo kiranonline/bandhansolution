@@ -5,9 +5,14 @@ const compression = require("compression");
 const helmet = require("helmet");
 const path = require("path");
 const logger = require("morgan");
+var favicon = require('serve-favicon')
+require("./services/connection");
+
+
+const AuthApis = require("./routes/authApis");
 
 //port 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4500;
 
 //app declaration
 const app = express();
@@ -28,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public'),{
         res.set('x-timestamp', Date.now().toString())
     }
 }));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
 
 //middlewares
 app.use(logger('dev'));
@@ -36,6 +42,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(compression());
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,"views"));
+
+//apis
+app.use(`/apis/v1`,AuthApis)
+
+
+
 
 
 
