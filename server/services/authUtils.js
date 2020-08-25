@@ -11,8 +11,8 @@ exports.isAuthenticated = async (req,res,next) => {
             //console.log(decoded);
             let user = await User.findById(decoded._id).select("-password");
             //console.log(user);
-            user = user.toObject();
             if(user){
+                user = user.toObject();
                 req.user = user;
                 next();
             }
@@ -35,6 +35,32 @@ exports.isAuthenticated = async (req,res,next) => {
         res.status(500).json({
             status : false,
             message : "server error"
+        })
+    }
+};
+
+
+exports.isAdmin = async(req,res,next) => {
+    if(req.user && req.user.userType && req.user.userType==='admin'){
+        next();
+    }
+    else{
+        res.status(401).json({
+            status : false,
+            message : "You don't have permission to use this API."
+        })
+    }
+};
+
+
+exports.isSeller = async(req,res,next) => {
+    if(req.user && req.user.userType && req.user.userType==='seller'){
+        next();
+    }
+    else{
+        res.status(401).json({
+            status : false,
+            message : "You don't have permission to use this API."
         })
     }
 };

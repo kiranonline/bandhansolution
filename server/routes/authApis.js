@@ -1,7 +1,8 @@
 const express = require("express");
 const {body} = require("express-validator");
-const { LoginWithEmail, getUserDetails } = require("../controllers/authControllers");
+const { LoginWithEmailAndPassword, getUserDetails } = require("../controllers/authControllers");
 const {isAuthenticated} = require("../services/authUtils");
+const {errorHandler}  = require("../services/error");
 const router = express.Router();
 
 
@@ -9,7 +10,7 @@ const router = express.Router();
 router.post(`/login-with-email-password`,[
     body("email").isEmail(),
     body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 chars long.')
-],LoginWithEmail)
+],errorHandler,LoginWithEmailAndPassword)
 
 
 

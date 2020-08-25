@@ -10,6 +10,10 @@ require("./services/connection");
 
 
 const AuthApis = require("./routes/authApis");
+const UserApis = require("./routes/userApis");
+const FileUploadApis = require("./routes/fileuploadApis");
+const categoryApis = require("./routes/categoryApis");
+const productApis = require("./routes/prodictApis");
 
 //port 
 const PORT = process.env.PORT || 4500;
@@ -44,7 +48,11 @@ app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,"views"));
 
 //apis
-app.use(`/apis/v1`,AuthApis)
+app.use(`/apis/v1`,AuthApis);
+app.use(`/apis/v1`,UserApis);
+app.use(`/apis/v1`,FileUploadApis);
+app.use("/apis/v1",categoryApis);
+app.use("/apis/v1",productApis);
 
 
 

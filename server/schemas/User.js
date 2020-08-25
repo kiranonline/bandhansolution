@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
     email : {
         type : String
     },
+    phoneNumber:{
+        type : String,
+    },
     password : {
         type : String
     },
@@ -16,6 +19,9 @@ const UserSchema = new mongoose.Schema({
         type : String,
         enum : ['customer','seller','admin'],
         default: 'customer'
+    },
+    avatar:{
+        type:String
     },
     isActive:{
         type : Boolean,
