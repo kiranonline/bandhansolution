@@ -33,6 +33,11 @@ const ProductSchema = new mongoose.Schema({
         type : Boolean,
         default : true,
         required : true
+    },
+    sold:{
+        type:Number,
+        default:0,
+        required:true
     }
 },{
     timestamps : true

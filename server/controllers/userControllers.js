@@ -22,7 +22,8 @@ exports.createUser = async(req,res,next)=>{
                 userType : req.body.userType,
                 phoneNumber : req.body.phoneNumber,
                 avatar : req.body.avatar,
-                isActive : true
+                isActive : true,
+                isVerified:true
             })
             console.log(user);
             await user.save();
