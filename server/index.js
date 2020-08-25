@@ -13,7 +13,7 @@ const AuthApis = require("./routes/authApis");
 const UserApis = require("./routes/userApis");
 const FileUploadApis = require("./routes/fileuploadApis");
 const categoryApis = require("./routes/categoryApis");
-const productApis = require("./routes/prodictApis");
+const productApis = require("./routes/productApis");
 
 //port 
 const PORT = process.env.PORT || 4500;
