@@ -22,6 +22,7 @@ function UserCreate(props) {
     const [form] = Form.useForm(); 
     const [avatar,setAvatar] = useState();
     const [isAvatarUploading,setIsAvatarUploading] = useState(false);
+    const [userType,setUserType] = useState();
 
     const onFinish = (data)=>{
         if(!avatar){
@@ -29,7 +30,7 @@ function UserCreate(props) {
         }
         else{
             //console.log(avatar,data,apis.USER_CREATE);
-            const {email,name,phoneNumber,userType,password} = data;
+            const {email,name,phoneNumber,userType,password,deliverTo} = data;
             props.loading(true);
             http.post(apis.USER_CREATE,{
                 email,
@@ -37,13 +38,15 @@ function UserCreate(props) {
                 phoneNumber,
                 userType,
                 password,
-                avatar
+                avatar,
+                deliverTo
             }).then(result=>{
                 console.log(result.data);
                 if(result.data.status){
                     message.info("User created sucessfully");
                     form.resetFields();
                     setAvatar();
+                    setUserType();
                 }
                 else{
                     message.error(result.data.message)
@@ -83,6 +86,7 @@ function UserCreate(props) {
         })
         return false;
     }
+
 
     return (
         <div className="user-create-wrapper full-width-height">
@@ -156,6 +160,7 @@ function UserCreate(props) {
                                 rules={[{ required: true, message: `Please select one option!` }]}
                             >
                                 <Select
+                                    onChange={setUserType}
                                     placeholder="Select a user type"
                                 >
                                     <Select.Option value="admin">Admin</Select.Option>
@@ -196,6 +201,24 @@ function UserCreate(props) {
                             </Form.Item>
                         </Col>
                     </Row>
+                    {
+                        userType==="seller"?
+                            <Row justify="center" gutter={16}>
+                                <Col span={24}>
+                                    <Form.Item 
+                                        label="Delivery Pin Codes" 
+                                        name="deliverTo"
+                                    >
+                                        <Select mode="tags" style={{ width: '100%', minHeight:'50px' }} tokenSeparators={[',']}>
+
+                                        </Select>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            :
+                            null
+                    }
+                    
                     <Row justify="end" gutter={16}>
                         <Col>
                             <Form.Item>

@@ -58,7 +58,12 @@ export const AdminSideBar = (props)=>(
 
 export const SellerSideBar = (props)=>(
     <Menu  theme="dark" mode="inline">                
-        
+        <Menu.Item  key="32">
+            <Link to="/dashboard/product/list">
+                <UnorderedListOutlined />
+                <span>PRODUCT LIST</span>
+            </Link>
+        </Menu.Item>
     </Menu>
 )
 

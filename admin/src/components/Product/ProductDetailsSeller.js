@@ -16,9 +16,10 @@ import "./Product.less";
 import {Link,useParams} from "react-router-dom";
 import { Editor, EditorState, convertFromRaw } from "draft-js";
 import ProductDetailsCommon from "./ProductDetailsCommon";
+import UpdateProductStock from "./UpdateProductStock";
 const { Title } = Typography;
 
-function ProductDetailsAdmin(props) {
+function ProductDetailsSeller(props) {
     const {id} = useParams();
     const [productDetails,setProductDetails] = useState();
     const [productDescription,setProductDescription] = useState(() => EditorState.createEmpty());
@@ -26,7 +27,7 @@ function ProductDetailsAdmin(props) {
 
     const fetchProductDetails = ()=>{
         props.loading(true);
-        http.get(`${apis.PRODUCT_DETAILS_FOR_ADMIN}/${id}`).then((result)=>{
+        http.get(`${apis.PRODUCT_DETAILS_FOR_SELLER}/${id}`).then((result)=>{
             console.log(result.data)
             if(result.data.status){
                 setProductDetails(result.data.data);
@@ -60,6 +61,7 @@ function ProductDetailsAdmin(props) {
             />
             <div className="product-details-inner padding-after-page-header" >
                 <ProductDetailsCommon productDescription={productDescription} productDetails={productDetails}/>
+                <UpdateProductStock productDetails={productDetails} />
             </div>
         </div>
     )
@@ -73,4 +75,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, { 
     logout,
     loading
-})(ProductDetailsAdmin);
+})(ProductDetailsSeller);

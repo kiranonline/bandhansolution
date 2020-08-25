@@ -1,7 +1,10 @@
 const Product = require("../models/Product");
+const Stock = require("../models/Stock");
+const {createStockForNewProduct} = require("../services/stock")
+const mongoose = require("mongoose")
 
 
-//++++++++++++++++++++++++++++++++++++++ create user +++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++ create product by admin +++++++++++++++++++++++++++++++++++++
 exports.createProduct = async(req,res,next)=>{
     try{
         let product = new Product({
@@ -18,6 +21,7 @@ exports.createProduct = async(req,res,next)=>{
         console.log(product);
         let savedproduct = await product.save();
         console.log(savedproduct);
+        createStockForNewProduct(savedproduct._id)
         res.json({
             status : true,
             message : 'Product Created sucessfully.'
@@ -36,7 +40,7 @@ exports.createProduct = async(req,res,next)=>{
 
 
 
-//++++++++++++++++++++++++++++++++++++++ list products +++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++ list products for amdin+++++++++++++++++++++++++++++++++++++
 exports.listProductsForAdmin = async(req,res,next)=>{
     try{ 
         let query = {isActive:true};
@@ -66,7 +70,7 @@ exports.listProductsForAdmin = async(req,res,next)=>{
 
 
 
-//++++++++++++++++++++++++++++++++++++++ product details by admin +++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++ product details for admin +++++++++++++++++++++++++++++++++++++
 exports.productDetailsForAdmin = async(req,res,next)=>{
     try{
         let id = req.params.id;
@@ -86,6 +90,219 @@ exports.productDetailsForAdmin = async(req,res,next)=>{
             })
         }
         
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+//++++++++++++++++++++++++++++++++++++++ list products for seller+++++++++++++++++++++++++++++++++++++
+exports.listProductsForSeller = async(req,res,next)=>{
+    try{ 
+        let query = {
+            isActive:true,
+            seller : req.user._id
+        };
+        let pageNumber = req.body.pageNumber || 1;
+        let pageSize = req.body.pageSize || 50;
+        pageNumber = parseInt(pageNumber);
+        pageSize = parseInt(pageSize);
+        console.log(pageNumber,pageSize)
+        let [products,totalProductsSize] = await Promise.all([
+            Stock.aggregate([
+                {
+                    $match : query
+                },
+                {
+                    $skip : ((pageNumber-1)*pageSize)
+                },
+                {
+                    $limit : pageSize
+                },
+                {
+                    $lookup : {
+                        from : 'products',
+                        localField : 'product',
+                        foreignField : '_id',
+                        as : 'product'
+                    }
+                },
+                {
+                    $unwind:{
+                        path : '$product'
+                    }
+                },
+                {
+                    $lookup : {
+                        from : 'categories',
+                        localField : 'product.category',
+                        foreignField : '_id',
+                        as : 'category'
+                    }
+                },
+                {
+                    $project:{
+                        "name":"$product.name",
+                        "images":"$product.images",
+                        "regularPrice":"$product.regularPrice",
+                        "salePrice":"$product.salePrice",
+                        "stockUpdated":"$updatedAt",
+                        "category":1,
+                        "stock":1,
+                        "productId":"$product._id",
+                        
+                    }
+                }
+            ]),
+            Stock.countDocuments(query)
+        ]);
+        res.json({
+            status : true,
+            message : "Products fetched sucessfully.",
+            data : products,
+            total : totalProductsSize
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
+
+
+
+
+
+
+//++++++++++++++++++++++++++++++++++++++ product details for admin +++++++++++++++++++++++++++++++++++++
+exports.productDetailsForSeller = async(req,res,next)=>{
+    try{
+        let id = req.params.id;
+        let query = {
+            product : mongoose.Types.ObjectId(id),
+            isActive:true,
+            seller : req.user._id
+        };
+        console.log(query)
+        let product = await Stock.aggregate([
+            {
+                $match : query
+            },
+            {
+                $lookup : {
+                    from : 'products',
+                    localField : 'product',
+                    foreignField : '_id',
+                    as : 'product'
+                }
+            },
+            {
+                $unwind:{
+                    path : '$product'
+                }
+            },
+            {
+                $lookup : {
+                    from : 'categories',
+                    localField : 'product.category',
+                    foreignField : '_id',
+                    as : 'category'
+                }
+            },
+            {
+                $project:{
+                    "name":"$product.name",
+                    "images":"$product.images",
+                    "regularPrice":"$product.regularPrice",
+                    "salePrice":"$product.salePrice",
+                    "stockUpdated":"$updatedAt",
+                    "category":1,
+                    "stock":1,
+                    "description" : "$product.description"
+                }
+            }
+        ])
+        console.log(product);
+        if(product.length>0){
+            res.json({
+                status : true,
+                message : "Products details fetched sucessfully.",
+                data : product[0]
+            })
+        }
+        else{
+            res.json({
+                status : false,
+                message : "Invalid Product Id."
+            })
+        }
+        
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
+
+
+
+
+
+
+
+//++++++++++++++++++++++++++++++++++++++ create product by admin +++++++++++++++++++++++++++++++++++++
+exports.updateProductStockBySeller = async(req,res,next)=>{
+    try{
+        let {id,stock} = req.body;
+        let updatedStock = await Stock.findOneAndUpdate(
+            {
+                _id : mongoose.Types.ObjectId(id),
+                isActive:true,
+                seller : req.user._id
+
+            },
+            {
+                stock : stock
+            },
+            {
+                new : true
+            }
+        )
+        console.log(updatedStock)
+        if(updatedStock){
+            res.json({
+                status : true,
+                message : "stock updated sucessfully."
+            })
+        }
+        else{
+            res.json({
+                status : false,
+                message : "Invalid details."
+            })
+        }
     }
     catch(err){
         console.log(err);
