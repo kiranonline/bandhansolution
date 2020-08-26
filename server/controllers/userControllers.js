@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Product = require("../models/Product");
 const { createStockForNewSeller } = require("../services/stock");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -48,7 +49,6 @@ exports.createUser = async(req,res,next)=>{
         })
     }
 }
-
 
 
 //++++++++++++++++++++++++++++++++++++++ list users +++++++++++++++++++++++++++++++++++++
