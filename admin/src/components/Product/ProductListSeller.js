@@ -12,10 +12,10 @@ import apis from "../../services/apis";
 import http from "../../services/httpCall";
 import Errorhandler from "../../services/errorHandler";
 import "./Product.less";
-import column from "./productcolumnAdmin";
+import column from "./productcolumnSeller";
 import {Link} from "react-router-dom";
 
-function ProductListAdmin(props) {
+function ProductListSeller(props) {
     const [isTableLoading,setIstableLoading] = useState(false);
     const [productData,setProductData] = useState([]);
     const [currentPage,setCurrentpage] = useState(1);
@@ -34,7 +34,7 @@ function ProductListAdmin(props) {
             pageNumber : currentPage,
             pageSize:pageSize
         }
-        http.post(apis.LIST_PRODUCTS_FOR_ADMIN,body).then((result)=>{
+        http.post(apis.LIST_PRODUCT_FOR_SELLER,body).then((result)=>{
             console.log(result.data)
             if(result.data.status){
                 setProductData(result.data.data);
@@ -95,4 +95,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, { 
     logout,
     loading
-})(ProductListAdmin);
+})(ProductListSeller);

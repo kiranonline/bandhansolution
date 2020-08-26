@@ -13,6 +13,8 @@ import ProductCreate from "../Product/ProductCreate";
 import ProductListAdmin from "../Product/ProductListAdmin";
 import ProductDetailsAdmin from "../Product/ProductDetailsAdmin";
 
+import ProductListSeller from "../Product/ProductListSeller";
+import ProductDetailsSeller from "../Product/ProductDetailsSeller";
 
 
 function Dashboard(props) {
@@ -31,31 +33,46 @@ function Dashboard(props) {
                 </Col>
                 <Col className={"dashboard-content-col"+(sideBarCollapsed?" dashboadr-sidebar-collapsed":" dashboard-sidebar-normal")}>
                     <Layout.Content  className="dasboard-content-wrapper">
-                        <div className="dashboard-content-inner">
-                            <Switch>
-                                <Route exact={true} path="/dashboard/user/list">
-                                    <UserList />
-                                </Route>
-                                <Route exact={true} path="/dashboard/user/create">
-                                    <UserCreate />
-                                </Route>
-                                <Route exact={true} path="/dashboard/category/create">
-                                    <CategoryCreate />
-                                </Route>
-                                <Route exact={true} path="/dashboard/category/list">
-                                    <CategoryList />
-                                </Route> 
-                                <Route exact={true} path="/dashboard/product/create">
-                                    <ProductCreate />
-                                </Route>
-                                <Route exact={true} path="/dashboard/product/list">
-                                    <ProductListAdmin />
-                                </Route>
-                                <Route exact={true} path="/dashboard/product/details/:id">
-                                    <ProductDetailsAdmin />
-                                </Route>
-                            </Switch>
-                        </div>   
+                        {
+                            props.Auth.userdetails.userType && props.Auth.userdetails.userType==='admin'?
+                            <div className="dashboard-content-inner">
+                                <Switch>
+                                    <Route exact={true} path="/dashboard/user/list">
+                                        <UserList />
+                                    </Route>
+                                    <Route exact={true} path="/dashboard/user/create">
+                                        <UserCreate />
+                                    </Route>
+                                    <Route exact={true} path="/dashboard/category/create">
+                                        <CategoryCreate />
+                                    </Route>
+                                    <Route exact={true} path="/dashboard/category/list">
+                                        <CategoryList />
+                                    </Route> 
+                                    <Route exact={true} path="/dashboard/product/create">
+                                        <ProductCreate />
+                                    </Route>
+                                    <Route exact={true} path="/dashboard/product/list">
+                                        <ProductListAdmin />
+                                    </Route>
+                                    <Route exact={true} path="/dashboard/product/details/:id">
+                                        <ProductDetailsAdmin />
+                                    </Route>
+                                </Switch>
+                            </div>
+                            :
+                            <div className="dashboard-content-inner">
+                                <Switch>
+                                    <Route path="/dashboard/product/list">
+                                        <ProductListSeller />
+                                    </Route>
+                                    <Route exact={true} path="/dashboard/product/details/:id">
+                                        <ProductDetailsSeller />
+                                    </Route>
+                                </Switch>
+                            </div>
+                        }
+                           
                         <Layout.Footer className="dashboard-footer-wrapper">BANDHAN SOLUTIONS</Layout.Footer>    
                     </Layout.Content>
                 </Col>

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const { createStockForNewSeller } = require("../services/stock");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -25,8 +26,14 @@ exports.createUser = async(req,res,next)=>{
                 isActive : true,
                 isVerified:true
             })
+            if(req.body.deliverTo && Array.isArray(req.body.deliverTo) ){
+                user.deliverTo = req.body.deliverTo;
+            }
             console.log(user);
             await user.save();
+            if(user.userType==='seller'){
+                createStockForNewSeller(user._id)
+            }
             res.json({
                 status : true,
                 message : 'User registered sucessfully.'
@@ -72,5 +79,6 @@ exports.listUsers = async(req,res,next)=>{
         })
     }
 }
+
 
 

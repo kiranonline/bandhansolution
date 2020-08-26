@@ -37,6 +37,11 @@ const UserSchema = new mongoose.Schema({
         {
             type: Number
         }
+    ],
+    deliverTo:[
+        {
+            type:Number
+        }
     ]
 },{
     timestamps : true
