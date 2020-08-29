@@ -63,3 +63,22 @@ exports.listCategory = async(req,res,next)=>{
         })
     }
 }
+
+exports.listCategoryForUsers = async(req,res,next) => {
+    try{
+        let category = await Category.find();
+        if(category){
+            res.json({
+                status:true,
+                data: category
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status:false,
+            message:"Server Error"
+        })
+    }
+}

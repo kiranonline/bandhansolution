@@ -48,42 +48,29 @@ exports.LoginWithEmailAndPassword = async(req,res,next)=>{
 
 //++++++++++++++++++++++++++++++++++++++ Create Normal User with email-id or phoneNumber & password +++++++++++++++++++++++++++++++++++++
 exports.createnormalUser= async(req,res,next) =>{
+    
     try{
-        let existingUser = await User.findOne({$or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}]})
+        let existingUser;
+        if(req.body.email){
+            existingUser = await User.findOne({$or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}]})
+        }else{
+            existingUser = await User.findOne({phoneNumber:req.body.phoneNumber})
+        }
         // console.log(existingUser);
         if(existingUser){
             res.json({
                 status : false,
-                message : 'The email or phone number is already registered with another account.'
+                message : 'The phone number is already registered with another account.'
             })
         }else{
             let securepassword = await bcrypt.hash(req.body.password, saltRounds);
             let otp_number=Math.floor(100000 + Math.random() * 900000);
-            if(req.body.email){
-                //Create User with email id.
-                let user = new User({
-                    name : req.body.name,
-                    password : securepassword,
-                    email : req.body.email,
-                    userType : 'customer',
-                    isActive : true,
-                    isVerified:false,
-                    otp:otp_number
-                })
-                console.log(user);
-                await user.save();
-                
-                res.json({
-                    status : true,
-                    message : 'User registered sucessfully.',
-                    data:user._id
-                })
-
-            }else{
+            if(req.body.phoneNumber){
                 //create user with phone number.
                 let user = new User({
                     name : req.body.name,
                     password : securepassword,
+                    email : req.body.email,
                     phoneNumber : req.body.phoneNumber,
                     userType : 'customer',
                     isActive : true,
@@ -98,6 +85,7 @@ exports.createnormalUser= async(req,res,next) =>{
                     message : 'User registered sucessfully.',
                     data:user._id
                 })
+
             }
         }
     }
@@ -113,9 +101,10 @@ exports.createnormalUser= async(req,res,next) =>{
 exports.otpverification= async(req,res,next)=>{
     try{
         const user_otp=req.body.otp;
-        console.log(req.body.user_id)
+        // console.log(req.body.user_id)
         const _id=req.body.user_id;
         let user = await User.find({_id:_id});
+        // console.log(user[0].otp.includes(user_otp));
         if(user && user[0].otp.includes(user_otp)){
             let updated_user=user;
             updated_user[0].otp=[];
@@ -134,7 +123,8 @@ exports.otpverification= async(req,res,next)=>{
               return res.json({
                 status: true,
                 message: "Successfully Logged in",
-                token: token
+                token: token,
+                data:updated_user
               });
         }else{
             res.json({
@@ -154,14 +144,17 @@ exports.otpverification= async(req,res,next)=>{
     
 }
 
+
+//++++++++++++++++++++++++++++++++++++++ Login User with phoneNumber & password +++++++++++++++++++++++++++++++++++++
 exports.loginnormalUser= async(req,res,next)=>{
     try{
-        let user = User.find({$or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}]});
-        if(user){
-            let isPasswordValid = await user.comparePassword(req.body.password);
+        let user = await User.find({phoneNumber:req.body.phoneNumber});
+        console.log(user);
+        if(user[0]){
+            let isPasswordValid = await user[0].comparePassword(req.body.password);
             if(isPasswordValid){
-                let token = jwt.sign({_id : user._id.toString()},process.env.JWT_SECRET_KEY);
-                let data = user.toObject();
+                let token = jwt.sign({_id : user[0]._id.toString()},process.env.JWT_SECRET_KEY);
+                let data = user[0].toObject();
                 delete data["password"];
                 res.json({
                     status : true,
@@ -180,7 +173,7 @@ exports.loginnormalUser= async(req,res,next)=>{
         else{
             res.json({
                 status : false,
-                message : 'email does not exist'
+                message : 'phone number does not exist'
             })
         }
     }

@@ -1,6 +1,6 @@
 const express = require("express");
 const {body} = require("express-validator");
-const { createCategory, listCategory } = require("../controllers/categoryControllers");
+const { createCategory, listCategory, listCategoryForUsers } = require("../controllers/categoryControllers");
 const {isAuthenticated,isAdmin} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
 const router = express.Router();
@@ -15,6 +15,10 @@ router.post(`/category/create`,isAuthenticated,isAdmin,[
 
 //++++++++++++++++++++++++++++++++ List Categories ++++++++++++++++++++++++++++++++++
 router.post('/category/list',isAuthenticated,isAdmin,listCategory)
+
+
+//++++++++++++++++++++++++++++++++ List Categories for users ++++++++++++++++++++++++++++++++++
+router.get('/user/category/list',listCategoryForUsers)
 
 
 
