@@ -48,9 +48,15 @@ exports.LoginWithEmailAndPassword = async(req,res,next)=>{
 
 //++++++++++++++++++++++++++++++++++++++ Create Normal User with email-id or phoneNumber & password +++++++++++++++++++++++++++++++++++++
 exports.createnormalUser= async(req,res,next) =>{
+    
     try{
-        let existingUser = await User.findOne({$or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}]})
-        console.log(existingUser);
+        let existingUser;
+        if(req.body.email){
+            existingUser = await User.findOne({$or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}]})
+        }else{
+            existingUser = await User.findOne({phoneNumber:req.body.phoneNumber})
+        }
+        // console.log(existingUser);
         if(existingUser){
             res.json({
                 status : false,
@@ -139,7 +145,7 @@ exports.otpverification= async(req,res,next)=>{
 }
 
 
-//++++++++++++++++++++++++++++++++++++++ Create Normal User with email-id or phoneNumber & password +++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++ Login User with phoneNumber & password +++++++++++++++++++++++++++++++++++++
 exports.loginnormalUser= async(req,res,next)=>{
     try{
         let user = await User.find({phoneNumber:req.body.phoneNumber});

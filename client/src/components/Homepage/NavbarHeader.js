@@ -1,4 +1,5 @@
-import React,{useState,useEffect,useHistory} from 'react'
+import React,{useState,useEffect} from 'react';
+import {useHistory, Redirect} from "react-router-dom";
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import apis from "../../services/apis";
@@ -11,14 +12,17 @@ import krishi from "./static/images/krishi.jpeg";
 Modal.setAppElement('#root');
 function NavbarHeader(props) {
   // const [modalIsOpen,setModalIsOpen] = useState(false);
-  const [search_query,setSearchQuery] = useState("s");
-  const login_item=props.auth.isLoggedIn?{display:"none"}:{}
-  const myaccount_item=props.auth.isLoggedIn?{}:{display:"none"}
-  // const history= useHistory();
-
+  const [search_query,setSearchQuery] = useState("");
+  let login_item=props.auth.isLoggedIn?{display:"none"}:{}
+  let myaccount_item=props.auth.isLoggedIn?{}:{display:"none"}
+  const history= useHistory();
+  console.log(history);
   const handleSearch = () => {
-    // console.log(history);
+    history.push("/products");
     console.log(search_query);
+    // return (
+    //   <Redirect to="/products" />
+    // )
   }
 
     return (
@@ -55,8 +59,8 @@ function NavbarHeader(props) {
                 <ul className="main-navigation">
                   <li><a href="#"   className="parent"  >Home</a> </li>
                   <li className="search-box">
-                        <input placeholder="search.." type="text" onClick={(e)=> setSearchQuery(e.target.value)}/>
-                        <button onClick={()=>handleSearch()}><i className="fa fa-search"></i></button>
+                        <input placeholder="search.." type="text" name="search_query" onChange={(e)=> setSearchQuery(e.target.value)}/>
+                        <button onClick={handleSearch}><i className="fa fa-search"></i></button>
                   </li>
                   <li style={login_item}><a href="#"   className="parent"  onClick={()=>props.modal(true)}>Login</a> </li>
                   <li style={myaccount_item}><a href="#"   className="parent"  >My Account</a> </li>
