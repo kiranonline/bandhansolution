@@ -7,6 +7,7 @@ import http from "../../services/httpCall";
 import Account from './Account';
 import { modal } from "../../actions/modalAction";
 import krishi from "./static/images/krishi.jpeg";
+import '../NavbarHeader.css'
 
 
 Modal.setAppElement('#root');
@@ -28,6 +29,7 @@ function NavbarHeader(props) {
     return (
       <div>
         <Modal 
+          contentClassName="Content"
           isOpen={props.modalisopen.loading}
           onRequestClose={()=> props.modal(false)}
           style={{
