@@ -7,6 +7,7 @@ import { loading } from "../../actions/loadingAction";
 import { modal } from "../../actions/modalAction";
 import { login, setUserDetails } from "../../actions/authAction";
 import './Account.css';
+import krishi from "./static/images/krishi.jpeg";
 
 function Account(props) {
     const [inview,changeinview] = useState('login');
@@ -107,7 +108,7 @@ function Account(props) {
         <div>
             {inview=== 'login' ? 
             (
-                <div>
+                <div className="login-wrapper">
                     <button className="account-btn" onClick={()=>props.modal(false)}>X</button>
                     <form className="login-form" onSubmit={handleSubmit(onSubmitLogin)}>
                                     <h1>
@@ -159,53 +160,68 @@ function Account(props) {
                         <button onClick={()=> otpverification(otp)}>Verify</button>
                     </div>
                     <div className={`limiter ${showotpfield? "dnone":"dblock"}`}>
-                        <div>
-                            <button className="account-btn" onClick={()=>props.modal(false)}>X</button>
-                            <form className="login100-form" onSubmit={handleSubmit(onSubmitRegitser)}>
-                                    <h1 >
-                                        Welcome
-                                    </h1>
-                                    <p className="errorMessage">{errormessage!==""&&errormessage}</p>
-                                    <div className="wrap-input100">
-                                        <input className="input100" type="text" name="phoneNumber" placeholder="Phone Number" ref={register({required:true,minLength:10,maxLength:10})} />
-                                    </div>
-                                    {errors.phoneNumber && (
-                                        <p>Your phone number is required.</p>
-                                    )}
-
-                                    <div className="wrap-input100">
-                                        <input className="input100" type="text" name="email" placeholder="Email" ref={register({validate:validateEmail})} />
-                                    </div>
-                                    {errors.email && (
-                                        <p>Email is required.</p>
-                                    )}
-
-                                    <div className="wrap-input100">
-                                        <input className="input100" type="text" name="name" placeholder="Name" ref={register({required:true})}/>
-                                    </div>
-                                    {errors.name && (
-                                        <p>This is required.</p>
-                                    )}
-
-                                    <div className="wrap-input100">
-                                        <input className="input100" type="password" name="password" placeholder="Password" ref={register({required:true, minLength:5})} />
-                                    </div>
-                                    {errors.password && (
-                                        <p>This is required and enter more than 5 characters.</p>
-                                    )}
-
-                                    <div className="container-login100-form-btn">
-                                        <div className="wrap-login100-form-btn">
-                                            <div className="login100-form-bgbtn"></div>
+                        <div className="registerWrapper">
+                            <button className="account-btn" onClick={()=>props.modal(false)}>x</button>
+                            <div className="">
+                                <div>
+                                    <div className="registerForm">
+                                        <div className="sidePart">
+                                            <h1>Krishi</h1>
                                         </div>
                                     </div>
-                                    <button className="login-form-btn">
-                                        Register
-                                    </button>
-                                    <button className="signup-form-btn" onClick={()=>changeinview('login')}>
-                                        Login
-                                    </button>
-                                </form>
+                                    <div className="registerForm">
+                                        <form className="login100-form" onSubmit={handleSubmit(onSubmitRegitser)}>
+                                        {/* <h1 >
+                                            Welcome
+                                        </h1> */}
+                                        <p className="errorMessage">{errormessage!==""&&errormessage}</p>
+                                        <div className="wrap-input100">
+                                            <input className="input100" type="text" name="phoneNumber" placeholder="Phone Number" ref={register({required:true,minLength:10,maxLength:10})} />
+                                            <label for="email" class="label-email">
+                                                <span class="content-email">Email</span>
+                                            </label>
+                                        </div>
+                                        {errors.phoneNumber && (
+                                            <p>Your phone number is required.</p>
+                                        )}
+
+                                        <div className="wrap-input100">
+                                            <input className="input100" type="text" name="email" placeholder="Email" ref={register({validate:validateEmail})} />
+                                        </div>
+                                        {errors.email && (
+                                            <p>Email is required.</p>
+                                        )}
+
+                                        <div className="wrap-input100">
+                                            <input className="input100" type="text" name="name" placeholder="Name" ref={register({required:true})}/>
+                                        </div>
+                                        {errors.name && (
+                                            <p>This is required.</p>
+                                        )}
+
+                                        <div className="wrap-input100">
+                                            <input className="input100" type="password" name="password" placeholder="Password" ref={register({required:true, minLength:5})} />
+                                        </div>
+                                        {errors.password && (
+                                            <p>This is required and enter more than 5 characters.</p>
+                                        )}
+
+                                        <div className="container-login100-form-btn">
+                                            <div className="wrap-login100-form-btn">
+                                                <div className="login100-form-bgbtn"></div>
+                                            </div>
+                                        </div>
+                                        <button className="login-form-btn">
+                                            Register
+                                        </button>
+                                        <button className="signup-form-btn" onClick={()=>changeinview('login')}>
+                                            Login
+                                        </button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </React.Fragment>

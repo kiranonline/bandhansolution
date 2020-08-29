@@ -6,6 +6,7 @@ import PrivateRoute from "./components/Root/PrivateWrapper";
 import http from "./services/httpCall"
 import apis from "./services/apis"
 import {login,logout,setUserDetails} from "./actions/authAction";
+import {fetchCategories} from "./actions/categoryAction";
 import Footer from "./components/Footer/Footer";
 import HomeComponent from "./components/Homepage/HomePage";
 import PrivacyPolicyComponent from "./components/Footer/PrivacyPolicyComponent";
@@ -13,6 +14,7 @@ import PrivateComponent from "./components/PrivateWrapper/PrivateComponents";
 import TermsComponent from "./components/Footer/TermsComponent";
 import BrandHeader from './components/Homepage/BrandHeader';
 import NavbarHeader from './components/Homepage/NavbarHeader';
+import ProductComponent from './components/Products/ProductComponent';
 
 // import './App.css';
 
@@ -42,10 +44,25 @@ function App(props) {
         })
     }
 
+  let fetchCategories = () => {
+    http.get(apis.GET_CATEGORY_LIST)
+    .then((result)=>{
+      console.log(result);
+      if(result.data.status){
+        props.fetchCategories(result.data.data);
+      }else{
+        console.log(result.data.message);
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
     // fetching user details on component load
     useEffect(()=>{
             fetchUserDetails();
-                
+            fetchCategories();
     },[])
 
   return (
@@ -59,10 +76,13 @@ function App(props) {
                     <Route path="/" exact={true}>
                       <HomeComponent />
                     </Route>
-                    <Route path="/privacy" exact={true}>
+                    <Route path="/privacy">
                       <PrivacyPolicyComponent />
                     </Route>
-                    <Route path="/terms" exact={true}>
+                    <Route path="/products">
+                      <ProductComponent />
+                    </Route>
+                    <Route path="/terms">
                       <TermsComponent />
                     </Route>
                     <PrivateRoute path="/">
@@ -85,5 +105,6 @@ const mapStateToProps= (state) => ({
 export default connect(mapStateToProps, {
   login,
   logout,
-  setUserDetails
+  setUserDetails,
+  fetchCategories
 })(App);
