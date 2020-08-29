@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import { IonContent, IonFab, IonFabButton, IonPage, IonInput, IonItem, IonButton, IonIcon, IonGrid, IonRow, IonCol } from '@ionic/react';
 import "./Signup.css";
 import { arrowBackCircle,homeOutline } from 'ionicons/icons';
+
 import MainSignUp from "./MainSignUp";
 import SignUpOTP from "./SignUpOTP"
 
@@ -23,7 +24,7 @@ const Signup = ()=>{
         <IonPage>
             <IonContent fullscreen={true} className="signup-page-wrapper ion-padding">   
                 <IonFab vertical="top" horizontal="start" slot="fixed">
-                    <IonFabButton className="custom-back" routerLink="/login">
+                    <IonFabButton className="custom-back" routerLink="/home">
                         <IonIcon icon={arrowBackCircle} />
                     </IonFabButton>
                 </IonFab>

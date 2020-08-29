@@ -50,7 +50,7 @@ exports.LoginWithEmailAndPassword = async(req,res,next)=>{
 exports.createnormalUser= async(req,res,next) =>{
     try{
         let existingUser = await User.findOne({$or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}]})
-        // console.log(existingUser);
+        console.log(existingUser);
         if(existingUser){
             res.json({
                 status : false,

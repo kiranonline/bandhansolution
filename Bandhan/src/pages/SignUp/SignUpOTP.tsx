@@ -7,12 +7,15 @@ import {login} from "../../actions/authAction";
 import apis from "../../services/apis";
 import http from "../../services/httpCall";
 import { Plugins } from '@capacitor/core';
+import {useHistory} from "react-router-dom"
 const { Storage } = Plugins;
 
 
 
 const SignUpOTP = (props:any)=>{
     const {register,handleSubmit,watch,errors,setValue,reset,} = useForm({mode: "onSubmit",reValidateMode: "onChange"});
+    const history = useHistory();
+
 
     const onSubmit = (data:any)=>{
         console.log(data);
@@ -29,6 +32,7 @@ const SignUpOTP = (props:any)=>{
                 });
                 props.loading(false);
                 props.login(result.data.token,result.data.data);
+                history.push("/home")
             }
             else{
                 props.openToast(result.data.message);

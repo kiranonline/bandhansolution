@@ -6,6 +6,12 @@ import {logout} from "../actions/authAction";
 import './Home.css';
 
 const Home: React.FC = (props:any) => {
+  console.log("2")
+  const IamPressed = ()=>
+  {
+    console.log("yooo")
+    //props.logout()
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -20,14 +26,16 @@ const Home: React.FC = (props:any) => {
             
           </IonToolbar>
         </IonHeader>
-        <IonButton onClick={props.logout} color="danger">Log Out</IonButton>
-        <ExploreContainer />
+        <IonButton onClick={IamPressed} color="danger">Log Out</IonButton>
+        <ExploreContainer  logout={props.logout}/>
       </IonContent>
     </IonPage>
   );
 };
 
-const mapStateToProps= (state:any) => ({})
+const mapStateToProps= (state:any) => ({
+  Auth:state.Auth
+})
 export default connect(mapStateToProps, { 
   logout
 })(Home);

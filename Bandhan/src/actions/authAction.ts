@@ -13,15 +13,17 @@ export const login = (token:any,userdetails:any) => {
 };
 
 export const logout = ()=> (dispatch:any) => {
-    //localStorage.removeItem("Token");
     Storage.remove({ key: 'Token' }).then((result)=>{
-        console.log(result);
         dispatch({
             type: 'LOGOUT'
         })
     })
 };
   
+
+
+  
+
 export const setUserDetails = (user:any)=>{
     return {
         type : 'SET_USER_DETAILS',
