@@ -5,7 +5,9 @@ const {errorHandler}  = require("../services/error");
 const router = express.Router();
 
 
-//++++++++++++++++++++++++++++++++ Product List ++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++ Product Highlight for Homepage ++++++++++++++++++++++++++++++++++
 router.get("/user/producthighlight",producthighlight);
+
+
 
 module.exports = router;
