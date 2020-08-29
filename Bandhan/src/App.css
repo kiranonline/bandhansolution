@@ -1,0 +1,6 @@
+.input-validation-error{
+    border:1.5px solid var(--ion-color-danger);
+}
+.custom-back{
+    --background:green;
+}
