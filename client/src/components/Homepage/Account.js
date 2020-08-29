@@ -110,32 +110,49 @@ function Account(props) {
             (
                 <div className="login-wrapper">
                     <button className="account-btn" onClick={()=>props.modal(false)}>X</button>
-                    <form className="login-form" onSubmit={handleSubmit(onSubmitLogin)}>
+                    <div>
+                        <div className="registerForm side-div">
+                            <div className="sidePart">
+                                <h1>Krishi</h1>
+                            </div>
+                        </div>
+                    <div className="registerForm">
+                        <form className="login-form" onSubmit={handleSubmit(onSubmitLogin)}>
                                     <h1>
                                         Welcome
                                     </h1>
                                     <div className="wrap-input100">
-                                        <input className="input100" type="text" name="phoneNumber" placeholder="Phone Number" ref={register({required:true, minLength:10,maxLength:10})} />
+                                        <input className="input100" type="text" name="phoneNumber"  ref={register({required:true, minLength:10,maxLength:10})} />
+                                            <label for="phone" class="label-phone">
+                                                <span class="content-phone">Phone</span>
+                                            </label>
                                     </div>
                                     {errors.phoneNumber && (
                                             <p>Your phone number is required.</p>
                                         )}
 
                                     <div className="wrap-input100">
-                                        <input className="input100" type="password" name="password" placeholder="Password" ref={register({required:true,minLength:5})}/>
+                                        <input className="input100" type="password" name="password"  ref={register({required:true,minLength:5})}/>
+                                            <label for="password" class="label-password">
+                                                <span class="content-password">Password</span>
+                                            </label>
                                         {errors.password && (
                                             <p>Password is required.</p>
                                         )}
                                     </div>
-
+                                    <div className="btn-login">
                                     <button className="login-form-btn">
                                         Login
                                     </button>
-                                    
+                                    </div>
+                                    <div className="btn-signup">
                                     <button className="signup-form-btn" onClick={()=>changeinview("register")}>
-                                            Sign Up
+                                            New User ? Sign up
                                         </button>
+                                    </div>
                                 </form>
+                                </div>
+                    </div>
                     <p className="errorMessage">{errormessage!==""&&errormessage}</p>
                 </div>
 
@@ -164,43 +181,52 @@ function Account(props) {
                             <button className="account-btn" onClick={()=>props.modal(false)}>x</button>
                             <div className="">
                                 <div>
-                                    <div className="registerForm">
+                                    <div className="registerForm side-div">
                                         <div className="sidePart">
                                             <h1>Krishi</h1>
                                         </div>
                                     </div>
                                     <div className="registerForm">
                                         <form className="login100-form" onSubmit={handleSubmit(onSubmitRegitser)}>
-                                        {/* <h1 >
-                                            Welcome
-                                        </h1> */}
+                                        <h1 >
+                                            Register
+                                        </h1>
                                         <p className="errorMessage">{errormessage!==""&&errormessage}</p>
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="phoneNumber" placeholder="Phone Number" ref={register({required:true,minLength:10,maxLength:10})} />
-                                            <label for="email" class="label-email">
-                                                <span class="content-email">Email</span>
-                                            </label>
+                                            <input className="input100" type="text" name="phoneNumber" autoComplete="off" ref={register({required:true,minLength:10,maxLength:10})} />
+                                                <label for="phone number" class="label-phone">
+                                                    <span class="content-phone">Phone Number</span>
+                                                </label>
                                         </div>
                                         {errors.phoneNumber && (
                                             <p>Your phone number is required.</p>
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="email" placeholder="Email" ref={register({validate:validateEmail})} />
+                                            <input className="input100" type="text" name="email" autoComplete="off" ref={register({validate:validateEmail})} />
+                                                <label for="email" class="label-email">
+                                                    <span class="content-email">Email</span>
+                                                </label>
                                         </div>
                                         {errors.email && (
                                             <p>Email is required.</p>
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="name" placeholder="Name" ref={register({required:true})}/>
+                                            <input className="input100" type="text" name="name" autoComplete="off" ref={register({required:true})}/>
+                                                <label for="name" class="label-name">
+                                                    <span class="content-name">Name</span>
+                                                </label>
                                         </div>
                                         {errors.name && (
                                             <p>This is required.</p>
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="password" name="password" placeholder="Password" ref={register({required:true, minLength:5})} />
+                                            <input className="input100" type="password" name="password" autoComplete="off" ref={register({required:true, minLength:5})} />
+                                                <label for="password" class="label-password">
+                                                    <span class="content-password">Password</span>
+                                                </label>
                                         </div>
                                         {errors.password && (
                                             <p>This is required and enter more than 5 characters.</p>
@@ -211,14 +237,20 @@ function Account(props) {
                                                 <div className="login100-form-bgbtn"></div>
                                             </div>
                                         </div>
+                                        <div className="btn-login">
                                         <button className="login-form-btn">
                                             Register
                                         </button>
+                                        </div>
+                                        <div className="btn-signup">
                                         <button className="signup-form-btn" onClick={()=>changeinview('login')}>
-                                            Login
+                                            Existing User? Sign In
                                         </button>
+                                        </div>
                                     </form>
+                                    
                                     </div>
+                                    
                                 </div>
                             </div>
                             

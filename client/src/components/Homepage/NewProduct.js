@@ -26,7 +26,7 @@ function NewProduct() {
                   </div>
                 </div>
               </div>
-              <div className="item">
+              {/* <div className="item">
                 <div className="product-thumb transition">
                   <div className="image product-imageblock"> <img src="image/product/product2.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" className="img-responsive" /> 
                     <div className="button-group">
@@ -88,8 +88,8 @@ function NewProduct() {
                     <button type="button" className="compare" data-toggle="tooltip" title="Compare this Product" ><i className="fa fa-exchange"></i></button>
                   </div>
                 </div>
-              </div>
-        </div>
+    </div> */}
+        </div> 
         </div>
     )
 }

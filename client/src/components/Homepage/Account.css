@@ -11,18 +11,52 @@
     font-size: 22px;
     line-height: 1;
     vertical-align: top;
+    background: rgb(56, 161, 105)
 }
 
 /* .account-btn:hover{
   background: rgb(38, 175, 25);
 } */
 
-.registerWrapper{
+.login-form {
+  margin-top: 10%;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   align-self: center;
+   gap: 2vh;
+
+}
+
+.login-wrapper{
   outline: none;
-    position: relative;
+  position: relative;
   background: white;
   min-width: 100%;
   height: 70vh;
+  top: 90px;
+}
+
+.login-wrapper h1 {
+  margin-top: 10%;
+  color: #16c22c;
+  font-size: 30px;
+}
+
+.registerWrapper h1 {
+  margin-top: 5%;
+  color: #16c22c;
+  font-size: 30px;
+}
+
+.registerWrapper{
+  outline: none;
+  position: relative;
+  background: white;
+  min-width: 100%;
+  height: 70vh;
+  top: 100px;
 }
 
 .sidePart{
@@ -37,6 +71,7 @@
   padding:0px;
   font-size: 30px;
   text-align: center;
+  color: black;
 }
 
 .registerForm{
@@ -45,7 +80,7 @@
     /* padding: 18px; */
   /* background: green; */
   height: 70vh;
-    border: 2px solid red;
+    border: 2px solid rgb(67, 110, 32);
 }
 
 
@@ -54,3 +89,114 @@
    font-size: 18px;
    margin-left: 36%;
  }
+
+ .login100-form {
+   margin-top: 10%;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   align-self: center;
+   gap: 1vh;
+ }
+
+ .wrap-input100 {
+   width:50%;
+   position: relative;
+   height: 50px;
+   overflow: hidden;
+ }
+
+ .wrap-input100 input {
+   width: 100%;
+   height: 100%;
+   color: #595f6e;
+   padding-top: 12px;
+   border: none;
+   outline: none;
+   font-weight: 400;
+   font-size: 14px;
+ }
+
+ .wrap-input100 label {
+   position: absolute;
+   bottom: 0px;
+   left:0%;
+   width: 100%;
+   height: 100%;
+   pointer-events: none;
+   border-bottom: 3px solid #16c22c;
+   font-weight: 100;
+ }
+
+ /* .wrap-input100 label::after {
+   content: "";
+   position: absolute;
+   left: 0px;
+   bottom: -1px;
+   height: 100%;
+   width: 100%;
+   border-bottom: 3px solid #16c22c;
+   transform: translateX(-100%);
+   transition: all 0.3s ease;
+ } */
+
+ .content-name,
+ .content-email,
+ .content-phone,
+ .content-password {
+    position: absolute;
+    bottom: -5px;
+    left: 0px;
+    /* transition: all 0.3s ease; */
+}
+
+.wrap-input100 input:focus + .label-name .content-name,
+.wrap-input100 input:valid + .label-name .content-name,
+.wrap-input100 input:focus + .label-email .content-email,
+.wrap-input100 input:valid + .label-email .content-email,
+.wrap-input100 input:focus + .label-phone .content-phone,
+.wrap-input100 input:valid + .label-phone .content-phone,
+.wrap-input100 input:focus + .label-password .content-password,
+.wrap-input100 input:valid + .label-password .content-password {
+    transform: translateY(-120%);
+    font-size: 14px;
+    color: rgba(14, 107, 60, 0.533);
+}
+
+/* .wrap-input100 input:focus + .label-name::after,
+.wrap-input100 input:valid + .label-name::after,
+.wrap-input100 input:focus + .label-email::after,
+.wrap-input100 input:valid + .label-email::after,
+.wrap-input100 input:focus + .label-phone::after,
+.wrap-input100 input:valid + .label-phone::after,
+.wrap-input100 input:focus + .label-password::after,
+.wrap-input100 input:valid + .label-password::after {
+    transform: translateX(0%);
+} */
+
+.btn-login, .btn-signup {
+  width: 100%;
+  height: 50px;
+}
+
+.btn-login .login-form-btn {
+  width: 40%;
+  height: 70%;
+  margin-left: 29%;
+  background: rgb(22, 160, 68);
+  color: #fff;
+  border: none;
+  outline: none;
+}
+
+.btn-signup .signup-form-btn {
+  width: 40%;
+  margin-left: 29%;
+  border: none;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
+  color:rgb(22, 160, 68)
+}
+
+
