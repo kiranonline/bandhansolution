@@ -30,10 +30,7 @@ router.post("/user/otpverification",[
 
 //++++++++++++++++++++++++++++++++++++++ Login Customer with email or phone number & password ++++++++++++++++++++++++++++++
 router.post("/user/login-with-email-or-phone-password",[
-    oneOf([
-        body("phoneNumber").isNumeric().isLength({min:10,max:10}).withMessage('Not a valid phone number'),
-        body("email").isEmail()
-    ]),
+    body("phoneNumber").isNumeric().isLength({min:10,max:10}).withMessage('Not a valid phone number'),
     body('password').isLength({min: 5}).withMessage('Password must be at least 5 chars long.')
 ],errorHandler,loginnormalUser)
 
