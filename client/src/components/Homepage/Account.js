@@ -193,9 +193,9 @@ function Account(props) {
                                         </h1>
                                         <p className="errorMessage">{errormessage!==""&&errormessage}</p>
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="phoneNumber" autoComplete="off" ref={register({required:true,minLength:10,maxLength:10})} />
+                                            <input className="input100" type="text" name="phoneNumber" placeholder="Phone" autoComplete="off" ref={register({required:true,minLength:10,maxLength:10})} />
                                                 <label for="phone number" class="label-phone">
-                                                    <span class="content-phone">Phone Number</span>
+                                                    {/* <span class="content-phone">Phone Number</span> */}
                                                 </label>
                                         </div>
                                         {errors.phoneNumber && (
@@ -203,9 +203,9 @@ function Account(props) {
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="email" autoComplete="off" ref={register({validate:validateEmail})} />
+                                            <input className="input100" type="text" name="email" placeholder="Email" autoComplete="off" ref={register({validate:validateEmail})} />
                                                 <label for="email" class="label-email">
-                                                    <span class="content-email">Email</span>
+                                                    {/* <span class="content-email">Email</span> */}
                                                 </label>
                                         </div>
                                         {errors.email && (
@@ -213,9 +213,9 @@ function Account(props) {
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="name" autoComplete="off" ref={register({required:true})}/>
+                                            <input className="input100" type="text" name="name" placeholder="Name" autoComplete="off" ref={register({required:true})}/>
                                                 <label for="name" class="label-name">
-                                                    <span class="content-name">Name</span>
+                                                    {/* <span class="content-name">Name</span> */}
                                                 </label>
                                         </div>
                                         {errors.name && (
@@ -223,9 +223,9 @@ function Account(props) {
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="password" name="password" autoComplete="off" ref={register({required:true, minLength:5})} />
+                                            <input className="input100" type="password" name="password" placeholder="Password" autoComplete="off" ref={register({required:true, minLength:5})} />
                                                 <label for="password" class="label-password">
-                                                    <span class="content-password">Password</span>
+                                                    {/* <span class="content-password">Password</span> */}
                                                 </label>
                                         </div>
                                         {errors.password && (

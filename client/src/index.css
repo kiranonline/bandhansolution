@@ -220,9 +220,9 @@ float:left;
 margin-left: 15px;
 }
 /* CSS for Header Start */
-header {
+/* header {
 /* background-image:url("../image/heaer-ptn.jpg"); */
-}
+*/
 
 .header-top {
 background-color:  rgba(0, 0, 0, 0.1);
@@ -643,8 +643,8 @@ border: none;
 width: 100%;
 padding: 23px 0;
 }
-#menu .btn-navbar:hover, #menu .btn-navbar:focus, #menu .btn-navbar:active, #menu .btn-navbar.disabled, #menu .btn-navbar[disabled] {
-}
+/* #menu .btn-navbar:hover, #menu .btn-navbar:focus, #menu .btn-navbar:active, #menu .btn-navbar.disabled, #menu .btn-navbar[disabled] {
+} */
 .testimonial-desc{
 margin: 0 0 10px;
 }
@@ -1017,8 +1017,8 @@ margin-left: 0;
 min-height: 0;
 }
 }
-.product-thumb .rating {
-}
+/* .product-thumb .rating {
+} */
 .rating .fa-stack {
 font-size: 8px;
 vertical-align: 1px;
@@ -2407,7 +2407,7 @@ width: 100%;
 width: 385px;
 }
 #submit {
-background: #ef8829none repeat scroll 0 0;
+background: #ef8829 none repeat scroll 0 0;
 height: 32px;
 border: none;
 color: #fff;
@@ -2568,11 +2568,7 @@ color: #000;
 font-weight: 600;
 line-height: 24px;
 }
-{
-line-height: 24px;
-} {
-line-height: 24px;
-}
+
 .work li {
 list-style: outside none none;
 margin-bottom: 47px;

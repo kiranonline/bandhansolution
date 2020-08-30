@@ -89,6 +89,8 @@ function NewProduct() {
                   </div>
                 </div>
     </div> */}
+
+    
         </div> 
         </div>
     )

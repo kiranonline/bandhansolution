@@ -45,9 +45,8 @@
 }
 
 .registerWrapper h1 {
-  margin-top: 5%;
   color: #16c22c;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .registerWrapper{
@@ -91,13 +90,12 @@
  }
 
  .login100-form {
-   margin-top: 10%;
+   /* margin-top: 10%; */
    display: flex;
    justify-content: center;
    flex-direction: column;
    align-items: center;
    align-self: center;
-   gap: 1vh;
  }
 
  .wrap-input100 {
@@ -151,10 +149,7 @@
     /* transition: all 0.3s ease; */
 }
 
-.wrap-input100 input:focus + .label-name .content-name,
-.wrap-input100 input:valid + .label-name .content-name,
-.wrap-input100 input:focus + .label-email .content-email,
-.wrap-input100 input:valid + .label-email .content-email,
+
 .wrap-input100 input:focus + .label-phone .content-phone,
 .wrap-input100 input:valid + .label-phone .content-phone,
 .wrap-input100 input:focus + .label-password .content-password,
@@ -198,5 +193,27 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
   color:rgb(22, 160, 68)
 }
+
+.login100-form input{
+  padding: 0%;
+}
+
+@media(max-width:1400px){
+  .side-div {
+    display: none;
+  }
+
+  .registerForm {
+    width:100%;
+  }
+
+  .login-wrapper {
+    height: 80vh;
+    position: relative;
+    top: 70px;
+  }
+}
+
+
 
 
