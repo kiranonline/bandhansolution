@@ -1,28 +1,21 @@
 import React,{useState,useEffect} from 'react';
-import {useHistory, Redirect} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
-import apis from "../../services/apis";
-import http from "../../services/httpCall";
 import Account from './Account';
 import { modal } from "../../actions/modalAction";
-import krishi from "./static/images/krishi.jpeg";
 
 
 Modal.setAppElement('#root');
 function NavbarHeader(props) {
-  // const [modalIsOpen,setModalIsOpen] = useState(false);
+  let history= useHistory();
   const [search_query,setSearchQuery] = useState("");
   let login_item=props.auth.isLoggedIn?{display:"none"}:{}
   let myaccount_item=props.auth.isLoggedIn?{}:{display:"none"}
-  const history= useHistory();
-  console.log(history);
+  
+  // console.log(history);
   const handleSearch = () => {
-    history.push("/products");
-    console.log(search_query);
-    // return (
-    //   <Redirect to="/products" />
-    // )
+    history.push(`/products?search=${search_query}`);
   }
 
     return (

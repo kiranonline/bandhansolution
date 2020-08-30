@@ -14,7 +14,8 @@ import PrivateComponent from "./components/PrivateWrapper/PrivateComponents";
 import TermsComponent from "./components/Footer/TermsComponent";
 import BrandHeader from './components/Homepage/BrandHeader';
 import NavbarHeader from './components/Homepage/NavbarHeader';
-import ProductComponent from './components/Products/ProductComponent';
+import ProductListComponent from './components/Products/ProductListComponent';
+import SingleProductComponent from './components/Products/SingleProductComponent';
 
 // import './App.css';
 
@@ -69,9 +70,10 @@ function App(props) {
 
     <React.Fragment>
             {/* <Loader /> */}
-            <BrandHeader />
-            <NavbarHeader />
+            
             <BrowserRouter>
+                <BrandHeader />
+                <NavbarHeader />
                 <Switch>
                     <Route path="/" exact={true}>
                       <HomeComponent />
@@ -80,7 +82,10 @@ function App(props) {
                       <PrivacyPolicyComponent />
                     </Route>
                     <Route path="/products">
-                      <ProductComponent />
+                      <ProductListComponent />
+                    </Route>
+                    <Route path="/product/:id">
+                      <SingleProductComponent />
                     </Route>
                     <Route path="/terms">
                       <TermsComponent />

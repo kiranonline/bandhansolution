@@ -19,7 +19,7 @@
 } */
 
 .login-form {
-  margin-top: 10%;
+  /* margin-top: 1%; */
    display: flex;
    justify-content: center;
    flex-direction: column;

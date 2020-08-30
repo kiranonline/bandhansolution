@@ -113,7 +113,7 @@ function Account(props) {
                     <div>
                         <div className="registerForm side-div">
                             <div className="sidePart">
-                                <h1>Krishi</h1>
+                                
                             </div>
                         </div>
                     <div className="registerForm">
@@ -183,7 +183,7 @@ function Account(props) {
                                 <div>
                                     <div className="registerForm side-div">
                                         <div className="sidePart">
-                                            <h1>Krishi</h1>
+                                            
                                         </div>
                                     </div>
                                     <div className="registerForm">

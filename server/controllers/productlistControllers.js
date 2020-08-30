@@ -7,7 +7,7 @@ exports.productlist = async(req,res,next) =>{
         const category=req.query.category;
         const search=req.query.search;
         const is_pricefilter=req.query.is_pricefilter;
-        const sortType=req.query.sortType;
+        const sortType=req.query.sortType || "newest";
         const minprice = req.query.minprice;
         const maxprice = req.query.maxprice;
         console.log(minprice);

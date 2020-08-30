@@ -32,6 +32,10 @@ body {
   display: none;
 }
 
+/* .form-group{
+  margin-bottom: 10px 0px !important;
+} */
+
 #language-selection{
   display: block;
     font-size: 14px;
@@ -1904,6 +1908,7 @@ margin-right: 10px;
 }
 #product {
 clear: both;
+display: inline-block;
 margin-top: 25px;
 }
 
