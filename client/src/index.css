@@ -36,6 +36,10 @@ body {
   margin-bottom: 10px 0px !important;
 } */
 
+.owl-crousel{
+  width: 250px !important;
+}
+
 #language-selection{
   display: block;
     font-size: 14px;
@@ -1265,14 +1269,14 @@ border-color: #ef8829;
 width: 460px;
 }
 .col-3 #product-thumbnail.owl-carousel {
-width: 330px;
+width: 250px;
 }
 #product-thumbnail.owl-carousel {
 border: none;
 box-shadow: none;
 border-radius: 0;
 margin: 0 auto;
-width: 700px;
+width: 250px;
 }
 #product-thumbnail.owl-carousel .owl-buttons {
 position: absolute;

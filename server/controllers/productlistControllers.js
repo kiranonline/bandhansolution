@@ -96,3 +96,31 @@ exports.productlist = async(req,res,next) =>{
 
 
 }
+
+exports.singleProduct = async(req,res,next) =>{
+    console.log(req.params);
+    try{
+        let product_id=req.params.id;
+        let product = await Product.findOne({_id:product_id,isActive:true});
+        console.log(product);
+        if(product){
+                res.json({
+                    status: true,
+                    data: product
+                })
+
+        }else{
+            res.json({
+                status: false,
+                message: "Product not found"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.json({
+            status:false,
+            message:"Server Error"
+        })
+    }
+}

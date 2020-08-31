@@ -6,7 +6,7 @@ import http from "../../services/httpCall";
 import { loading } from "../../actions/loadingAction";
 import { modal } from "../../actions/modalAction";
 import { login, setUserDetails } from "../../actions/authAction";
-import './Account.css';
+// import './Account.css';
 import krishi from "./static/images/krishi.jpeg";
 
 function Account(props) {
@@ -109,7 +109,6 @@ function Account(props) {
             {inview=== 'login' ? 
             (
                 <div className="login-wrapper">
-                    <button className="account-btn" onClick={()=>props.modal(false)}>X</button>
                     <div>
                         <div className="registerForm side-div">
                             <div className="sidePart">
@@ -178,7 +177,6 @@ function Account(props) {
                     </div>
                     <div className={`limiter ${showotpfield? "dnone":"dblock"}`}>
                         <div className="registerWrapper">
-                            <button className="account-btn" onClick={()=>props.modal(false)}>x</button>
                             <div className="">
                                 <div>
                                     <div className="registerForm side-div">

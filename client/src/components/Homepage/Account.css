@@ -1,22 +1,3 @@
-.account-btn{
-  position: absolute;
-    right: 0;
-    top: 0;
-    /* padding: 1%; */
-    margin: 1%;
-    /* background: transparent; */
-    border: none;
-    cursor: pointer;
-    color: #fff;
-    font-size: 22px;
-    line-height: 1;
-    vertical-align: top;
-    background: rgb(56, 161, 105)
-}
-
-/* .account-btn:hover{
-  background: rgb(38, 175, 25);
-} */
 
 .login-form {
   /* margin-top: 1%; */
@@ -26,7 +7,6 @@
    align-items: center;
    align-self: center;
    gap: 2vh;
-
 }
 
 .login-wrapper{

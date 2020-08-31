@@ -1,10 +1,49 @@
-import React from 'react';
-// import {fetchProduct} from ""
+import React, { useState, useEffect } from 'react';
+import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import Skeleton from 'react-loading-skeleton';
 import product1 from "../static/images/product1.jpg";
+import http from '../../services/httpCall';
+import apis from '../../services/apis';
+import { Editor, EditorState, convertFromRaw } from "draft-js";
 
-function SingleProductComponent() {
+
+function SingleProductComponent(props) {
+    let [product, setProduct] = useState({});
+    const [productDescription,setProductDescription] = useState(() => EditorState.createEmpty());
+
+    let {id}=useParams();
+    // console.log(id);
+    const fetchProduct = ()=>{
+        http.get(apis.GET_SINGLE_PRODUCT+`${id}`)
+        .then((result)=>{
+            console.log(result);
+            if(result.data.status){
+                setProduct(result.data.data);
+                console.log(result.data.data);
+                const contentState = convertFromRaw(JSON.parse(result.data.data.description));
+                const editorState = EditorState.createWithContent(contentState);
+                console.log(editorState);
+                setProductDescription(editorState);
+
+            }else{
+                console.log(result.data.message);
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
+    useEffect(()=>{
+        fetchProduct();
+        console.log(productDescription)
+    },[]);
+
     return (
         <div className="container">
             <ul className="breadcrumb">
@@ -16,11 +55,13 @@ function SingleProductComponent() {
                     <div className="columnblock-title">Categories</div>
                         <div className="category_block">
                             <ul className="box-category treeview-list treeview">
-                            <li><a href="#">Tablets</a></li>
-                            <li><a href="#">Software</a></li>
-                            <li><a href="#">Phones</a></li>
-                            <li><a href="#">Cameras</a></li>
-                            <li><a href="#">MP3 Players</a></li>
+                                {props.categories.category_list.length===0?
+                                    <Skeleton count={5} />
+                                :
+                                    props.categories.category_list.map((data)=>(
+                                        <li key={data._id}><a href="#">{data.name}</a></li>
+                                    ))
+                                }
                             </ul>
                         </div>
                     </div>
@@ -30,62 +71,50 @@ function SingleProductComponent() {
                 <div className="row">
                     <div className="col-sm-6">
                     <div className="thumbnails">
-                        <div><a className="thumbnail" href="image/product/product8.jpg" title="lorem ippsum dolor dummy"><img src={product1} title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        <div id="product-thumbnail" className="owl-carousel">
-                        <div className="item">
-                            <div className="image-additional"><a className="thumbnail  " href="image/product/product1.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-1-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        </div>
-                        <div className="item">
-                            <div className="image-additional"><a className="thumbnail  " href="image/product/product2.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-2-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        </div>
-                        <div className="item">
-                            <div className="image-additional"><a className="thumbnail  " href="image/product/product3.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-3-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        </div>
-                        <div className="item">
-                            <div className="image-additional"><a className="thumbnail  " href="image/product/product4.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-4-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        </div>
-                        <div className="item">
-                            <div className="image-additional"><a className="thumbnail  " href="image/product/product5.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-5-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        </div>
-                        <div className="item">
-                            <div className="image-additional"><a className="thumbnail  " href="image/product/product6.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-6-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        </div>
-                        <div className="item">
-                            <div className="image-additional"><a className="thumbnail  " href="image/product/product7.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-7-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-                        </div>
+                            <div><Link className="thumbnail" to="/home" title="">{product.images ?<img src={product.images?`${apis.BASE_SERVER_URL}${product.images[0]}`:""} title= {product.name} alt="lorem ippsum dolor dummy" />:<Skeleton height={100}/>}</Link></div>
+                        <div id="product-thumbnail">
+                            <OwlCarousel
+                            id="product-thumbnail"
+                            className="owl-theme"
+                            items="4"
+                            autoplay
+                            loop
+                            dots
+                            margin={3}
+                            >
+                                {(product.images && product.images.length>0) && product.images.map((image)=>(
+                                    <div className="item"> <Link to="#"><img src={product.images?`${apis.BASE_SERVER_URL}${image}`:""} alt="product1" className="img-responsive" /></Link> </div>
+                                ))}
+                                <div className="item"> <Link to="#"><img src={product1} alt="product2" className="img-responsive" /></Link> </div>
+                            </OwlCarousel>
                         </div>
                     </div>
                     </div>
                     <div className="col-sm-6">
-                    <h1 className="productpage-title">lorem ippsum dolor dummy</h1>
-                    <div className="rating product"> <span className="fa fa-stack"><i className="fa fa-star fa-stack-1x"></i><i className="fa fa-star-o fa-stack-1x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-1x"></i><i className="fa fa-star-o fa-stack-1x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-1x"></i><i className="fa fa-star-o fa-stack-1x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-1x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-1x"></i></span> <span className="review-count"> <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">1 reviews</a> / <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a></span>
-                        <hr/>
-                        <div className="addthis_toolbox addthis_default_style"><a className="addthis_button_facebook_like" ></a> <a className="addthis_button_tweet"></a> <a className="addthis_button_pinterest_pinit"></a> <a className="addthis_counter addthis_pill_style"></a></div>
-                        
-                    </div>
+                    <h1 className="productpage-title">{product.name || <Skeleton />}</h1>
                     <ul className="list-unstyled productinfo-details-top">
                         <li>
-                        <h2 className="productpage-price">$122.00</h2>
+                            
+                            <h2 className="productpage-price">Price: Rs.{product.salePrice?product.salePrice:product.regularPrice|| <Skeleton />}</h2>
                         </li>
-                        <li><span className="productinfo-tax">Ex Tax: $100.00</span></li>
                     </ul>
                     <hr />
                     <ul className="list-unstyled product_info">
-                        <li>
-                        <label>Brand:</label>
-                        <span> <a href="#">Apple</a></span></li>
-                        <li>
-                        <label>Product Code:</label>
-                        <span> product 20</span></li>
+                        {product.isActive?(
                         <li>
                         <label>Availability:</label>
-                        <span> In Stock</span></li>
+                        <span> In Stock</span>
+                        </li>) :<Skeleton />}
+                        {product.isActive===false && (
+                        <li>
+                        <label>Availability:</label>
+                        <span> In Stock</span>
+                        </li>)}
                     </ul>
                     <hr />
-                    <p className="product-desc"> More room to move.
-                        With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-                        Cover Flow.
-                        Browse through your music collection by flipping..</p>
+                    <p className="product-desc">
+                        <Editor editorState={productDescription} readOnly={true} />
+                    </p> 
                     <div id="product">
                         <div className="form-group">
                         <label className="control-label qty-label" for="input-quantity">Qty</label>
@@ -101,21 +130,13 @@ function SingleProductComponent() {
                 <div className="productinfo-tab">
                     <ul className="nav nav-tabs">
                     <li className="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
-                    <li><a href="#tab-review" data-toggle="tab">Reviews (1)</a></li>
                     </ul>
                     <div className="tab-content">
                     <div className="tab-pane active" id="tab-description">
                         <div className="cpt_product_description ">
                             <div>
-                            <p> <strong>More room to move.</strong></p>
-                            <p> With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.</p>
-                            <p> <strong>Cover Flow.</strong></p>
-                            <p> Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.</p>
-                            <p> <strong>Enhanced interface.</strong></p>
-                            <p> Experience a whole new way to browse and view your music and video.</p>
-                            <p> <strong>Sleeker design.</strong></p>
-                            <p> Beautiful, durable, and sleeker than ever, lorem ippsum dolor dummy now features an anodized aluminum and polished stainless steel enclosure with rounded edges.</p>
-                        </div>
+                            <Editor editorState={productDescription} readOnly={true} />
+                            </div>
                         </div>
                     </div>
                     <div className="tab-pane" id="tab-review">
@@ -165,7 +186,7 @@ function SingleProductComponent() {
 }
 
 const mapStateToProps= (state) => ({
-    
+    categories: state.FetchCategories
 })
 
 export default connect(mapStateToProps, {

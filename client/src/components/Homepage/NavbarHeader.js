@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import Account from './Account';
 import { modal } from "../../actions/modalAction";
 import krishi from "./static/images/krishi.jpeg";
-import '../NavbarHeader.css'
+import './NavbarHeader.css'
 
 
 Modal.setAppElement('#root');
@@ -22,7 +22,8 @@ function NavbarHeader(props) {
 
     return (
       <div>
-        <Modal 
+        
+        {/* <Modal 
           contentClassName="Content"
           isOpen={props.modalisopen.loading}
           onRequestClose={()=> props.modal(false)}
@@ -43,8 +44,18 @@ function NavbarHeader(props) {
             }
           }}
         >
+        {props.modalisopen.loading?"dblock":"dnone"}
+        {props.modalisopen.loading?"dnone":"dblock"}
           <Account />
-        </Modal>
+        </Modal> */}
+
+        <div id="simpleModal" className={`account-modal ${props.modalisopen.loading?"dblock":"dnone"}`}>
+          <div className="account-modal-content">
+            <span className="closeBtn" onClick={()=> props.modal(false)}>&times;</span>
+            {/* <p>Hello I am a modal</p> */}
+            <Account />
+          </div>
+        </div>
 
         <nav id="menu" className="navbar">
             <div className="nav-inner container">
