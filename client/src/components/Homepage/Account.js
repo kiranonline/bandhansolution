@@ -6,7 +6,7 @@ import http from "../../services/httpCall";
 import { loading } from "../../actions/loadingAction";
 import { modal } from "../../actions/modalAction";
 import { login, setUserDetails } from "../../actions/authAction";
-// import './Account.css';
+import './Account.css';
 import krishi from "./static/images/krishi.jpeg";
 
 function Account(props) {
@@ -109,32 +109,37 @@ function Account(props) {
             {inview=== 'login' ? 
             (
                 <div className="login-wrapper">
-                    <div>
-                        <div className="registerForm side-div">
-                            <div className="sidePart">
-                                
+                    <div >
+                        {/* <div className="registerForm side-div ">
+                            <div className="sidePart ">
+                                <img src=" https://acad.xlri.ac.in/evening/images/login.svg" ></img>
                             </div>
-                        </div>
-                    <div className="registerForm">
-                        <form className="login-form" onSubmit={handleSubmit(onSubmitLogin)}>
+                    
+                        </div> */}
+                    <div className="registerForm"   >
+                    <div className="sidePart ">
+                                <img src=" https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                    </div>
+                    <form className="login-form" onSubmit={handleSubmit(onSubmitLogin)}>
                                     <h1>
                                         Welcome
                                     </h1>
                                     <div className="wrap-input100">
-                                        <input className="input100" type="text" name="phoneNumber"  ref={register({required:true, minLength:10,maxLength:10})} />
-                                            <label for="phone" class="label-phone">
+                                        <input className="input100" type="text" name="phoneNumber" placeholder="Phone Number" ref={register({required:true, minLength:10,maxLength:10})} /> 
+
+                                            {/* <label for="phone" class="label-phone">
                                                 <span class="content-phone">Phone</span>
-                                            </label>
+                                            </label> */}
                                     </div>
                                     {errors.phoneNumber && (
                                             <p>Your phone number is required.</p>
                                         )}
 
                                     <div className="wrap-input100">
-                                        <input className="input100" type="password" name="password"  ref={register({required:true,minLength:5})}/>
-                                            <label for="password" class="label-password">
+                                        <input className="input100" type="password" name="password" placeholder="Password" ref={register({required:true,minLength:5})}/> <br></br> 
+                                            {/* <label for="password" class="label-password">
                                                 <span class="content-password">Password</span>
-                                            </label>
+                                            </label> */}
                                         {errors.password && (
                                             <p>Password is required.</p>
                                         )}
@@ -180,11 +185,14 @@ function Account(props) {
                             <div className="">
                                 <div>
                                     <div className="registerForm side-div">
-                                        <div className="sidePart">
+                                        {/* <div className="sidePart">
                                             
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="registerForm">
+                                    <div className="sidePart">
+                                    <img src=" https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                                    </div>
                                         <form className="login100-form" onSubmit={handleSubmit(onSubmitRegitser)}>
                                         <h1 >
                                             Register
@@ -192,9 +200,9 @@ function Account(props) {
                                         <p className="errorMessage">{errormessage!==""&&errormessage}</p>
                                         <div className="wrap-input100">
                                             <input className="input100" type="text" name="phoneNumber" placeholder="Phone" autoComplete="off" ref={register({required:true,minLength:10,maxLength:10})} />
-                                                <label for="phone number" class="label-phone">
-                                                    {/* <span class="content-phone">Phone Number</span> */}
-                                                </label>
+                                                {/* <label for="phone number" class="label-phone">
+                                                    <span class="content-phone">Phone Number</span>
+                                                </label> */}
                                         </div>
                                         {errors.phoneNumber && (
                                             <p>Your phone number is required.</p>
@@ -202,9 +210,9 @@ function Account(props) {
 
                                         <div className="wrap-input100">
                                             <input className="input100" type="text" name="email" placeholder="Email" autoComplete="off" ref={register({validate:validateEmail})} />
-                                                <label for="email" class="label-email">
-                                                    {/* <span class="content-email">Email</span> */}
-                                                </label>
+                                                {/* <label for="email" class="label-email">
+                                                    <span class="content-email">Email</span>
+                                                </label> */}
                                         </div>
                                         {errors.email && (
                                             <p>Email is required.</p>
@@ -212,9 +220,9 @@ function Account(props) {
 
                                         <div className="wrap-input100">
                                             <input className="input100" type="text" name="name" placeholder="Name" autoComplete="off" ref={register({required:true})}/>
-                                                <label for="name" class="label-name">
-                                                    {/* <span class="content-name">Name</span> */}
-                                                </label>
+                                                {/* <label for="name" class="label-name">
+                                                    <span class="content-name">Name</span>
+                                                </label> */}
                                         </div>
                                         {errors.name && (
                                             <p>This is required.</p>
@@ -222,9 +230,9 @@ function Account(props) {
 
                                         <div className="wrap-input100">
                                             <input className="input100" type="password" name="password" placeholder="Password" autoComplete="off" ref={register({required:true, minLength:5})} />
-                                                <label for="password" class="label-password">
-                                                    {/* <span class="content-password">Password</span> */}
-                                                </label>
+                                                {/* <label for="password" class="label-password">
+                                                    <span class="content-password">Password</span>
+                                                </label> */}
                                         </div>
                                         {errors.password && (
                                             <p>This is required and enter more than 5 characters.</p>
