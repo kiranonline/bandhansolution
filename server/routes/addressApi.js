@@ -14,7 +14,7 @@ router.post("/user/add/address",[
     body("state").not().isEmpty(),
     body("country").not().isEmpty(),
     body("pincode").not().isEmpty()
-],isAuthenticated,addaddress);
+],errorHandler,isAuthenticated,addaddress);
 
 //+++++++++++++++++++++++++++++++++++++++ Remove Address ++++++++++++++++++++++++++
 router.post("/user/remove/address",isAuthenticated,removeaddress);
@@ -27,7 +27,7 @@ router.post("/user/edit/address",isAuthenticated,editaddress);
 //+++++++++++++++++++++++++++++++++++++++ Set Default Address ++++++++++++++++++++++++++
 router.post("/user/setdefault/address",[
   body("address_id").not().isEmpty()  
-],isAuthenticated,setdefaultaddress);
+],errorHandler,isAuthenticated,setdefaultaddress);
 
 
 module.exports = router;

@@ -247,7 +247,7 @@ padding: 26px 0;
 }
 .header-inner .header-left,.header-inner .header-right {
 padding: 0;
-margin: 18px 0;
+margin: px 0;
 }
 .header-inner .header-middle {
 padding: 0;
@@ -385,7 +385,7 @@ border: 1px solid #e5e5e5;
 color: #666;
 }
 #cart-total {
-/* background: url("../image/cart.png") no-repeat; */
+background: url("./static/images/cart.png") no-repeat;
 padding: 4px 0 12px 60px;
 float:left;
 }

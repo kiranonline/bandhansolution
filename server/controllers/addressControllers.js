@@ -1,4 +1,5 @@
 const Address = require("../models/Address");
+const User = require("../models/User");
 
 
 
@@ -101,15 +102,19 @@ exports.editaddress = async(req,res,next) => {
 exports.setdefaultaddress = async(req,res,next) => {
     try{
         const address_id = req.body.address_id;
-        let address1= await Address.findOneAndUpdate({user: req.user._id, isdefault:true},{isdefault:false},{
+        let old_address= await Address.findOneAndUpdate({user: req.user._id, isdefault:true},{isdefault:false},{
             new:true
         })
-        console.log(address1);
-        let address2 = await Address.findByIdAndUpdate({_id:address_id, user:req.user._id},{isdefault:true},{
+        // console.log(old_address);
+        let address = await Address.findOneAndUpdate({_id:address_id, user:req.user._id},{isdefault:true},{
             new:true
         });
-        console.log(address2);
-        if(address2){
+        console.log(address);
+        let updated_user = await User.findOneAndUpdate({_id:req.user._id},{defaultAddress:{
+            address
+        }},{new:true});
+        console.log(updated_user);
+        if(address){
             res.json({
                 status:true,
                 message:"Default Address Updated"
