@@ -118,7 +118,7 @@ function Account(props) {
                         </div> */}
                     <div className="registerForm"   >
                     <div className="sidePart ">
-                                <img src=" https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                                <img src="https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
                     </div>
                     <form className="login-form" onSubmit={handleSubmit(onSubmitLogin)}>
                                     <h1>

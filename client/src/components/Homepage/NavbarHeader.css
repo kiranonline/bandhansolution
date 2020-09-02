@@ -30,8 +30,8 @@
     cursor: pointer;
 }
 
-@media (min-width: 500px){
+@media (max-width: 500px){
     .account-modal-content{
-        
+        width:100%;
     }
 }
