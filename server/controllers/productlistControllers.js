@@ -97,6 +97,8 @@ exports.productlist = async(req,res,next) =>{
 
 }
 
+
+//++++++++++++++++++++++++++++++++++++++ Single Product +++++++++++++++++++++++++++++++++++++
 exports.singleProduct = async(req,res,next) =>{
     console.log(req.params);
     try{

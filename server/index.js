@@ -17,6 +17,7 @@ const productApis = require("./routes/productApis");
 const producthighlightApis = require("./routes/producthighlightApis");
 const productlistApi = require("./routes/productlistApi");
 const addressApi =require("./routes/addressApi");
+const cartApi =require("./routes/cartApis");
 
 //port 
 const PORT = process.env.PORT || 4500;
@@ -59,6 +60,7 @@ app.use("/apis/v1",productApis);
 app.use("/apis/v1",producthighlightApis);
 app.use("/apis/v1",productlistApi);
 app.use("/apis/v1",addressApi);
+app.use("/apis/v1",cartApi);
 
 
 
