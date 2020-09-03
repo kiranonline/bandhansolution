@@ -10,6 +10,9 @@ const apis = {
     OTP_VERIFICATION : "/apis/v1/user/otpverification",
     GET_CATEGORY_LIST : "/apis/v1/user/category/list",
     GET_PRODUCT_LIST : "/apis/v1/user/productlist/",
+    GET_SINGLE_PRODUCT : "/apis/v1/product/",
+    ADD_TO_CART : "/apis/v1/user/add-to-cart",
+    FETCH_THE_CART : "/apis/v1//user/fetch-the-cart",
 
 
     UPLOAD_USER_AVATAR:"/apis/v1/upload-avatar"    

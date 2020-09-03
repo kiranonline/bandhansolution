@@ -149,8 +149,9 @@ exports.otpverification= async(req,res,next)=>{
 exports.loginnormalUser= async(req,res,next)=>{
     try{
         let user = await User.find({phoneNumber:req.body.phoneNumber});
-        console.log(user);
-        if(user[0]){
+        // console.log(user.length);
+        if(user.length>0){
+            console.log(user[0]);
             let isPasswordValid = await user[0].comparePassword(req.body.password);
             if(isPasswordValid){
                 let token = jwt.sign({_id : user[0]._id.toString()},process.env.JWT_SECRET_KEY);

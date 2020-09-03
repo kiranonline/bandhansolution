@@ -2347,7 +2347,7 @@ video {
 	width: 385px;
 }
 #submit {
-	background: #ef8829none repeat scroll 0 0;
+	background: #ef8829 none repeat scroll 0 0;
 	height: 32px;
 	border: none;
 	color: #fff;
@@ -2508,11 +2508,7 @@ i.circle {
 	font-weight: 600;
 	line-height: 24px;
 }
-{
- line-height: 24px;
-} {
- line-height: 24px;
-}
+
 .work li {
 	list-style: outside none none;
 	margin-bottom: 47px;

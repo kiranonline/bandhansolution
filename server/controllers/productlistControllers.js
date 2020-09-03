@@ -7,7 +7,7 @@ exports.productlist = async(req,res,next) =>{
         const category=req.query.category;
         const search=req.query.search;
         const is_pricefilter=req.query.is_pricefilter;
-        const sortType=req.query.sortType;
+        const sortType=req.query.sortType || "newest";
         const minprice = req.query.minprice;
         const maxprice = req.query.maxprice;
         console.log(minprice);
@@ -95,4 +95,34 @@ exports.productlist = async(req,res,next) =>{
     }
 
 
+}
+
+
+//++++++++++++++++++++++++++++++++++++++ Single Product +++++++++++++++++++++++++++++++++++++
+exports.singleProduct = async(req,res,next) =>{
+    console.log(req.params);
+    try{
+        let product_id=req.params.id;
+        let product = await Product.findOne({_id:product_id,isActive:true});
+        console.log(product);
+        if(product){
+                res.json({
+                    status: true,
+                    data: product
+                })
+
+        }else{
+            res.json({
+                status: false,
+                message: "Product not found"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.json({
+            status:false,
+            message:"Server Error"
+        })
+    }
 }
