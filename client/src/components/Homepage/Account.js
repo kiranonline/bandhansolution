@@ -5,7 +5,7 @@ import apis from "../../services/apis";
 import http from "../../services/httpCall";
 import { loading } from "../../actions/loadingAction";
 import { modal } from "../../actions/modalAction";
-import { login, setUserDetails } from "../../actions/authAction";
+import { login, setUserDetails,logout } from "../../actions/authAction";
 import './Account.css';
 import krishi from "./static/images/krishi.jpeg";
 
@@ -277,5 +277,6 @@ export default connect(mapStateToProps, {
     loading,
     login,
     modal,
-    setUserDetails
+    setUserDetails,
+    logout
 })(Account);

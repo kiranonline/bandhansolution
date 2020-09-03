@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {useHistory} from "react-router-dom";
+import {useHistory,Link} from "react-router-dom";
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import Account from './Account';
@@ -22,33 +22,6 @@ function NavbarHeader(props) {
 
     return (
       <div>
-        
-        {/* <Modal 
-          contentClassName="Content"
-          isOpen={props.modalisopen.loading}
-          onRequestClose={()=> props.modal(false)}
-          style={{
-            overlay:{
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              zIndex:1000
-            },
-            content:{
-              top: "10%",
-              bottom: "10%",
-              right: "27%",
-              left:"22%",
-              overflow: 'hidden',
-              padding: '0px',
-              background: "transparent",
-              border: '0px solid #ccc',
-            }
-          }}
-        >
-        {props.modalisopen.loading?"dblock":"dnone"}
-        {props.modalisopen.loading?"dnone":"dblock"}
-          <Account />
-        </Modal> */}
-
         <div id="simpleModal" className={`account-modal ${props.modalisopen.loading?"dblock":"dnone"}`}>
           <div className="account-modal-content">
             <span className="closeBtn" onClick={()=> props.modal(false)}>&times;</span>
@@ -64,14 +37,14 @@ function NavbarHeader(props) {
               </div>
               <div className="navbar-collapse">
                 <ul className="main-navigation">
-                  <li><a href="#"   className="parent"  >Home</a> </li>
+                  <li><Link to="/home"   className="parent"  >Home</Link> </li>
                   <li className="search-box">
                         <input placeholder="search.." type="text" name="search_query" onChange={(e)=> setSearchQuery(e.target.value)}/>
                         <button onClick={handleSearch}><i className="fa fa-search"></i></button>
                   </li>
-                  <li style={login_item}><a href="#"   className="parent"  onClick={()=>props.modal(true)}>Login</a> </li>
-                  <li style={myaccount_item}><a href="#"   className="parent"  >My Account</a> </li>
-                  <li><a href="#"   className="parent"  >Cart</a> </li>
+                  <li style={login_item}><Link to="#"   className="parent"  onClick={()=>props.modal(true)}>Login</Link> </li>
+                  <li style={myaccount_item}><Link to="/profile"   className="parent"  >My Account</Link> </li>
+                  <li><Link to="/cart"   className="parent"  >Cart</Link> </li>
                   <li className="language">
                     <form action="#" encType="multipart/form-data" id="language">
                       <div className="btn-group">

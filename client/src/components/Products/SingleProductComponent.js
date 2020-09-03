@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
@@ -17,17 +17,21 @@ import { Editor, EditorState, convertFromRaw } from "draft-js";
 function SingleProductComponent(props) {
     let [product, setProduct] = useState({});
     const [productDescription,setProductDescription] = useState(() => EditorState.createEmpty());
-    const [quantity,setQuantity] = useState(0);
+    const [productImage,setproductImage] = useState("");
+    const [categorySelected, setCategory] = useState("");
     const [errorInCart,setErrorInCart] = useState("");
+    let history = useHistory();
 
     let {id}=useParams();
     // console.log(id);
+
     const fetchProduct = ()=>{
         http.get(apis.GET_SINGLE_PRODUCT+`${id}`)
         .then((result)=>{
             console.log(result);
             if(result.data.status){
                 setProduct(result.data.data);
+                setproductImage(result.data.data.images[0]);
                 const contentState = convertFromRaw(JSON.parse(result.data.data.description));
                 const editorState = EditorState.createWithContent(contentState);
                 setProductDescription(editorState);
@@ -63,6 +67,10 @@ function SingleProductComponent(props) {
         }
     }
 
+    const handleCategory = ()=>{
+        
+    }
+
     useEffect(()=>{
         fetchProduct();
     },[]);
@@ -79,10 +87,12 @@ function SingleProductComponent(props) {
                         <div className="category_block">
                             <ul className="box-category treeview-list treeview">
                                 {props.categories.category_list.length===0?
-                                    <Skeleton count={5} />
+                                    <Skeleton count={7} />
                                 :
                                     props.categories.category_list.map((data)=>(
-                                        <li key={data._id}><Link to="#">{data.name}</Link></li>
+                                        <div onClick={()=>handleCategory()}>
+                                        <li key={data._id} >{data.name}</li>
+                                        </div>
                                     ))
                                 }
                             </ul>
@@ -94,23 +104,23 @@ function SingleProductComponent(props) {
                 <div className="row">
                     <div className="col-sm-6">
                     <div className="thumbnails">
-                            <div><Link className="thumbnail" to="/home" title="">{product.images ?<img src={product.images?`${apis.BASE_SERVER_URL}${product.images[0]}`:""} title= {product.name} alt="lorem ippsum dolor dummy" />:<Skeleton height={100}/>}</Link></div>
-                        <div id="product-thumbnail">
-                            <OwlCarousel
-                            id="product-thumbnail"
-                            className="owl-theme"
-                            items="4"
-                            autoplay
-                            loop
-                            dots
-                            margin={3}
-                            >
-                                {(product.images && product.images.length>0) && product.images.map((image,index)=>(
-                                    <div className="item" key={index}> <Link to="#"><img src={product.images?`${apis.BASE_SERVER_URL}${image}`:""} alt="product1" className="img-responsive" /></Link> </div>
-                                ))}
-                                <div className="item"> <Link to="#"><img src={product1} alt="product2" className="img-responsive" /></Link> </div>
-                            </OwlCarousel>
-                        </div>
+                            <div><Link className="thumbnail" to="/home" title="">{productImage ?<img src={productImage?`${apis.BASE_SERVER_URL}${productImage}`:""} title= {product.name} alt="lorem ippsum dolor dummy" />:<Skeleton height={100}/>}</Link></div>
+                            <div id="product-thumbnail">
+                                <OwlCarousel
+                                id="product-thumbnail"
+                                className="owl-theme"
+                                items="4"
+                                autoplay
+                                loop
+                                dots
+                                margin={3}
+                                >
+                                    {(product.images && product.images.length>0) && product.images.map((image,index)=>(
+                                        <div className="item" key={index} onClick={()=>setproductImage(image)}> <img src={product.images?`${apis.BASE_SERVER_URL}${image}`:""} alt="product1" className="img-responsive" /> </div>
+                                    ))}
+                                    <div className="item"> <Link to="#"><img src={product1} alt="product2" className="img-responsive" /></Link> </div>
+                                </OwlCarousel>
+                            </div>
                     </div>
                     </div>
                     <div className="col-sm-6">
