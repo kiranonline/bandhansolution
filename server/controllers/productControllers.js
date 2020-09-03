@@ -4,6 +4,10 @@ const {createStockForNewProduct} = require("../services/stock")
 const mongoose = require("mongoose")
 
 
+
+//kiran
+
+
 //++++++++++++++++++++++++++++++++++++++ create product by admin +++++++++++++++++++++++++++++++++++++
 exports.createProduct = async(req,res,next)=>{
     try{

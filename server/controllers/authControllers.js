@@ -5,6 +5,7 @@ const saltRounds = 10;
 const JWT_KEY = process.env.JWT_SECRET_KEY;
 
 
+//kiran
 
 //++++++++++++++++++++++++++++++++++++++ Login with email id and password +++++++++++++++++++++++++++++++++++++
 exports.LoginWithEmailAndPassword = async(req,res,next)=>{
@@ -60,7 +61,7 @@ exports.createnormalUser= async(req,res,next) =>{
         if(existingUser){
             res.json({
                 status : false,
-                message : 'The phone number is already registered with another account.'
+                message : 'The phone number or email id is already registered with another account.'
             })
         }else{
             let securepassword = await bcrypt.hash(req.body.password, saltRounds);
