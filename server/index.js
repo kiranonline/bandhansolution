@@ -59,6 +59,9 @@ app.use("/apis/v1",producthighlightApis);
 app.use("/apis/v1",productlistApi);
 
 
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/public/index.html'));
+});
 
 
 

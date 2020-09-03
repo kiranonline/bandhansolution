@@ -30,6 +30,9 @@ const RouterWrapper = ({Auth,...rest}:any)=>{
                 <Route exact={true} path="/signup">
                     <Signup />
                 </Route>
+                <Route exact={true} path="/">
+                    <Redirect to="/home"/> 
+                </Route>
             </IonRouterOutlet>
         </IonReactRouter>
     )
