@@ -30,36 +30,50 @@ function NavbarHeader(props) {
           </div>
         </div>
 
-        <nav id="menu" className="navbar">
-            <div className="nav-inner container">
-              <div className="navbar-header"><span id="category" className="visible-xs">Categories</span>
-                <button type="button" className="btn btn-navbar navbar-toggle" ><i className="fa fa-bars"></i></button>
-              </div>
-              <div className="navbar-collapse">
-                <ul className="main-navigation">
-                  <li><Link to="/home"   className="parent"  >Home</Link> </li>
-                  <li className="search-box">
-                        <input placeholder="search.." type="text" name="search_query" onChange={(e)=> setSearchQuery(e.target.value)}/>
-                        <button onClick={handleSearch}><i className="fa fa-search"></i></button>
-                  </li>
-                  <li style={login_item}><Link to="#"   className="parent"  onClick={()=>props.modal(true)}>Login</Link> </li>
-                  <li style={myaccount_item}><Link to="/profile"   className="parent"  >My Account</Link> </li>
-                  <li><Link to="/cart"   className="parent"  >Cart</Link> </li>
-                  <li className="language">
-                    <form action="#" encType="multipart/form-data" id="language">
-                      <div className="btn-group">
-                        <select name="language" id="language-selection">
-                          <option value="english">English</option>
-                          <option value="hindi">Hindi</option>
-                          <option value="telgu">Telgu</option>
-                        </select>
-                      </div>
-                    </form>
-                  </li>
-                  
-                </ul>
-              </div>
+        <nav id="menu" className="navbar navbar-expand-md py-3">
+          <div className="container d-flex justify-content-between align-items-center flex-column flex-md-row">
+            <div id="navbarSupportedContent">
+              <ul className="d-flex">
+                <li className="nav-item hoverable active">
+                  <Link className="nav-link spc" href="/home">Home <span className="sr-only">(current)</span></Link>
+                </li>
+                <li className="nav-item hoverable">
+                  <Link style={login_item} className="nav-link spc" href="#" onClick={()=>props.modal(true)}>Login</Link>
+                </li>
+                <li className="nav-item hoverable">
+                  <Link style={myaccount_item} className="nav-link spc" href="/profile" onClick={()=>props.modal(true)}>Profile</Link>
+                </li>
+                <li className="nav-item mr-2">
+                  <form className="d-md-none" action="#" encType="multipart/form-data" id="language">
+                    <div className="btn-group">
+                      <select name="language" id="language-selection">
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="telgu">Telgu</option>
+                      </select>
+                    </div>
+                  </form>
+                </li>
+              </ul>
             </div>
+
+            <div className="w-75 my-2 my-md-0 mr-3">
+              <form className="d-flex justify-content-center align-items-center">
+                <input className="form-control mr-sm-2 flex-grow-1" type="search" onChange={(e)=> setSearchQuery(e.target.value)} placeholder="Search" aria-label="Search" />
+                <button className="btn btn-warning text-dark my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+
+            <form className="d-none d-md-block w-10" action="#" encType="multipart/form-data" id="language">
+              <div className="btn-group">
+                <select name="language" id="language-selection">
+                  <option value="english">English</option>
+                  <option value="hindi">Hindi</option>
+                  <option value="telgu">Telgu</option>
+                </select>
+              </div>
+            </form>
+          </div>
         </nav>
       </div>
     )

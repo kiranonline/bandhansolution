@@ -17,22 +17,19 @@ function BrandHeader(props) {
     console.log(props.cartItems);
     
     return (
-        <div className="container">
-            <div className="header-inner">
-                <div className="col-sm-4 col-xs-12 header-middle">
-                    <div className="header-middle-top">
-                    <div id="logo">
-                        <a href="#">
-                            <img src={logo} title="E-Commerce" alt="E-Commerce" className="img-responsive" />
-                        </a> 
-                    </div>
-                    </div>
-                </div>
-                <div className="col-sm-4 col-xs-12 header-right">
-                    <div id="cart" className="btn-group btn-block">
-                        <button type="button" onClick={()=> handleCart()} className="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span className="cart-title">Shopping Cart</span><br/>
-                        {props.cartItems.count} item(s)</span><Link to="/cart"/> </button>
-                    </div>
+        <div className="container p-3 w-100 d-flex justify-content-between align-items-center">
+            
+            <a id="logo" className="d-block" href="#">
+                <img src={logo} title="E-Commerce" alt="E-Commerce" className="img-responsive" />
+            </a> 
+    
+            <div className="header-right p-0">
+                <div id="cart" className="btn-group btn-block p-0">
+                    <button type="button" onClick={()=> handleCart()} className="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span className="cart-title">Shopping Cart</span><br/>
+                    <span className="count">
+                    {props.cartItems.count} item(s)    
+                    </span>
+                    </span><Link to="/cart"/> </button>
                 </div>
             </div>
         </div>

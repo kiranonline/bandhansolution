@@ -116,49 +116,51 @@ function Account(props) {
                             </div>
                     
                         </div> */}
-                    <div className="registerForm"   >
-                    <div className="sidePart ">
-                                <img src="https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
-                    </div>
-                    <form className="login-form" onSubmit={handleSubmit(onSubmitLogin)}>
-                                    <h1>
-                                        Welcome
-                                    </h1>
-                                    <div className="wrap-input100">
-                                        <input className="input100" type="text" name="phoneNumber" placeholder="Phone Number" ref={register({required:true, minLength:10,maxLength:10})} /> 
+                        <div className="registerForm d-flex flex-md-row flex-col justify-content-around align-items-center">
+                            <div className="sidePart">
+                                        <img src="https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                            </div>
+                            <form className="login-form d-flex flex-column justify-content-center align-itmes-center" onSubmit={handleSubmit(onSubmitLogin)}>
+                                <h3 className="h3 mb-3">Welcome</h3>
+                                <div className="wrap-input100">
+                                    <input className="input100 py-2" type="text" name="phoneNumber" placeholder="Phone Number" ref={register({required:true, minLength:10,maxLength:10})} /> 
 
-                                            {/* <label for="phone" class="label-phone">
-                                                <span class="content-phone">Phone</span>
-                                            </label> */}
-                                    </div>
+                                        {/* <label for="phone" class="label-phone">
+                                            <span class="content-phone">Phone</span>
+                                        </label> */}
+                                </div>
                                     {errors.phoneNumber && (
-                                            <p>Your phone number is required.</p>
-                                        )}
+                                        <p>Your phone number is required.</p>
+                                    )}
 
-                                    <div className="wrap-input100">
-                                        <input className="input100" type="password" name="password" placeholder="Password" ref={register({required:true,minLength:5})}/> <br></br> 
-                                            {/* <label for="password" class="label-password">
-                                                <span class="content-password">Password</span>
-                                            </label> */}
-                                        {errors.password && (
-                                            <p>Password is required.</p>
-                                        )}
-                                    </div>
-                                    <div className="btn-login">
-                                    <button className="login-form-btn">
-                                        Login
-                                    </button>
-                                    </div>
-                                    <div className="btn-signup">
-                                    <button className="signup-form-btn" onClick={()=>changeinview("register")}>
-                                            New User ? Sign up
+                                <div className="wrap-input100">
+                                    <input className="input100 py-2" type="password" name="password" placeholder="Password" ref={register({required:true,minLength:5})}/> <br></br> 
+                                        {/* <label for="password" class="label-password">
+                                            <span class="content-password">Password</span>
+                                        </label> */}
+                                    {errors.password && (
+                                        <p>Password is required.</p>
+                                    )}
+                                </div>
+                                
+                                <div className="row">
+                                    <div className="col-md-6 col-12 pr-1">
+                                        <button className="btn btn-success w-100">
+                                            Login
                                         </button>
                                     </div>
-                                </form>
+                                    
+                                    <div className="col-md-6 col-12 pl-1">
+                                        <button className="btn btn-primary w-100" onClick={()=>changeinview("register")}>
+                                                New User ? Sign up
+                                        </button>
+                                    </div>
                                 </div>
+                            </form>
+                        </div>
                     </div>
-                    <p className="errorMessage">{errormessage!==""&&errormessage}</p>
-                </div>
+                <p className="errorMessage">{errormessage!==""&&errormessage}</p>
+            </div>
 
             ):
             (
@@ -243,15 +245,20 @@ function Account(props) {
                                                 <div className="login100-form-bgbtn"></div>
                                             </div>
                                         </div>
-                                        <div className="btn-login">
-                                        <button className="login-form-btn">
-                                            Register
-                                        </button>
-                                        </div>
-                                        <div className="btn-signup">
-                                        <button className="signup-form-btn" onClick={()=>changeinview('login')}>
-                                            Existing User? Sign In
-                                        </button>
+
+
+                                        <div className="row">
+                                            <div className="col-md-6 col-12 pr-1">
+                                                <button className="btn btn-success w-100">
+                                                    Register
+                                                </button>
+                                            </div>
+                                            
+                                            <div className="col-md-6 col-12 pl-1">
+                                                <button className="btn btn-primary w-100" onClick={()=>changeinview('login')}>
+                                                    Existing User? Sign In
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
                                     

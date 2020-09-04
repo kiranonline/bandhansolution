@@ -1,13 +1,16 @@
 import React from "react";
 import Crousel from "./Crousel";
-import NewProduct from "./NewProduct";
+import NewProduct from "./ProductCard";
 
 function HomePage() {
   return (
     <div className="home-component">
       <Crousel />
       {/* product1 component  */}
-      <NewProduct />
+
+      <div className="container">
+        <NewProduct />
+      </div>
       {/* Each has 4 card component */}
       {/* product2 component  */}
       {/* product3 component  */}
