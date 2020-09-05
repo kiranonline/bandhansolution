@@ -14,6 +14,7 @@ const apis = {
     ADD_TO_CART : "/apis/v1/user/add-to-cart",
     FETCH_THE_CART : "/apis/v1//user/fetch-the-cart",
 
+    FETCH_PRODUCT_HIGHLIGHT : "/apis/v1/user/producthighlight",
 
     UPLOAD_USER_AVATAR:"/apis/v1/upload-avatar"    
 };

@@ -2715,31 +2715,35 @@ width: 300px;
 }
 
 
-.item{
-  width: fit-content;
-  text-align: center;
+.itemcard{
+  width: 200px;
+  margin: 5px;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
-.item .product-thumb{
+.itemcard .product-thumb{
   overflow: hidden;
 }
 
-.item .product-thumb button{
+.itemcard .product-thumb button{
   transform: translateY(100%);
   opacity: 0;
   transition: all 0.2s ease-in-out;
 }
 
-.item:hover .product-thumb button{
+.itemcard:hover .product-thumb button{
   transform: translateY(0%);
   opacity: 1;
 }
 
-.item .image{
+.itemcard .image {
   position: relative;
+  width: 100%;
+  min-height: 260px;
 }
 
-.item button{
+.itemcard button{
   position: absolute;
   bottom: 0;
   left: 0;
@@ -2750,6 +2754,11 @@ width: 300px;
 
 .img-responsive{
   width: 150px;
+}
+
+.strikethrough{
+  text-decoration: line-through;
+  text-decoration-thickness: 0.2em;
 }
 
 @media (max-width: 768px){
