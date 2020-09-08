@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Crousel from "./Crousel";
 import NewProduct from "./ProductCard";
 import http from "../../services/httpCall";
+import LatestNews from "./LatestNews";
 
 
 function HomePage() {
@@ -46,10 +47,16 @@ function HomePage() {
             }
           </div>
         </div>
-      </div>
+        
+
+        <LatestNews />
+
       {/* Each has 4 card component */}
       {/* product2 component  */}
       {/* product3 component  */}
+
+
+    </div>
     </div>
   );
 }
