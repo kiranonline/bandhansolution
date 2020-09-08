@@ -28,13 +28,13 @@ function LatestNews() {
     const news = ["1", "2", "3", "4" ,"5"]
 
     return (
-    <div class="blog">
+    <div className="blog">
         <h3 className="h2">Latest News</h3>
         
         <Carousel responsive={responsive}>
             {news.map(e => 
-                <div className="card news-card mx-3 border-0">
-                    <div class="img-holder">
+                <div className="card news-card mx-3 border-0" key={e}>
+                    <div className="img-holder">
                         <img className="card-img-top" src={`/blog/blog_${e}.jpg`} alt="Card image cap" />
 
                         <div className="date p-2 px-3">

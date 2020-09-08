@@ -35,13 +35,13 @@ function NavbarHeader(props) {
             <div id="navbarSupportedContent">
               <ul className="d-flex">
                 <li className="nav-item hoverable active">
-                  <Link className="nav-link spc" href="/home">Home <span className="sr-only">(current)</span></Link>
+                  <Link className="nav-link spc" to="/">Home <span className="sr-only">(current)</span></Link>
                 </li>
                 <li className="nav-item hoverable">
-                  <Link style={login_item} className="nav-link spc" href="#" onClick={()=>props.modal(true)}>Login</Link>
+                  <Link style={login_item} className="nav-link spc" to="#" onClick={()=>props.modal(true)}>Login</Link>
                 </li>
                 <li className="nav-item hoverable">
-                  <Link style={myaccount_item} className="nav-link spc" href="/profile" onClick={()=>props.modal(true)}>Profile</Link>
+                  <Link style={myaccount_item} className="nav-link spc" to="/profile">Profile</Link>
                 </li>
                 <li className="nav-item mr-2">
                   <form className="d-md-none" action="#" encType="multipart/form-data" id="language">
@@ -58,7 +58,7 @@ function NavbarHeader(props) {
             </div>
 
             <div className="w-75 my-2 my-md-0 mr-3">
-              <form className="d-flex justify-content-center align-items-center">
+              <form className="d-flex justify-content-center align-items-center" onSubmit={() => handleSearch()}>
                 <input className="form-control mr-sm-2 flex-grow-1" type="search" onChange={(e)=> setSearchQuery(e.target.value)} placeholder="Search" aria-label="Search" />
                 <button className="btn btn-warning text-dark my-2 my-sm-0" type="submit">Search</button>
               </form>

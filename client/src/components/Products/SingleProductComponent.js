@@ -91,7 +91,11 @@ function SingleProductComponent(props) {
                                 :
                                     props.categories.category_list.map((data)=>(
                                         <div onClick={()=>handleCategory()}>
-                                        <li key={data._id} >{data.name}</li>
+                                        <li key={data._id} >
+                                        <Link to="#">
+                                            {data.name}
+                                        </Link>
+                                        </li>
                                         </div>
                                     ))
                                 }

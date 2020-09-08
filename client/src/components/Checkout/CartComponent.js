@@ -37,7 +37,7 @@ function CartComponent(props) {
     return (
         <div className="container">
             <ul className="breadcrumb">
-                <li><Link to="/home"><i className="fa fa-home"></i></Link></li>
+                <li><Link to="/"><i className="fa fa-home"></i></Link></li>
             </ul>
             <div id="column-left" className="col-sm-3 hidden-xs column-left">
                 <div className="column-block">

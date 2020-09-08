@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Link, Redirect} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import {connect} from "react-redux"
 import logo from './static/images/logo.png'
 import {modal} from "../../actions/modalAction";
@@ -7,8 +7,10 @@ import {cartQuantity} from "../../actions/cartAction";
 
 function BrandHeader(props) {
     const [cartIsOpen,setcartIsOpen] = useState(false);
+    let history = useHistory()
 
     const handleCart = ()=>{
+        history.push("/cart")
         console.log(props.Auth.isLoggedIn);
         if(!props.Auth.isLoggedIn){
             props.modal(true);

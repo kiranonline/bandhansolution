@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import {connect} from "react-redux";
-import { Link,useParams } from 'react-router-dom'
+import { Link,useParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 import apis from "../../services/apis";
 import http from "../../services/httpCall";
 import {fetchProducts} from "../../actions/productListAction";
@@ -9,6 +10,11 @@ function ProductComponent(props) {
     let params=useParams();
     console.log(params);
     let [category_id,setCategoryId] =useState("");
+
+    const handleCategory = ()=>{
+        
+    }
+
     const fetchProducts = (data)=>{
         // let api = {}
         http.get(apis.GET_PRODUCT_LIST).then((result)=>{
@@ -35,21 +41,34 @@ function ProductComponent(props) {
                 {/* <li><Link to="/home"><i className="fa fa-home"></i></Link></li> */}
                 <li>All Products</li>
             </ul>
-            <div className="row">
-                <div id="column-left" className="col-sm-3 hidden-xs column-left">
+            
+            <div id="column-left" className="col-sm-3 hidden-xs column-left">
                 <div className="column-block">
-                    <div className="columnblock-title">Categories</div>
-                    <div className="category_block">
-                    <ul className="box-category treeview-list treeview">
-                        <li>Tablets</li>
-                        <li><a href="#">Software</a></li>
-                        <li><a href="#">Phones & PDAs</a></li>
-                        <li><a href="#">Cameras</a></li>
-                        <li><a href="#">MP3 Players</a></li>
-                    </ul>
+                    <div className="column-block">
+                        <div className="columnblock-title">
+                            Categories
+                        </div>
+                        <div className="category_block">
+                            <ul className="box-category treeview-list treeview">
+                                {props.category_list.category_list.length===0?
+                                    <Skeleton count={7} />
+                                :
+                                    props.category_list.category_list.map((data)=>(
+                                        <div onClick={()=>handleCategory()}>
+                                        <li key={data._id} >
+                                        <Link to="#">
+                                            {data.name}
+                                        </Link>
+                                        </li>
+                                        </div>
+                                    ))
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                </div>
+            </div>
+
                 <div id="content" className="col-sm-9">
                 <h2 className="category-title">Desktops</h2>
                 <div className="row category-banner">
@@ -275,7 +294,6 @@ function ProductComponent(props) {
                     </div>
                 </div>
                 </div>
-            </div>
             </div>
     )
 }
