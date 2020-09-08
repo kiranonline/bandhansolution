@@ -7,6 +7,10 @@ const apis = {
     REGISTER : "/apis/v1/user/createnormal",
     OTP_VERIFICATION : "/apis/v1/user/otpverification",
     LOGIN_WITH_EMAIL_OR_PHONE : "/apis/v1/user/login-with-email-or-phone-password",
+
+
+
+    FETCH_PRODUCT_HIGHLIGHT : "/apis/v1/user/producthighlight"
     
 };
 

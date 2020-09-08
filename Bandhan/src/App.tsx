@@ -31,7 +31,7 @@ const App: React.FC = (props:any) =>{
   return(
     <IonApp>
       <Loader />
-        <RouterWrapper />
+      <RouterWrapper />
       <Toast />
     </IonApp>
   )

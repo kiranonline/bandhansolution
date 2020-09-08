@@ -1,41 +1,38 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
-import ExploreContainer from '../components/ExploreContainer';
-import {connect} from "react-redux";
-import {logout} from "../actions/authAction";
+import { connect } from "react-redux";
+import { logout } from "../actions/authAction";
+import HomePageSlide from "../components/HomePageSlide";
+import HomePageTrending from "../components/HomePageTrending"
 import './Home.css';
 
-const Home: React.FC = (props:any) => {
+const Home: React.FC = (props: any) => {
   console.log("2")
-  const IamPressed = ()=>
-  {
+  const IamPressed = () => {
     console.log("yooo")
-    //props.logout()
+    props.logout()
   }
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+        <IonToolbar className="custom-header">
+          <IonTitle className="custom-heading-text">Home</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-            
-          </IonToolbar>
-        </IonHeader>
-        <IonButton onClick={IamPressed} color="danger">Log Out</IonButton>
-        <ExploreContainer  logout={props.logout}/>
+      <IonContent fullscreen className="ion-padding">
+        <HomePageSlide />
+        <HomePageTrending />
       </IonContent>
     </IonPage>
   );
 };
 
-const mapStateToProps= (state:any) => ({
-  Auth:state.Auth
+
+
+
+const mapStateToProps = (state: any) => ({
+  Auth: state.Auth
 })
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
   logout
 })(Home);
