@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import SecureWrapper from "./SecureRoute";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
 import {connect} from 'react-redux';
@@ -12,27 +12,32 @@ import { home } from 'ionicons/icons';
 
 
 const RouterWrapper = ({Auth,...rest}:any)=>{
+    console.log(Auth.isLoggedIn)
 
     
     return(
         <IonReactRouter>
             <IonRouterOutlet>
                 <Route 
-                    exact={true} 
-                    path="/home"
+                    path="/secure"
                     render={props=>{
-                        return Auth.isLoggedIn?<Home />:<Login />
+                        console.log("hi")
+                        return Auth.isLoggedIn?<SecureWrapper {...props} />:<Login />
                     }}
                 />
-                <Route exact={true} path="/login">
-                    <Login />
-                </Route>
-                <Route exact={true} path="/signup">
-                    <Signup />
-                </Route>
-                <Route exact={true} path="/">
-                    <Redirect to="/home"/> 
-                </Route>
+                <Route 
+                    path="/login"
+                    render={props=>{
+                        return Auth.isLoggedIn?<Redirect to="/secure/home"/>:<Login />
+                    }}
+                />
+                <Route 
+                    path="/signup"
+                    render={props=>{
+                        return Auth.isLoggedIn?<Redirect to="/secure/home"/>:<Signup />
+                    }}
+                />
+                <Route exact path="/" render={() => <Redirect to="/secure/home" />} />
             </IonRouterOutlet>
         </IonReactRouter>
     )

@@ -24,7 +24,7 @@ const Signup = ()=>{
         <IonPage>
             <IonContent fullscreen={true} className="signup-page-wrapper ion-padding">   
                 <IonFab vertical="top" horizontal="start" slot="fixed">
-                    <IonFabButton className="custom-back" routerLink="/home">
+                    <IonFabButton className="custom-back" routerLink="/login">
                         <IonIcon icon={arrowBackCircle} />
                     </IonFabButton>
                 </IonFab>
