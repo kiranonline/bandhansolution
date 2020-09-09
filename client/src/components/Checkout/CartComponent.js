@@ -37,57 +37,62 @@ function CartComponent(props) {
     return (
         <div className="container">
             <ul className="breadcrumb">
-                <li><Link to="/"><i className="fa fa-home"></i></Link></li>
+                <li><Link to="/"><i className="fa fa-home"></i>&nbsp;Home</Link></li>
             </ul>
-            <div id="column-left" className="col-sm-3 hidden-xs column-left">
-                <div className="column-block">
+
+            <div className="row">
+                <div id="column-left" className="col-md-3 hidden-xs column-left">
                     <div className="column-block">
-                    <div className="columnblock-title">Categories</div>
-                        <div className="category_block">
-                            <ul className="box-category treeview-list treeview">
-                                {props.categories.category_list.length===0?
-                                    <Skeleton count={5} />
-                                :
-                                    props.categories.category_list.map((data)=>(
-                                        <li key={data._id}><Link to="#">{data.name}</Link></li>
-                                    ))
-                                }
-                            </ul>
+                        <div className="column-block">
+                        <div className="columnblock-title">Categories</div>
+                            <div className="category_block">
+                                <ul className="box-category treeview-list treeview">
+                                    {props.categories.category_list.length===0?
+                                        <Skeleton count={5} />
+                                    :
+                                        props.categories.category_list.map((data)=>(
+                                            <li key={data._id}><Link to="#">{data.name}</Link></li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="table-responsive">
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <td className="text-center">Image</td>
-                            <td className="text-left">Product Name</td>
-                            <td className="text-left">Model</td>
-                            <td className="text-left">Quantity</td>
-                            <td className="text-right">Unit Price</td>
-                            <td className="text-right">Total</td>
-                        </tr>
-                    </thead>
-                    {cartDetails && cartDetails.length>0 && cartDetails.map((cart,index)=>(
-                        <tbody key={index}>
+                <div className="table-responsive col-md-9">
+                    <table className="table table-bordered">
+                        <thead>
                             <tr>
-                                <td className="text-center"><Link to="/product"><img className="img-thumbnail" title="women's clothing" alt="women's clothing" src="image/product/2product50x59.jpg" /></Link></td>
-                                <td className="text-left"><Link to="/product">women's clothing</Link></td>
-                                <td className="text-left">product 11</td>
-                                <td className="text-left"><div style={{maxWidth: "200px"}} className="input-group btn-block">
-                                    <input type="text" className="form-control quantity" disabled={true} size="1" value={cart.count} name="quantity" />
-                                    <span className="input-group-btn">
-                                    <button className="btn btn-primary" title="" data-toggle="tooltip" type="button" data-original-title="Update"><i className="fa fa-plus"></i></button>
-                                    <button  className="btn btn-danger" title="" data-toggle="tooltip" type="button" data-original-title="Remove"><i className="fa fa-minus"></i></button>
-                                    </span></div></td>
-                                <td className="text-right">$254.00</td>
-                                <td className="text-right">$254.00</td>
+                                <td className="text-center">Image</td>
+                                <td className="text-left">Product Name</td>
+                                <td className="text-left">Model</td>
+                                <td className="text-left">Quantity</td>
+                                <td className="text-right">Unit Price</td>
+                                <td className="text-right">Total</td>
                             </tr>
-                        </tbody>
-                    ))}
-                </table>
+                        </thead>
+                        {cartDetails.map((cart,index)=>(
+                            <tbody key={index}>
+                                <tr>
+                                    <td className="text-center"><Link to="/product"><img className="img-thumbnail" title="women's clothing" alt="women's clothing" src="image/product/2product50x59.jpg" /></Link></td>
+                                    <td className="text-left"><Link to="/product">women's clothing</Link></td>
+                                    <td className="text-left">product 11</td>
+                                    <td className="text-left"><div style={{maxWidth: "200px"}} className="input-group btn-block">
+                                        <input type="text" className="form-control quantity" disabled={true} size="1" value={cart.count} name="quantity" />
+                                        <span className="input-group-btn">
+                                        <button className="btn btn-primary" title="" data-toggle="tooltip" type="button" data-original-title="Update"><i className="fa fa-plus"></i></button>
+                                        <button  className="btn btn-danger" title="" data-toggle="tooltip" type="button" data-original-title="Remove"><i className="fa fa-minus"></i></button>
+                                        </span></div></td>
+                                    <td className="text-right">$254.00</td>
+                                    <td className="text-right">$254.00</td>
+                                </tr>
+                            </tbody>
+                        ))}
+                    </table>
+                </div>
             </div>
+
+            
             <div className="buttons">
                 {/* <div className="pull-left"><a className="btn btn-default" href="index-2.html">Continue Shopping</a></div> */}
                 <div className="pull-right"><Link className="btn btn-primary" to="/checkout">Checkout</Link></div>

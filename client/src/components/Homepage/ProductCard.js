@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import product1 from './static/images/product1.jpg'
 
 function NewProduct({product}) {
@@ -10,7 +11,7 @@ function NewProduct({product}) {
             <button type="button" className="addtocart-btn btn btn-primary" >Add To Cart</button>
           </div>
           <div className="caption product-detail p-0 m-0 mt-4">
-            <h4 className="product-name">{product.name}</h4>
+            <Link to={`/product/${product._id}`} className="product-name h5">{product.name}</Link>
             <div className="d-flex align-items-center">
               <p 
                 className={product.salePrice ? "m-0 text-danger strikethrough" : "h3 m-0"}>
