@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useParams, useHistory} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
@@ -12,15 +12,13 @@ import apis from '../../services/apis';
 import {modal} from "../../actions/modalAction";
 import {cartQuantity} from "../../actions/cartAction";
 import { Editor, EditorState, convertFromRaw } from "draft-js";
+import CategorySelector from '../GlobalComponents/CategorySelector';
 
 
 function SingleProductComponent(props) {
     let [product, setProduct] = useState({});
     const [productDescription,setProductDescription] = useState(() => EditorState.createEmpty());
     const [productImage,setproductImage] = useState("");
-    const [categorySelected, setCategory] = useState("");
-    const [errorInCart,setErrorInCart] = useState("");
-    let history = useHistory();
 
     let {id}=useParams();
     // console.log(id);
@@ -87,30 +85,8 @@ function SingleProductComponent(props) {
             </ul>
 
             <div className="row">
-                <div id="column-left" className="col-12 col-md-3 hidden-xs column-left">
-                <div className="column-block">
-                    <div className="column-block">
-                    <div className="columnblock-title">Categories</div>
-                        <div className="category_block">
-                            <ul className="box-category treeview-list treeview">
-                                {props.categories.category_list.length===0?
-                                    <Skeleton count={7} />
-                                :
-                                    props.categories.category_list.map((data)=>(
-                                        <div onClick={()=>handleCategory()}>
-                                        <li key={data._id} >
-                                        <Link to="#">
-                                            {data.name}
-                                        </Link>
-                                        </li>
-                                        </div>
-                                    ))
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
+                <CategorySelector />
 
                 <div id="content" className="col-md-9 col-12">
                     <div className="row">
@@ -170,9 +146,7 @@ function SingleProductComponent(props) {
                             </li>)}
                         </ul>
                         <hr className="my-2"/>
-                        {/* <p className="product-desc"> */}
-                            {/* <Editor editorState={productDescription} readOnly={true} /> */}
-                        
+                       
                         <div id="product" className="mt-2 ml-1">
                             <div className="form-group">
                                 

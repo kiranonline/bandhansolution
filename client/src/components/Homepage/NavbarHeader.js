@@ -1,25 +1,26 @@
-import React,{useState,useEffect} from 'react';
-import {useHistory,Link} from "react-router-dom";
+import React from 'react';
+import {Link} from "react-router-dom";
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import Account from './Account';
 import { modal } from "../../actions/modalAction";
-import krishi from "./static/images/krishi.jpeg";
+// import krishi from "./static/images/krishi.jpeg";
 import './NavbarHeader.css'
 
 
 Modal.setAppElement('#root');
 function NavbarHeader(props) {
-  let history= useHistory();
-  const [search_query,setSearchQuery] = useState("");
+  // let history= useHistory();
+  // const [search_query,setSearchQuery] = useState("");
+
   let login_item=props.auth.isLoggedIn?{display:"none"}:{}
   let myaccount_item=props.auth.isLoggedIn?{}:{display:"none"}
   
   // console.log(history);
-  const handleSearch = (e) => {
-    e.preventDefault();
-    history.push(`/products?search=${search_query}`);
-  }
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   history.push(`/products?search=${search_query}`);
+  // }
 
     return (
       <div>
@@ -60,7 +61,7 @@ function NavbarHeader(props) {
 
             <div className="w-75 my-2 my-md-0 mr-3">
               <form className="d-flex justify-content-center align-items-center" method="get" action="/products">
-                <input id="search" name="search" className="form-control mr-sm-2 flex-grow-1"  type="search" onChange={(e)=> setSearchQuery(e.target.value)} placeholder="Search" aria-label="Search" />
+                <input id="search" name="search" className="form-control mr-sm-2 flex-grow-1"  type="search" placeholder="Search" aria-label="Search" />
                 <button className="btn btn-warning text-dark my-2 my-sm-0" type="submit">Search</button>
               </form>
             </div>

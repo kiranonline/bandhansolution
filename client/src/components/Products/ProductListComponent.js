@@ -6,14 +6,13 @@ import apis from "../../services/apis";
 import http from "../../services/httpCall";
 import {fetchProducts} from "../../actions/productListAction";
 import NewProduct from "../Homepage/ProductCard";
-import queryString from 'query-string'
+import CategorySelector from '../GlobalComponents/CategorySelector';
 
 
 function ProductComponent(props) {
     let params=useParams();
     console.log(params);
     
-    let [category_id,setCategoryId] = useState("");
     let [productList,setProductList] = useState([]);
     let [isList, setIsList] = useState(true);
 
@@ -21,14 +20,17 @@ function ProductComponent(props) {
         color: "orange"
     }
 
-    const handleCategory = ()=>{
-        
-    }
-
     const fetchProducts = (data)=>{
         // let api = {}
 
         let URL = apis.GET_PRODUCT_LIST;
+
+        // let qs = queryString.parse(window.location.search)
+        // console.log(qs);
+
+        // if(qs.category){
+        //     setCategoryId(qs.category)
+        // }
 
         URL = URL + window.location.search  
 
@@ -60,32 +62,7 @@ function ProductComponent(props) {
 
             <div className="row">
 
-                <div id="column-left" className="col-md-3 hidden-xs column-left">
-                    <div className="column-block">
-                        <div className="column-block">
-                            <div className="columnblock-title">
-                                Categories
-                            </div>
-                            <div className="category_block">
-                                <ul className="box-category treeview-list treeview">
-                                    {props.category_list.category_list.length===0?
-                                        <Skeleton count={7} />
-                                    :
-                                        props.category_list.category_list.map((data)=>(
-                                            <div key={data._id} onClick={()=>handleCategory()}>
-                                            <li  >
-                                            <Link to="#">
-                                                {data.name}
-                                            </Link>
-                                            </li>
-                                            </div>
-                                        ))
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <CategorySelector />
 
                 <div id="content" className="col-md-9">
                 {/* <h2 className="category-title">Desktops</h2>

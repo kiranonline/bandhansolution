@@ -7,7 +7,6 @@ import { loading } from "../../actions/loadingAction";
 import { modal } from "../../actions/modalAction";
 import { login, setUserDetails,logout } from "../../actions/authAction";
 import './Account.css';
-import krishi from "./static/images/krishi.jpeg";
 
 function Account(props) {
     const [inview,changeinview] = useState('login');
@@ -117,8 +116,8 @@ function Account(props) {
                     
                         </div> */}
                         <div className="registerForm d-flex flex-md-row flex-col justify-content-around align-items-center">
-                            <div className="sidePart">
-                                        <img src="https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                            <div className="sidePart d-md-block d-none" style={{paddingRight: "30px"}}>
+                                        <img width="100%" src="https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
                             </div>
                             <form className="login-form d-flex flex-column justify-content-center align-itmes-center" onSubmit={handleSubmit(onSubmitLogin)}>
                                 <h3 className="h3 mb-3">Welcome</h3>
@@ -143,16 +142,16 @@ function Account(props) {
                                     )}
                                 </div>
                                 
-                                <div className="row">
-                                    <div className="col-md-6 col-12 pr-1">
+                                <div className="row px-3">
+                                    <div className="col-lg-6 col-12 p-0 pr-lg-2">
                                         <button className="btn btn-success w-100">
                                             Login
                                         </button>
                                     </div>
                                     
-                                    <div className="col-md-6 col-12 pl-1">
-                                        <button className="btn btn-primary w-100" onClick={()=>changeinview("register")}>
-                                                New User ? Sign up
+                                    <div className="col-lg-6 col-12 p-0 mt-2 mt-lg-0 pr-lg-2">
+                                        <button className="btn btn-warning w-100" onClick={()=>changeinview("register")}>
+                                            Sign up
                                         </button>
                                     </div>
                                 </div>
@@ -192,8 +191,8 @@ function Account(props) {
                                         </div> */}
                                     </div>
                                     <div className="registerForm">
-                                    <div className="sidePart">
-                                    <img src=" https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                                    <div className="sidePart d-flex justiify-content-center align-items-center" style={{paddingRight: "30px"}}>
+                                    <img width="100%" src=" https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
                                     </div>
                                         <form className="login100-form" onSubmit={handleSubmit(onSubmitRegitser)}>
                                         <h1 >
@@ -201,7 +200,7 @@ function Account(props) {
                                         </h1>
                                         <p className="errorMessage">{errormessage!==""&&errormessage}</p>
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="phoneNumber" placeholder="Phone" autoComplete="off" ref={register({required:true,minLength:10,maxLength:10})} />
+                                            <input className="input100 py-2" type="number" name="phoneNumber" placeholder="Phone" autoComplete="off" ref={register({required:true,minLength:10,maxLength:10})} />
                                                 {/* <label for="phone number" class="label-phone">
                                                     <span class="content-phone">Phone Number</span>
                                                 </label> */}
@@ -211,7 +210,7 @@ function Account(props) {
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="email" placeholder="Email" autoComplete="off" ref={register({validate:validateEmail})} />
+                                            <input className="input100 py-2" type="text" name="email" placeholder="Email" autoComplete="off" ref={register({validate:validateEmail})} />
                                                 {/* <label for="email" class="label-email">
                                                     <span class="content-email">Email</span>
                                                 </label> */}
@@ -221,7 +220,7 @@ function Account(props) {
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="text" name="name" placeholder="Name" autoComplete="off" ref={register({required:true})}/>
+                                            <input className="input100 py-2" type="text" name="name" placeholder="Name" autoComplete="off" ref={register({required:true})}/>
                                                 {/* <label for="name" class="label-name">
                                                     <span class="content-name">Name</span>
                                                 </label> */}
@@ -231,7 +230,7 @@ function Account(props) {
                                         )}
 
                                         <div className="wrap-input100">
-                                            <input className="input100" type="password" name="password" placeholder="Password" autoComplete="off" ref={register({required:true, minLength:5})} />
+                                            <input className="input100 py-2" type="password" name="password" placeholder="Password" autoComplete="off" ref={register({required:true, minLength:5})} />
                                                 {/* <label for="password" class="label-password">
                                                     <span class="content-password">Password</span>
                                                 </label> */}
@@ -247,15 +246,15 @@ function Account(props) {
                                         </div>
 
 
-                                        <div className="row">
-                                            <div className="col-md-6 col-12 pr-1">
+                                        <div className="row px-3">
+                                            <div className="col-lg-6 col-12 p-0 pr-lg-2">
                                                 <button className="btn btn-success w-100">
                                                     Register
                                                 </button>
                                             </div>
                                             
-                                            <div className="col-md-6 col-12 pl-1">
-                                                <button className="btn btn-primary w-100" onClick={()=>changeinview('login')}>
+                                            <div className="col-lg-6 col-12 p-0 mt-2 mt-lg-0">
+                                                <button className="btn btn-dark w-100" onClick={()=>changeinview('login')}>
                                                     Existing User? Sign In
                                                 </button>
                                             </div>
