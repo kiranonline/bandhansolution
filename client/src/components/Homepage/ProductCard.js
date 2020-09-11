@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import apis from "../../services/apis"
 import product1 from './static/images/product1.jpg'
 
 function NewProduct({product}) {
@@ -7,7 +8,7 @@ function NewProduct({product}) {
       <div className="itemcard">
         <div className="product-thumb transition">
           <div className="image product-imageblock"> 
-            <img src={`http://localhost:4500/${product.images[0]}`} alt="product1" title="product1" width="200px" /> 
+            <img src={`${apis.BASE_SERVER_URL}/${product.images[0]}`} alt="product1" title="product1" width="200px" /> 
             <button type="button" className="addtocart-btn btn btn-primary" >Add To Cart</button>
           </div>
           <div className="caption product-detail p-0 m-0 mt-4">
