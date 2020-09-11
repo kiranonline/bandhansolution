@@ -16,7 +16,8 @@ function NavbarHeader(props) {
   let myaccount_item=props.auth.isLoggedIn?{}:{display:"none"}
   
   // console.log(history);
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     history.push(`/products?search=${search_query}`);
   }
 
@@ -58,8 +59,8 @@ function NavbarHeader(props) {
             </div>
 
             <div className="w-75 my-2 my-md-0 mr-3">
-              <form className="d-flex justify-content-center align-items-center" onSubmit={() => handleSearch()}>
-                <input className="form-control mr-sm-2 flex-grow-1" type="search" onChange={(e)=> setSearchQuery(e.target.value)} placeholder="Search" aria-label="Search" />
+              <form className="d-flex justify-content-center align-items-center" method="get" action="/products">
+                <input id="search" name="search" className="form-control mr-sm-2 flex-grow-1"  type="search" onChange={(e)=> setSearchQuery(e.target.value)} placeholder="Search" aria-label="Search" />
                 <button className="btn btn-warning text-dark my-2 my-sm-0" type="submit">Search</button>
               </form>
             </div>

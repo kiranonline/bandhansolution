@@ -9,6 +9,7 @@
     "axios": "^0.20.0",
     "draft-js": "^0.11.7",
     "otp-input-react": "^0.2.4",
+    "query-string": "^6.13.1",
     "react": "^16.8",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.5.3",

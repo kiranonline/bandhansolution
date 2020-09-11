@@ -29,7 +29,7 @@ function LatestNews() {
 
     return (
     <div className="blog">
-        <h3 className="h2">Latest News</h3>
+        <h3 className="h2 mb-4">Latest News</h3>
         
         <Carousel responsive={responsive}>
             {news.map(e => 
