@@ -2,9 +2,10 @@ import React,{useState,useEffect} from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonRouterOutlet,  IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonBadge } from '@ionic/react';
 import {connect} from 'react-redux';
-import { home, calendar, personCircle, informationCircle } from 'ionicons/icons';
-import Home from './pages/Home';
+import { home, calendar, personCircle, informationCircle, cart, person } from 'ionicons/icons';
 
+import Home from './pages/Home/Home';
+import Profile from "./pages/Profile/Profile"
 
 
 const SecureWrapper = ({match}:any)=>{
@@ -12,14 +13,41 @@ const SecureWrapper = ({match}:any)=>{
     
     return(
         <>
+        <IonTabs>
+            <IonTabBar slot="bottom">
+                <IonTabButton tab="home" href="/secure/home">
+                    <IonIcon icon={home} />
+                    <IonLabel>Home</IonLabel>
+                </IonTabButton>
+
+                <IonTabButton tab="cart" href="/tab1">
+                    <IonIcon icon={cart} />
+                    <IonLabel>Cart</IonLabel>
+                </IonTabButton>
+
+                <IonTabButton tab="profile" href="/secure/profile">
+                    <IonIcon icon={person} />
+                    <IonLabel>Profile</IonLabel>
+                </IonTabButton>
+            </IonTabBar>
+
+
             <IonRouterOutlet>
                 <Route 
                     exact={true} 
                     path={`${match.url}/home`}
                     component={Home}
                 />
+                <Route 
+                    exact={true} 
+                    path={`${match.url}/profile`}
+                    component={Profile}
+                />
                 <Route exact path={`${match.url}`} render={() => <Redirect to="/secure/home" />} />
             </IonRouterOutlet>
+
+
+        </IonTabs>
         </>
 
     )

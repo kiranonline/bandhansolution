@@ -4,7 +4,9 @@ import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Loader from "./components/Loader";
 import Toast from "./components/Toast";
-import { login } from "./actions/authAction";
+import apis from "./services/apis";
+import http from "./services/httpCall"
+import { login, setUserDetails,logout } from "./actions/authAction";
 import {connect} from 'react-redux';
 import { Plugins } from '@capacitor/core';
 import RouterWrapper from "./RouteWrapper";
@@ -25,8 +27,30 @@ const App: React.FC = (props:any) =>{
     }
   }
 
+
+  let fetchUserDetails = ()=>{
+    http.get(apis.GET_USER_DETAILS).then((result)=>{
+      console.log(result);
+      if(result.data.status){
+          props.setUserDetails(result.data.data);
+      }
+      else{
+          props.logout();
+      }
+    }).catch((err)=>{
+      console.log(err);
+      props.logout()
+    })
+  }
+
   console.log("1")
   getToken();
+
+
+  useEffect(()=>{
+    fetchUserDetails()
+  },[])
+
 
   return(
     <IonApp>
@@ -42,5 +66,7 @@ const App: React.FC = (props:any) =>{
 
 const mapStateToProps= (state:any) => ({})
 export default connect(mapStateToProps, { 
-  login
+  login,
+  setUserDetails,
+  logout
 })(App);

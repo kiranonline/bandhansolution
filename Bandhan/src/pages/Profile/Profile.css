@@ -1,0 +1,88 @@
+.profilePage-bg-wrapper{
+    position: relative;
+    width: 100%;
+}
+.profilePage-bg-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+.profilePage-avatar-wrapper{
+    position: relative;
+    width:100%;
+    margin-top: -60px;
+    z-index: 1000;
+}
+.profilePage-profile-avatar{
+    margin: auto;
+    width:120px;
+    height: 120px;
+}
+.profilePage-profile-image{
+    border:7px solid #a4c639;;
+}
+.profilePage-profile-image-not-present{
+    background-color: #E6E6FA;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    color:#fff;
+}
+.profilePage-user-name{
+    width:100%;
+    text-align: center;
+    padding: 0px auto 10px auto;
+}
+.profilePage-user-details-card{
+    padding: 10px;
+    padding-bottom: 0;
+}
+.profilePage-input{
+    --background:transparent;
+    color:rgba(0,0,0,1);
+    --highlight-background: unset;
+    border:1.5px solid #E6E6FA;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.profilePage-user-address-card{
+    padding: 10px;
+}
+.address-card-loader{
+    width:100%;
+    text-align: center;
+}
+.address-card{
+    color:rgba(0,0,0,1);
+    border:1.5px solid #E6E6FA;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding:12px;
+}
+.default-address{
+    background: #E6E6FA;
+}
+.address-card h6,.address-card p{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+.add-address-button{
+    --background: #a4c639;
+}
+.add-address-modal{
+    background: transparent;
+}
+.address-add-form{
+    padding:20px
+}
+.address-form-input{
+    --background:transparent;
+    color:rgb(59, 59, 59);
+    --highlight-background: unset;
+    border:1.5px solid #E6E6FA;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
