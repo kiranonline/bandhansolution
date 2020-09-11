@@ -6,6 +6,8 @@ import apis from "../../services/apis";
 import http from "../../services/httpCall";
 import {fetchProducts} from "../../actions/productListAction";
 import NewProduct from "../Homepage/ProductCard";
+import queryString from 'query-string'
+
 
 function ProductComponent(props) {
     let params=useParams();
@@ -25,7 +27,12 @@ function ProductComponent(props) {
 
     const fetchProducts = (data)=>{
         // let api = {}
-        http.get(apis.GET_PRODUCT_LIST).then((result)=>{
+
+        let URL = apis.GET_PRODUCT_LIST;
+
+        URL = URL + window.location.search  
+
+        http.get(URL).then((result)=>{
           console.log("res",result);
           if(result.data.status){
               setProductList(result.data.data)

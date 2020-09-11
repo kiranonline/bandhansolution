@@ -29,8 +29,8 @@ function HomePage() {
       <Crousel />
       {/* product1 component  */}
 
-      <div className="container">
-        <h2 className="h2 mb-3">Top Grossing</h2>
+      <div className="container mt-4">
+        <h2 className="h2 mb-4">Top Grossing</h2>
         <div className="d-flex align-items-stretch justify-content-center flex-wrap">
           {
             highlighProducts
@@ -38,8 +38,12 @@ function HomePage() {
           }
         </div>
 
-        <div className="mt-2">
-          <h2 className="h2 mb-3">New Arrivals</h2>
+        
+
+        <hr className="my-4" style={{border: "1px solid #aaa"}}/>
+
+        <div className="mt-5">
+          <h2 className="h2 mb-4">New Arrivals</h2>
           <div className="d-flex align-items-stretch justify-content-center flex-wrap">
             {
               newProducts
@@ -47,9 +51,14 @@ function HomePage() {
             }
           </div>
         </div>
-        
 
-        <LatestNews />
+        <hr className="my-4" style={{border: "1px solid #aaa"}} />
+
+        <div style={{width: "100%", height: "20px"}}>
+
+        </div>
+      
+        <LatestNews className="mt-6"/>
 
       {/* Each has 4 card component */}
       {/* product2 component  */}
