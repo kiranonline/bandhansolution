@@ -11,7 +11,7 @@ export default function HomePageSlide() {
     };
 
     return (
-        <IonSlides pager={true} options={slideOpts}>
+        <IonSlides pager={true} options={slideOpts} className="homepage-slider">
             <IonSlide>
                 <img src={banner1} />
             </IonSlide>

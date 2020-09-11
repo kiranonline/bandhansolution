@@ -1,9 +1,21 @@
 const express = require("express");
 const {body} = require("express-validator");
-const { addaddress,removeaddress,editaddress,setdefaultaddress } = require("../controllers/addressControllers");
+const { addaddress,removeaddress,editaddress,setdefaultaddress,getAddress } = require("../controllers/addressControllers");
 const {isAuthenticated,isAdmin} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
 const router = express.Router();
+
+
+//++++++++++++++++++++++++++++++++++ get Address ++++++++++++++++++++++++
+router.get("/user/get/address",isAuthenticated,getAddress)
+
+
+
+
+
+
+
+
 
 //+++++++++++++++++++++++++++++++++++++++ Add Address ++++++++++++++++++++++++++
 router.post("/user/add/address",[
@@ -21,7 +33,15 @@ router.post("/user/remove/address",isAuthenticated,removeaddress);
 
 
 //+++++++++++++++++++++++++++++++++++++++ Edit Address ++++++++++++++++++++++++++
-router.post("/user/edit/address",isAuthenticated,editaddress);
+router.post("/user/edit/address",[
+  body("lineone").not().isEmpty(),
+  body("locality").not().isEmpty(),
+  body("city").not().isEmpty(),
+  body("district").not().isEmpty(),
+  body("state").not().isEmpty(),
+  body("country").not().isEmpty(),
+  body("pincode").not().isEmpty()
+],errorHandler,isAuthenticated,editaddress);
 
 
 //+++++++++++++++++++++++++++++++++++++++ Set Default Address ++++++++++++++++++++++++++

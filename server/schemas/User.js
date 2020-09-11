@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema({
     ],
     defaultAddress:{
         type: Object,
-        default:{}
+        default:null
     }
 },{
     timestamps : true
