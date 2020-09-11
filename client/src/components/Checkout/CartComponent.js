@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 import http from "../../services/httpCall";
 import apis from "../../services/apis";
+import CategorySelector from '../GlobalComponents/CategorySelector';
 
 function CartComponent(props) {
     let [cartDetails,setcartDetails] = useState([]);
@@ -41,24 +42,7 @@ function CartComponent(props) {
             </ul>
 
             <div className="row">
-                <div id="column-left" className="col-md-3 hidden-xs column-left">
-                    <div className="column-block">
-                        <div className="column-block">
-                        <div className="columnblock-title">Categories</div>
-                            <div className="category_block">
-                                <ul className="box-category treeview-list treeview">
-                                    {props.categories.category_list.length===0?
-                                        <Skeleton count={5} />
-                                    :
-                                        props.categories.category_list.map((data)=>(
-                                            <li key={data._id}><Link to="#">{data.name}</Link></li>
-                                        ))
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <CategorySelector />
                 <div className="table-responsive col-md-9">
                     <table className="table table-bordered">
                         <thead>
