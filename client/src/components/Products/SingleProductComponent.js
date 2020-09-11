@@ -17,11 +17,14 @@ import CategorySelector from '../GlobalComponents/CategorySelector';
 
 function SingleProductComponent(props) {
     let [product, setProduct] = useState({});
+    let [productCategory, setProductCategory] = useState([]);
     const [productDescription,setProductDescription] = useState(() => EditorState.createEmpty());
     const [productImage,setproductImage] = useState("");
 
     let {id}=useParams();
     // console.log(id);
+
+    
 
     const fetchProduct = ()=>{
         http.get(apis.GET_SINGLE_PRODUCT+`${id}`)
@@ -33,7 +36,8 @@ function SingleProductComponent(props) {
                 const contentState = convertFromRaw(JSON.parse(result.data.data.description));
                 const editorState = EditorState.createWithContent(contentState);
                 setProductDescription(editorState);
-
+                setProductCategory(result.data.data.category);
+                
             }else{
                 console.log(result.data.message);
             }
@@ -145,6 +149,16 @@ function SingleProductComponent(props) {
                             <span> In Stock</span>
                             </li>)}
                         </ul>
+                                
+                        <div className="categoryButton">
+                            {productCategory.map(cat => 
+                                <a className="mr-2" href={`/products/?category=${cat}`} key={cat}>
+                                    Category
+                                </a>
+
+                            )}
+                        </div>
+
                         <hr className="my-2"/>
                        
                         <div id="product" className="mt-2 ml-1">
