@@ -5,7 +5,9 @@ import {connect} from 'react-redux';
 import { home, calendar, personCircle, informationCircle, cart, person } from 'ionicons/icons';
 
 import Home from './pages/Home/Home';
-import Profile from "./pages/Profile/Profile"
+import Product from "./pages/Product/Product";
+import Cart from "./pages/Cart/Cart";
+import Profile from "./pages/Profile/Profile";
 
 
 const SecureWrapper = ({match}:any)=>{
@@ -20,7 +22,7 @@ const SecureWrapper = ({match}:any)=>{
                     <IonLabel>Home</IonLabel>
                 </IonTabButton>
 
-                <IonTabButton tab="cart" href="/tab1">
+                <IonTabButton tab="cart" href="/secure/cart">
                     <IonIcon icon={cart} />
                     <IonLabel>Cart</IonLabel>
                 </IonTabButton>
@@ -40,8 +42,17 @@ const SecureWrapper = ({match}:any)=>{
                 />
                 <Route 
                     exact={true} 
+                    path={`${match.url}/cart`}
+                    component={Cart}
+                />
+                <Route 
+                    exact={true} 
                     path={`${match.url}/profile`}
                     component={Profile}
+                />
+                <Route 
+                    path={`${match.url}/product`}
+                    component={Product}
                 />
                 <Route exact path={`${match.url}`} render={() => <Redirect to="/secure/home" />} />
             </IonRouterOutlet>
