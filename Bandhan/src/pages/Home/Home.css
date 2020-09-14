@@ -6,13 +6,12 @@
 }
 .homepage-slider{
     margin-top: 5px;
+    margin-bottom: 25px;
 }
-.homepage-main-text{
-    padding-left: 5px;
+.homepage-main-text-trending, .homepage-main-text-latest{
+    width: 100%;
+    text-align: center;
 }
-.item-card-wrapper{
-    margin: 3px;
-}
-.price-section{
-    
+.homepage-main-text-latest{
+    margin-top: 20px;
 }

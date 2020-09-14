@@ -14,7 +14,7 @@
     position: relative;
     width:100%;
     margin-top: -60px;
-    z-index: 1000;
+    z-index: 1;
 }
 .profilePage-profile-avatar{
     margin: auto;
@@ -56,7 +56,7 @@
     text-align: center;
 }
 .address-card{
-    color:rgba(0,0,0,1);
+    color:var(--ion-color-medium-shade);
     border:1.5px solid #E6E6FA;
     border-radius: 5px;
     margin-bottom: 10px;

@@ -4,3 +4,36 @@
 .custom-back{
     --background:green;
 }
+
+.item-card-wrapper{
+    margin: 3px;
+}
+.itemName{
+    width: 100%;
+    text-align: center;
+    color:var(--ion-color-medium-shade);
+    margin: 0;
+    margin-bottom: 5px;
+}
+.itemStars{
+    text-align: center;
+    margin-bottom: 3px;
+}
+.item-star{
+    color:var(--ion-color-medium-shade);
+}
+.item-price-section{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.price-striked-wrapper{
+    color:red;
+    text-decoration:line-through
+}
+.price-striked-inner{
+    color:var(--ion-color-medium-shade);
+}
+.actual-price{
+    color:var(--ion-color-mainColor)
+}

@@ -3,7 +3,8 @@ import React from 'react';
 import { connect } from "react-redux";
 import { logout } from "../../actions/authAction";
 import HomePageSlide from "../../components/HomePageSlide";
-import HomePageTrending from "../../components/HomePageTrending"
+import HomePageTrending from "../../components/HomePageTrending";
+import HomePageLates from "../../components/HomePageLatest"
 import './Home.css';
 
 const Home: React.FC = (props: any) => {
@@ -22,6 +23,7 @@ const Home: React.FC = (props: any) => {
       <IonContent fullscreen>
         <HomePageSlide />
         <HomePageTrending />
+        <HomePageLates />
       </IonContent>
     </IonPage>
   );
