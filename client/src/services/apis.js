@@ -16,7 +16,8 @@ const apis = {
 
     FETCH_PRODUCT_HIGHLIGHT : "/apis/v1/user/producthighlight",
 
-    UPLOAD_USER_AVATAR:"/apis/v1/upload-avatar"    
+    UPLOAD_USER_AVATAR:"/apis/v1/upload-avatar",
+    UPDATE_PASSWORD:"/apis/v1/user/update-password"    
 };
 
 export default apis;
