@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import apis from "../../services/apis"
-import product1 from './static/images/product1.jpg'
+// import product1 from './static/images/product1.jpg'
 
 function NewProduct({product}) {
     return (

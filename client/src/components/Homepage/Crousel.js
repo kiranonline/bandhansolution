@@ -15,9 +15,9 @@ function Crousel() {
             autoplay
             dots
             >
-                <div className="item"> <a href="#"><img src={banner1} alt="main-banner1" className="img-responsive" /></a> </div>
-                <div className="item"> <a href="#"><img src={banner2} alt="main-banner2" className="img-responsive" /></a> </div>
-                <div className="item"> <a href="#"><img src={banner3} alt="main-banner3" className="img-responsive" /></a> </div>
+                <div className="item"> <a href="/"><img src={banner1} alt="main-banner1" className="img-responsive" /></a> </div>
+                <div className="item"> <a href="/"><img src={banner2} alt="main-banner2" className="img-responsive" /></a> </div>
+                <div className="item"> <a href="/"><img src={banner3} alt="main-banner3" className="img-responsive" /></a> </div>
             </OwlCarousel>
     )
 }

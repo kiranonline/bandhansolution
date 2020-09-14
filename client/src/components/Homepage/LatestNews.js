@@ -35,18 +35,18 @@ function LatestNews() {
             {news.map(e => 
                 <div className="card news-card mx-3 border-0" key={e}>
                     <div className="img-holder">
-                        <img className="card-img-top" src={`/blog/blog_${e}.jpg`} alt="Card image cap" />
+                        <img className="card-img-top" src={`/blog/blog_${e}.jpg`} alt={e} />
 
                         <div className="date p-2 px-3">
                             06/07/2019
                         </div>
 
-                        <a href="#" className="btn btn-danger btn-black">
+                        <a href="/" className="btn btn-danger btn-black">
                             Read More
                         </a>
                     </div>
                     <div className="card-body p-0 pt-3">
-                        <a href="#" className="h4 card-title">Card title</a>
+                        <a href="/" className="h4 card-title">Card title</a>
                         <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </div>

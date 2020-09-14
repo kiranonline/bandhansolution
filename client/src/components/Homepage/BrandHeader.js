@@ -1,12 +1,12 @@
-import React,{useState} from 'react';
-import {Link, Redirect, useHistory} from "react-router-dom";
+import React from 'react';
+import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux"
 import logo from './static/images/logo.png'
 import {modal} from "../../actions/modalAction";
 import {cartQuantity} from "../../actions/cartAction";
 
 function BrandHeader(props) {
-    const [cartIsOpen,setcartIsOpen] = useState(false);
+    // const [cartIsOpen,setcartIsOpen] = useState(false);
     let history = useHistory()
 
     const handleCart = ()=>{

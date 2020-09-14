@@ -69,13 +69,9 @@ function SingleProductComponent(props) {
         }
     }
 
-    const handleCategory = ()=>{
-        
-    }
-
     useEffect(()=>{
         fetchProduct();
-    },[]);
+    },[fetchProduct]);
 
     return (
         <div className="container">

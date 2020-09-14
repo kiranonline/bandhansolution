@@ -9,7 +9,7 @@ import http from "../../services/httpCall";
 
 
 function Dashboard(props) {
-    const [sideBarCollapsed,setSideBarCollapsed] = useState(false);
+    // const [sideBarCollapsed,setSideBarCollapsed] = useState(false);
     const [userD, setUserD] = useState({})
 
     const tabbedPages = ["My Account","Addresses" , "My Order History"]
@@ -34,9 +34,9 @@ function Dashboard(props) {
     const [newPassword, setNewPassword] = useState("");
     const [passwordUpdateSuccess, setPasswordUpdateSuccess] = useState(false)
 
-    let toggleSideBar = ()=>{
-        setSideBarCollapsed(!sideBarCollapsed);
-    }
+    // let toggleSideBar = ()=>{
+    //     setSideBarCollapsed(!sideBarCollapsed);
+    // }
 
     useEffect(() => {
         http.get(apis.GET_USER_DETAILS).then((result)=>{
@@ -242,7 +242,17 @@ function Dashboard(props) {
 
                                 </div>
 
-                                <hr/>
+                            </div>
+                            </>
+                        ) 
+                        : 
+                        (<></>)
+                    }
+
+                    {currentActiveTab === 1 ? 
+                        (
+                            <>
+                                <h3 className="h3">Addresses</h3>
 
                                 <div className="addressBlock my-3">
                                     <h3 className="h4">Default Address</h3>
@@ -285,17 +295,6 @@ function Dashboard(props) {
                                 
 
                                 <button className="btn btn-secondary mt-2 ml-auto">Save Changes</button>
-                            </div>
-                            </>
-                        ) 
-                        : 
-                        (<></>)
-                    }
-
-                    {currentActiveTab === 1 ? 
-                        (
-                            <>
-                                <h3 className="h3">Addresses</h3>
                             </>
                         ) 
                         : 

@@ -28,26 +28,26 @@ function Footer() {
                     <ul className="list-unstyled ul-wrapper">
                     <li><a href="about-us.html">About Us</a></li>
                     <li><a href="checkout.html">Delivery Information</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="/">Privacy Policy</a></li>
+                    <li><a href="/">Terms &amp; Conditions</a></li>
                     </ul>
                 </div>
                 <div className="col-sm-3 footer-block">
                     <h5 className="footer-title">Customer Service</h5>
                     <ul className="list-unstyled ul-wrapper">
                     <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Site Map</a></li>
-                    <li><a href="#">Wish List</a></li>
+                    <li><a href="/">Returns</a></li>
+                    <li><a href="/">Site Map</a></li>
+                    <li><a href="/">Wish List</a></li>
                     </ul>
                 </div>
                 <div className="col-sm-3 footer-block">
                     <h5 className="footer-title">Extras</h5>
                     <ul className="list-unstyled ul-wrapper">
-                    <li><a href="#">Brands</a></li>
+                    <li><a href="/">Brands</a></li>
                     <li><a href="gift.html">Gift Vouchers</a></li>
                     <li><a href="affiliate.html">Affiliates</a></li>
-                    <li><a href="#">Specials</a></li>
+                    <li><a href="/">Specials</a></li>
                     </ul>
                 </div>
                 <div className="col-sm-3 footer-block">

@@ -1,8 +1,8 @@
-import React,{useEffect} from 'react'
-import {Switch, Route, Redirect} from "react-router-dom";
+import React from 'react'
+import {Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
-import http from "../../services/httpCall";
-import apis from "../../services/apis";
+// import http from "../../services/httpCall";
+// import apis from "../../services/apis";
 import CartComponent from "../Checkout/CartComponent";
 import CheckoutComponent from "../Checkout/CheckoutComponent";
 import { logout, setUserDetails } from "../../actions/authAction"; 

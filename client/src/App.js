@@ -62,8 +62,8 @@ function App(props) {
 
     // fetching user details on component load
     useEffect(()=>{
-            fetchUserDetails();
-            fetchCategories();
+      fetchUserDetails();
+      fetchCategories();
     },[])
 
   return (
