@@ -31,12 +31,12 @@ function App(props) {
 
   let fetchUserDetails = ()=>{
         http.get(apis.GET_USER_DETAILS).then((result)=>{
-            console.log(result);
+            console.log(result.data.data);
             if(result.data.status){
-                props.setUserDetails(result.data.data);
+              props.setUserDetails(result.data.data);
             }
             else{
-                props.logout();
+              props.logout();
             }
         }).catch((err)=>{
             console.log(err);
