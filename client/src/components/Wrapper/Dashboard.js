@@ -126,6 +126,20 @@ function Dashboard(props) {
         })
     }
 
+
+    const resetNewAddress = () => {
+        setnewAddress({
+            _id: "",
+            lineone: "",
+            locality: "",
+            city: "",
+            district: "",
+            state: "",
+            country: "",
+            pincode: "",
+        })
+    }
+
     const addNewAddress = () => {
         setAddressErrors([]);
         
@@ -184,33 +198,48 @@ function Dashboard(props) {
 
         console.log(newAddress)
 
-        http.post(apis.ADD_NEW_ADDRESS, newAddress)
-            .then(res => {
+        if(newAddress._id !== ""){
+
+            setAddresses(old => old.filter(e => e._id !== newAddress._id))
+
+            let address  = {...newAddress, address_id: newAddress._id}
+
+            http.post(apis.EDIT_ADDRESS, address).then(res => {
                 console.log(res.data);
                 if(!res.data.status){
                     setAddressErrors(old => [...old, res.data.message])
                 } 
                 else{
                     setAddresses(old => [...old, res.data.data]);
-                    if(userD.defaultAddress === null){
-                        setDefaultAddress(res.data.data._id)
-                    }
-                    setnewAddress({
-                        _id: "",
-                        lineone: "",
-                        locality: "",
-                        city: "",
-                        district: "",
-                        state: "",
-                        country: "",
-                        pincode: "",
-                    })
+
+                    resetNewAddress();
                 }
             })
             .catch(err => {
                 console.log(err);
                 setAddressErrors(old => [...old, "Something Went wrong"])
             })
+        }
+        else{
+            http.post(apis.ADD_NEW_ADDRESS, newAddress)
+                .then(res => {
+                    console.log(res.data);
+                    if(!res.data.status){
+                        setAddressErrors(old => [...old, res.data.message])
+                    } 
+                    else{
+                        setAddresses(old => [...old, res.data.data]);
+                        if(userD.defaultAddress === null){
+                            setDefaultAddress(res.data.data._id)
+                        }
+                        resetNewAddress();
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    setAddressErrors(old => [...old, "Something Went wrong"])
+                })
+        }
 
         
     } 
@@ -244,7 +273,9 @@ function Dashboard(props) {
             })
     }
 
-
+    const startEditingAddress = (id) => {
+        setnewAddress({...addresses.filter(e => e._id === id)[0]})
+    }
 
     return (
         <div className="container mt-2">
@@ -384,7 +415,12 @@ function Dashboard(props) {
                                 <h3 className="h3">Addresses</h3>
 
                                 <div className="addressBlock my-3">
-                                    <h3 className="h4">Add New</h3>
+                                    <h3 className="h4">
+                                    {
+                                        newAddress._id === "" ? "Add New" : "Edit Address"
+                                    }
+
+                                    </h3>
 
                                     {
                                         addressErrors.map((e,i) => (
@@ -434,13 +470,34 @@ function Dashboard(props) {
                                     </div>
                                 </div>
 
-                                <button className="btn btn-secondary mt-2 ml-auto" onClick={() => addNewAddress()}>Add new Address</button>
+                                <button className="btn btn-secondary mt-2 ml-auto" onClick={() => addNewAddress()}>
+                                {
+                                    newAddress._id === "" ? "Add New Address" : "Save Changes"
+                                }
+                                </button>
+
+                                {
+                                    newAddress._id !== "" ? 
+                                    (
+                                        <button className="btn btn-secondary mt-2 ml-2 ml-auto" onClick={() => resetNewAddress()}>
+                                            Cancel Edit
+                                        </button>
+                                    )
+                                    :
+                                    ""
+                                }
 
                                 <hr/>
 
                                 {addresses.map(ad => (
-                                    <div key={ad._id}>
+                                    <div key={ad._id} className="mt-2">
                                         <h2 className="h2">{ad.lineone} - {ad.pincode}</h2>
+
+                                        <button className="btn btn-warning" onClick={
+                                        () => startEditingAddress(ad._id)
+                                        }>
+                                            Edit Address
+                                        </button>
 
                                         {ad.isdefault ?
                                             ""
