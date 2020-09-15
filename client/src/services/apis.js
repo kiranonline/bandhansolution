@@ -17,7 +17,14 @@ const apis = {
     FETCH_PRODUCT_HIGHLIGHT : "/apis/v1/user/producthighlight",
 
     UPLOAD_USER_AVATAR:"/apis/v1/upload-avatar",
-    UPDATE_PASSWORD:"/apis/v1/user/update-password"    
+    UPDATE_PASSWORD:"/apis/v1/user/update-password",
+    
+    
+    GET_ADDRESS_LIST:"/apis/v1/user/get/address",
+    ADD_NEW_ADDRESS:"/apis/v1/user/add/address",
+    EDIT_ADDRESS:"/apis/v1/user/edit/address",
+    REMOVE_ADDRESS:"/apis/v1/user/remove/address",
+    SET_DEFAULT_ADDRESS:"/apis/v1/user/setdefault/address",
 };
 
 export default apis;

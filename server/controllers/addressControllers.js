@@ -54,7 +54,8 @@ exports.addaddress = async(req,res,next) => {
         
         res.json({
             status:true,
-            message:"Address saved successfully"
+            message:"Address saved successfully",
+            data: address
         })
     }
     catch(err){
