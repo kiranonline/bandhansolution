@@ -126,13 +126,13 @@ exports.setdefaultaddress = async(req,res,next) => {
             new:true
         });
         if(address){
+            console.log("here")
             let old_address= await Address.findByIdAndUpdate(req.user.defaultAddress._id,{isdefault:false},{
                 new:true
             })
-            console.log(address);
-            let updated_user = await User.findOneAndUpdate({_id:req.user._id},{defaultAddress:{
-                address
-            }},{new:true});
+            console.log(old_address);
+            let updated_user = await User.findOneAndUpdate({_id:req.user._id},{defaultAddress:address
+            },{new:true});
             console.log(updated_user);
             if(address){
                 res.json({
