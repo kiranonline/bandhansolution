@@ -54,6 +54,46 @@ exports.createUser = async(req,res,next)=>{
 }
 
 
+//++++++++++++++++++++++++++++++++++++++ update password +++++++++++++++++++++++++++++++++++++
+exports.updatePassword = async(req,res,next) => {
+    try {
+        let user = await User.findById(req.user._id);
+
+        console.log("Oldeuser", user);
+
+        if(!user) throw "Something Went Wrong"
+
+        let comparison = await user.comparePassword(req.body.oldPassword, user.password)
+
+        if(!comparison)
+            return res.json({
+                status: false,
+                message: "Wrong old password"
+            })
+        
+        let securepassword = await bcrypt.hash(req.body.newPassword, saltRounds);
+        
+        user = await User.findByIdAndUpdate(user._id, {password: securepassword}, {new: true})
+
+        console.log("NewUser", user);
+        
+
+        return res.json({
+            status: true,
+            message: "Password update successful"
+        })
+
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
+
 //++++++++++++++++++++++++++++++++++++++ list users +++++++++++++++++++++++++++++++++++++
 exports.listUsers = async(req,res,next)=>{
     try{ 

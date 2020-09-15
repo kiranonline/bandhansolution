@@ -54,7 +54,8 @@ exports.addaddress = async(req,res,next) => {
         
         res.json({
             status:true,
-            message:"Address saved successfully"
+            message:"Address saved successfully",
+            data: address
         })
     }
     catch(err){
@@ -101,11 +102,12 @@ exports.editaddress = async(req,res,next) => {
                 country: req.body.country,
                 pincode: req.body.pincode,
                 user: req.user._id
-        })
+        }, {new: true})
         console.log(address);
         res.json({
             status:true,
-            message:"Address Edited"
+            message:"Address Edited",
+            data: address
         })
     }
     catch(err){

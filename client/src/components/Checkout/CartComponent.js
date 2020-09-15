@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 import http from "../../services/httpCall";

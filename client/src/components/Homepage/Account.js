@@ -117,7 +117,7 @@ function Account(props) {
                         </div> */}
                         <div className="registerForm d-flex flex-md-row flex-col justify-content-around align-items-center">
                             <div className="sidePart d-md-block d-none" style={{paddingRight: "30px"}}>
-                                        <img width="100%" src="https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                                        <img width="100%" src="https://acad.xlri.ac.in/evening/images/login.svg" alt="Login Guy" className="login-img"></img>
                             </div>
                             <form className="login-form d-flex flex-column justify-content-center align-itmes-center" onSubmit={handleSubmit(onSubmitLogin)}>
                                 <h3 className="h3 mb-3">Welcome</h3>
@@ -192,7 +192,7 @@ function Account(props) {
                                     </div>
                                     <div className="registerForm">
                                     <div className="sidePart d-flex justiify-content-center align-items-center" style={{paddingRight: "30px"}}>
-                                    <img width="100%" src=" https://acad.xlri.ac.in/evening/images/login.svg" className="login-img"></img>
+                                    <img width="100%" src=" https://acad.xlri.ac.in/evening/images/login.svg" className="login-img" alt="Login Guy"></img>
                                     </div>
                                         <form className="login100-form" onSubmit={handleSubmit(onSubmitRegitser)}>
                                         <h1 >
