@@ -25,6 +25,8 @@ const apis = {
     EDIT_ADDRESS:"/apis/v1/user/edit/address",
     REMOVE_ADDRESS:"/apis/v1/user/remove/address",
     SET_DEFAULT_ADDRESS:"/apis/v1/user/setdefault/address",
+
+    USER_UPDATE_PROFILE_PIC: "/apis/v1/user/update-profile-pic"
 };
 
 export default apis;

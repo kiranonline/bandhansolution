@@ -38,6 +38,39 @@ function Dashboard(props) {
     const [passwordUpdateSuccess, setPasswordUpdateSuccess] = useState(false)
     const [passwordErrors, setPasswordErrors] = useState([]);
 
+    const [newProfilPicture, setNewProfilePicture] = useState({});
+
+    const uploadAvatar = () => {
+
+        const formData = new FormData();
+        formData.append('avatar',newProfilPicture)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+
+        http.post(apis.UPLOAD_USER_AVATAR, formData, config)
+            .then(res => {
+                console.log(res);
+                if(res.data.status){
+                   http.post(apis.USER_UPDATE_PROFILE_PIC, {avatar: res.data.file}).then(res => {
+                       if(res.data.status){
+                           getUserDetails();
+                       }
+                   }).catch(err => {
+                       console.log(err);
+                   })
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                setNewProfilePicture({});
+            })
+
+    }
     // let toggleSideBar = ()=>{
     //     setSideBarCollapsed(!sideBarCollapsed);
     // }
@@ -335,34 +368,61 @@ function Dashboard(props) {
                             
                             <div className="mx-3 w-100">
                                 <div className="row my-2 mb-4 w-100">
-                                    <div className="col-md-4 col-12 justify-content-center d-flex">
-                                        <img className="d-block" src={`${apis.BASE_SERVER_URL}${userD.avatar}`} alt="Avatar" style={{width: "100px", borderRadius: "50%"}}/>
+                                    <div className="col-md-4 col-12 justify-content-center align-items-center d-flex">
+                                        <img className="d-block" src={`${apis.BASE_SERVER_URL}${userD.avatar}`} alt="Avatar" style={{width: "100px", height:"100px", borderRadius: "50%"}}/>
                                     </div>
-                                    <div className="col-md-8 d-flex col-12 mt-2 mt-md-0 align-items-center justify-content-center p-0">
-                                        <button className="btn btn-primary m-0 mx-auto">Change Profile Image</button>
+                                    <div className="col-md-8 d-flex flex-column col-12 mt-2 mt-md-0 p-0">
+
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                        </div>
+                                        <div className="custom-file">
+                                            <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
+                                            onChange={(e) => {
+                                                e.persist();
+                                                setNewProfilePicture(e.target.files[0])
+                                            }}/>
+                                            <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div>
+                                    
+                                    {
+                                        <div class="alert alert-primary" role="alert">
+                                            Current File&nbsp; 
+                                            <strong>
+                                                {newProfilPicture.name ? newProfilPicture.name : "None"}
+                                            </strong>
+                                        </div>
+                                    }
+
+                                    <button className="btn btn-primary m-0" onClick={() => uploadAvatar()} disabled={newProfilPicture.name ? false : true}>Change Profile Image</button>
                                     </div>
                                 </div>
 
+
+                                
+
                                 <div className="row mb-md-1 mb-2 w-100">
                                     <label className="col-md-4 col-12 px-md-3 p-0 m-0 mb-md-0 mb-1 font-weight-bold align-self-center text-dark" htmlFor="name">Name</label>
-                                    <input type="text" className="col-12 col-md-8 form-control" id="name" name="name" value={userD.name ? userD.name : ""} onChange={(e) => updateFormField(e)}/>
+                                    <input type="text" className="col-12 col-md-8 form-control" id="name" name="name" value={userD.name ? userD.name : ""} onChange={(e) => updateFormField(e)} disabled/>
                                 </div>
 
                                 <div className="row mb-md-1 mb-2 w-100">
                                     <label className="col-md-4 col-12 px-md-3 p-0 m-0 mb-md-0 mb-1 font-weight-bold align-self-center text-dark" htmlFor="email">Email</label>
-                                    <input type="email" className="col-12 col-md-8 form-control" id="email" name="email" value={userD.email ? userD.email : ""} onChange={(e) => updateFormField(e)}/>
+                                    <input type="email" className="col-12 col-md-8 form-control" id="email" name="email" value={userD.email ? userD.email : ""} onChange={(e) => updateFormField(e)} disabled/>
                                 </div>
 
                                 <div className="row mb-md-1 mb-2 w-100">
                                     <label className="col-md-4 col-12 px-md-3 p-0 m-0 mb-md-0 mb-1 font-weight-bold align-self-center text-dark" htmlFor="phoneNumber">Phone Number</label>
-                                    <input type="number" typeof="number" className="col-12 col-md-8 form-control" id="phoneNumber" name="phoneNumber" value={userD.phoneNumber ? userD.phoneNumber : ""} onChange={(e) => updateFormField(e)}/>
+                                    <input type="number" typeof="number" className="col-12 col-md-8 form-control" id="phoneNumber" name="phoneNumber" value={userD.phoneNumber ? userD.phoneNumber : ""} onChange={(e) => updateFormField(e)} disabled/>
                                 </div>
 
-                                <div className="row w-100">
+                                {/* <div className="row w-100">
                                     <div className="col-12 col-md-6 offset-md-6 p-0">
                                         <button className="btn btn-secondary mt-2 w-100" >Save Changes</button>
                                     </div>
-                                </div>
+                                </div> */}
 
 
                                 <hr/>

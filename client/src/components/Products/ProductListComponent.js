@@ -15,6 +15,28 @@ function ProductComponent(props) {
     
     let [productList,setProductList] = useState([]);
     let [isList, setIsList] = useState(true);
+    let [sortby, setSortBy] = useState("");
+
+    const sort = (e) => {
+        setSortBy(e.target.value);
+        
+        let URL = apis.GET_PRODUCT_LIST + window.location.search;
+        URL = URL + `&sortType=${e.target.value}`  
+
+        http.get(URL).then((result)=>{
+          console.log("res",result);
+          if(result.data.status){
+              setProductList(result.data.data)
+              props.fetchProducts(result.data.data)
+          }else{
+              console.log(result.data.message);
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+
+    }
 
     let activeStyle = {
         color: "orange"
@@ -102,16 +124,17 @@ function ProductComponent(props) {
                     <div className="d-flex ml-auto">
                         <label className="control-label">Sort By :</label>
                         <div className="sort-inner">
-                            <select id="input-sort" className="form-control">
-                            <option>Default</option>
-                            <option >Name (A - Z)</option>
-                            <option >Name (Z - A)</option>
-                            <option >Price (Low &gt; High)</option>
-                            <option >Price (High &gt; Low)</option>
-                            <option >Rating (Highest)</option>
-                            <option >Rating (Lowest)</option>
-                            <option >Model (A - Z)</option>
-                            <option >Model (Z - A)</option>
+                            <select value={sortby} id="input-sort" className="form-control"
+                            onChange = {(e) => sort(e)}
+                            >
+                                <option value="">Default</option>
+                                <option value="hightolowprice">Price (Low &gt; High)</option>
+                                <option value="lowtohighprice">Price (High &gt; Low)</option>
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Newest Last</option>
+                                <option value="maxsold">Maximum Sold</option>
+                                <option value="minsold">Minimum Sold</option>
+
                             </select>
                         </div>
                     </div>

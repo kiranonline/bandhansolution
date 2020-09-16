@@ -2836,6 +2836,10 @@ a.active{
   font-weight: bold;
 }
 
+button:disabled{
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px){
   .img-responsive{
     width: 120px;
