@@ -71,7 +71,7 @@ function SingleProductComponent(props) {
 
     useEffect(()=>{
         fetchProduct();
-    },[fetchProduct]);
+    },[]);
 
     return (
         <div className="container">
@@ -148,8 +148,11 @@ function SingleProductComponent(props) {
                                 
                         <div className="categoryButton">
                             {productCategory.map(cat => 
-                                <a className="mr-2" href={`/products/?category=${cat}`} key={cat}>
-                                    Category
+                                <a className="mr-2" href={`/products/?category=${cat}`} key={cat} style={{textTransform: "capitalize"}}>
+                                    
+                                    <span class="badge badge-pill badge-info p-1">
+                                        {props.categories.category_list.filter(e => e._id === cat)[0].name}
+                                    </span>
                                 </a>
 
                             )}

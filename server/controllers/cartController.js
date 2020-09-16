@@ -12,7 +12,7 @@ exports.addtocart = async(req,res,next) =>{
     try{
         const product_id = req.body.product_id;
         const user_id = req.user._id;
-        const pincode = req.user.defaultAddress.address.pincode;
+        const pincode = req.user.defaultAddress.pincode;
         // console.log(user_id);
 
         let match_1={};
