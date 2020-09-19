@@ -31,7 +31,7 @@ router.post(`/user/update-profile-pic`, isAuthenticated, [
 
 
 //++++++++++++++++++++++++++++++++ List Users ++++++++++++++++++++++++++++++++++
-// router.post('/user/list',isAuthenticated,isAdmin,listUsers)
+router.post('/user/list',isAuthenticated,isAdmin,listUsers)
 
 
 router.get('/user/list',listUsers)

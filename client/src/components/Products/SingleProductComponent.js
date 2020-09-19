@@ -20,11 +20,12 @@ function SingleProductComponent(props) {
     let [productCategory, setProductCategory] = useState([]);
     const [productDescription,setProductDescription] = useState(() => EditorState.createEmpty());
     const [productImage,setproductImage] = useState("");
+    
+    const [isAvailable, setIsAvailable] = useState(true);
+    const [showModal, setShowModal] = useState(false);
 
     let {id}=useParams();
     // console.log(id);
-
-    
 
     const fetchProduct = ()=>{
         http.get(apis.GET_SINGLE_PRODUCT+`${id}`)
@@ -61,6 +62,8 @@ function SingleProductComponent(props) {
                     props.cartQuantity(result.data.data.cart[0].count);
                 }else{
                     // setErrorInCart(message);
+                    setIsAvailable(false);
+                    setShowModal(true);
                     console.log(result.data);
                 }
             }).catch((err)=>{
@@ -75,6 +78,8 @@ function SingleProductComponent(props) {
 
     return (
         <div className="container">
+
+            
             <ul className="breadcrumb">
                 <li>
                     <Link to="/">
@@ -89,6 +94,20 @@ function SingleProductComponent(props) {
                 <CategorySelector />
 
                 <div id="content" className="col-md-9 col-12">
+                        {
+                            showModal ? 
+                            (
+                                <div class="alert alert-danger" role="alert">
+                                    Sorry This product is not available for your default address. Change your default address at <Link to="/profile">Profile</Link> page to get the product.
+                                </div>
+                            )
+                            :
+                            (
+                                <>
+                                </>
+                            )
+                        }
+
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="thumbnails">
@@ -150,7 +169,7 @@ function SingleProductComponent(props) {
                             {productCategory.map(cat => 
                                 <a className="mr-2" href={`/products/?category=${cat}`} key={cat} style={{textTransform: "capitalize"}}>
                                     
-                                    <span class="badge badge-pill badge-info p-1">
+                                    <span className="badge badge-pill badge-warning p-2">
                                         {props.categories.category_list.filter(e => e._id === cat)[0].name}
                                     </span>
                                 </a>
@@ -164,7 +183,7 @@ function SingleProductComponent(props) {
                             <div className="form-group">
                                 
                                 <button type="button" id="button-cart" onClick={handleAddToCart} className="btn btn-primary btn-lg btn-block addtocart m-0 px-4 py-2 w-75"
-                                style={{fontSize: "1rem"}}
+                                style={{fontSize: "1rem"}} disabled={!isAvailable}
                                 >
                                     Add to Cart
                                 </button>
@@ -175,7 +194,7 @@ function SingleProductComponent(props) {
                     </div>
                     <div className="productinfo-tab">
                         <ul className="nav nav-tabs">
-                        <li className="active h4"><Link href="#tab-description" data-toggle="tab">Description</Link></li>
+                        <li className="active h4"><Link to="#tab-description" data-toggle="tab">Description</Link></li>
                         </ul>
                         <div className="tab-content">
                             <div className="tab-pane active" id="tab-description">

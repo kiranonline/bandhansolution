@@ -5,6 +5,61 @@ const { update } = require("../models/Stock");
 
 
 
+//ayushman
+exports.availableForCart = async(req, res, next) => {
+    try{
+        const product_id = req.body.product_id;
+        const user_id = req.user._id;
+        const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
+        // console.log(user_id);
+
+        let match_1={};
+        let lookup={};
+        let match_2={};
+
+        match_1.product = mongoose.Types.ObjectId(product_id);
+        match_1.stock = {$gt:0};
+
+        lookup.from = "users";
+        lookup.localField = "seller";
+        lookup.foreignField = "_id";
+        lookup.as = "seller_details";
+
+        match_2.pincode = {$in: "$seller_details.$deliverTo"};
+
+        const query = [
+            {$match:match_1},
+            {$lookup:lookup},
+            {$unwind:"$seller_details"},
+            {$match:{
+                "seller_details.deliverTo":{$in:[pincode]}
+            }}            
+        ]
+        // console.log(query);
+
+        let seller = await Stock.aggregate(query);
+        if(seller.length>0){
+            res.json({
+                status: true,
+                availableToAdd: true
+            })
+            
+        }else{
+            res.json({
+                status:false,
+                message:"No seller is delivering to your pincode"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.json({
+            status: true,
+            message:"Server Error"
+        })
+    }
+}
+
 //shubham
 
 
@@ -12,7 +67,7 @@ exports.addtocart = async(req,res,next) =>{
     try{
         const product_id = req.body.product_id;
         const user_id = req.user._id;
-        const pincode = req.user.defaultAddress.pincode;
+        const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
         // console.log(user_id);
 
         let match_1={};

@@ -148,7 +148,7 @@ function ProductComponent(props) {
                             
                             <div className="product-thumb row my-5" key={product._id}>
                                 <div className="image product-imageblock col-3"> 
-                                    <img src={`http://localhost:4500/${product.images[0]}`} alt="product1" title="product1" width="200px" style={{minWidth: "200px"}} /> 
+                                    <img src={`${apis.BASE_SERVER_URL}/${product.images[0]}`} alt={product.name} title={product.name} width="200px" style={{minWidth: "200px"}} /> 
                                     {/* <button type="button" className="addtocart-btn btn btn-primary" >Add To Cart</button> */}
                                 </div>
                                 <div className="caption product-detail col-8 offset-1 d-flex flex-column justify-content-center">
@@ -171,7 +171,7 @@ function ProductComponent(props) {
 
                                     {/* <div className="rating"> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i></span> </div> */}
                                         
-                                    <button type="button" className="btn btn-danger mt-2 w-25">Add to Cart</button>
+                                    <button type="button" className="btn btn-warning mt-2 w-25">Add to Cart</button>
                                     
                                 </div>
                             </div>
