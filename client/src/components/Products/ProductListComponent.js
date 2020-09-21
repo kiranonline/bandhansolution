@@ -171,7 +171,7 @@ function ProductComponent(props) {
 
                                     {/* <div className="rating"> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i></span> </div> */}
                                         
-                                    <button type="button" className="btn btn-warning mt-2 w-25">Add to Cart</button>
+                                    <Link to={`/product/${product._id}`} type="button" className="btn btn-warning mt-2 w-25">Add to Cart</Link>
                                     
                                 </div>
                             </div>

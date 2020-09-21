@@ -24,6 +24,8 @@ function SingleProductComponent(props) {
     const [isAvailable, setIsAvailable] = useState(true);
     const [showModal, setShowModal] = useState(false);
 
+    const [succesfulAddition, setSuccessfulAddition] = useState(false);
+
     let {id}=useParams();
     // console.log(id);
 
@@ -60,6 +62,8 @@ function SingleProductComponent(props) {
                 console.log(result);
                 if(result.data.status){
                     props.cartQuantity(result.data.data.cart[0].count);
+                    setSuccessfulAddition(true);
+                    setTimeout(() => setSuccessfulAddition(false), 3000);
                 }else{
                     // setErrorInCart(message);
                     setIsAvailable(false);
@@ -97,7 +101,7 @@ function SingleProductComponent(props) {
                         {
                             showModal ? 
                             (
-                                <div class="alert alert-danger" role="alert">
+                                <div className="alert alert-danger" role="alert">
                                     Sorry This product is not available for your default address. Change your default address at <Link to="/profile">Profile</Link> page to get the product.
                                 </div>
                             )
@@ -170,7 +174,7 @@ function SingleProductComponent(props) {
                                 <a className="mr-2" href={`/products/?category=${cat}`} key={cat} style={{textTransform: "capitalize"}}>
                                     
                                     <span className="badge badge-pill badge-warning p-2">
-                                        {props.categories.category_list.filter(e => e._id === cat)[0].name}
+                                        {props.categories ? props.categories.category_list.filter(e => e._id === cat)[0].name : ""}
                                     </span>
                                 </a>
 
@@ -181,6 +185,18 @@ function SingleProductComponent(props) {
                        
                         <div id="product" className="mt-2 ml-1">
                             <div className="form-group">
+
+                                {
+                                    succesfulAddition ? 
+                                    (
+                                        <div className="alert alert-success w-75" role="alert">
+                                            Successfully added to the cart
+                                        </div>
+                                    )
+                                    :
+                                    ""
+                                }
+                                
                                 
                                 <button type="button" id="button-cart" onClick={handleAddToCart} className="btn btn-primary btn-lg btn-block addtocart m-0 px-4 py-2 w-75"
                                 style={{fontSize: "1rem"}} disabled={!isAvailable}

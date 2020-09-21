@@ -60,6 +60,44 @@ exports.availableForCart = async(req, res, next) => {
     }
 }
 
+exports.updatecart = async(req,res,next) => {
+
+    //Problem in fetching in cart array.
+    try{
+        const {cart, _id} = req.body;
+        
+
+        console.log(`id = ${_id}`)
+        console.log(cart)
+
+        if(!cart || !_id){
+            res.json({
+                status:false,
+                message: "Cart items not found"
+            })
+        }
+
+        const newCart = await Cart.findByIdAndUpdate(_id, {cart}, {new: true});
+        
+        if(newCart){
+            // console.log(cart_details[0].product_details);
+            res.json({
+                status:true,
+                data: newCart
+            })
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            status:false,
+            message: "Server Error"
+        })
+    }
+}
+
+
+
+
 //shubham
 
 
@@ -183,7 +221,7 @@ exports.fetchcart = async(req,res,next) => {
             // console.log(cart_details[0].product_details);
             res.json({
                 status:true,
-                data: cart_details
+                data: cart_details[0]
             })
         }else{
             res.json({

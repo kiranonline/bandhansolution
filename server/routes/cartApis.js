@@ -2,7 +2,7 @@ const express = require("express");
 const {body} = require("express-validator");
 const {isAuthenticated} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
-const { addtocart, fetchcart, removecartitem, availableForCart } = require("../controllers/cartController");
+const { addtocart, updatecart, fetchcart, removecartitem, availableForCart } = require("../controllers/cartController");
 const router = express.Router();
 
 
@@ -15,6 +15,9 @@ router.post("/user/available-for-cart",[
 router.post("/user/add-to-cart",[
     body("product_id").not().isEmpty()
 ],errorHandler,isAuthenticated,addtocart)
+
+//+++++++++++++++++++++++++++++++++++++++ Add to Cart  ++++++++++++++++++++++++++
+router.post("/user/update-cart",isAuthenticated,updatecart)
 
 //+++++++++++++++++++++++++++++++++++++++ Fetches Cart  ++++++++++++++++++++++++++
 router.get("/user/fetch-the-cart",isAuthenticated,fetchcart);
