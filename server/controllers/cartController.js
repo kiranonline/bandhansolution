@@ -9,7 +9,6 @@ const { update } = require("../models/Stock");
 exports.availableForCart = async(req, res, next) => {
     try{
         const product_id = req.body.product_id;
-        const user_id = req.user._id;
         const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
         // console.log(user_id);
 
