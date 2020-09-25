@@ -4,7 +4,8 @@ const Tools = require("./tools");
 mongoose.Promise = global.Promise;
 const options = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 };
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING, options).then(()=>{

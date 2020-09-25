@@ -32,17 +32,24 @@ function CategorySelector(props) {
                     </div>
                     <div className="category_block">
                         <ul className="box-category treeview-list treeview">
+
+                            <li>
+                                <a style={categoryId === "" ?  activeStyle : {}} href={`/products`}>
+                                    All
+                                </a>
+                            </li>
+
                             {props.category_list.category_list.length===0?
                                 <Skeleton count={7} />
                             :
                                 props.category_list.category_list.map((data)=>(
-                                    <div key={data._id}>
-                                    <li>
+                                    
+                                    <li key={data._id}>
                                         <a style={data._id === categoryId ?  activeStyle : {}} href={`/products/?category=${data._id}`}>
                                             {data.name}
                                         </a>
                                     </li>
-                                    </div>
+                                    
                                 ))
                             }
                         </ul>

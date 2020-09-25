@@ -94,6 +94,37 @@ exports.updatePassword = async(req,res,next) => {
 }
 
 
+//++++++++++++++++++++++++++++++++++++++ update profile pic +++++++++++++++++++++++++++++++++++++
+exports.updateProfilePic = async(req,res,next) => {
+    try {
+        let user = await User.findById(req.user._id);
+
+        console.log("Oldeuser", user);
+
+        if(!user) throw "Something Went Wrong"
+        
+        user = await User.findByIdAndUpdate(user._id, {avatar: req.body.avatar}, {new: true})
+
+        console.log("NewUser", user);
+        
+
+        return res.json({
+            status: true,
+            message: "Profile Pic update successful"
+        })
+
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
+
+
 //++++++++++++++++++++++++++++++++++++++ list users +++++++++++++++++++++++++++++++++++++
 exports.listUsers = async(req,res,next)=>{
     try{ 

@@ -7,13 +7,15 @@ function Footer() {
             <div className="container">
                 <div className="row">
                 <div className="footer-top-cms">
-                    <div className="col-sm-7">
+                    <div className="col-sm-9">
                     <div className="newslatter">
                         <form>
                         <h5>Newsletter</h5>
-                        <div className="input-group">
-                            <input type="text" className=" form-control" placeholder="Email Here......" />
-                            <button type="submit" value="Sign up" className="btn btn-large btn-primary">Subscribe</button>
+                        <div className="form-group row w-100 mx-auto">
+                            <input type="text" className="form-control col-sm-8 col-12" placeholder="Email Here......" />
+                            <div className="col-sm-4 col-12 mt-1 mt-sm-0 px-sm-1 px-0">
+                                <button type="submit" value="Sign up" className="btn btn-primary h-100 w-100 w-sm-auto" style={{fontSize: "1.2rem"}}>Subscribe</button>
+                            </div>
                         </div>
                         </form>
                     </div>
@@ -68,10 +70,10 @@ function Footer() {
             </div>
         {/* <a id="scrollup">Scroll</a> */}
         </footer>
-            <div className="footer-bottom">
-                <div className="container">
+            <div className="footer-bottom" >
+                <div className="container" >
                     <div className="copyright">
-                        Powered By &nbsp;<a className="yourstore" href="http://www.lionode.com/">kissan &copy; 2020 </a>
+                        Powered By <a className="d-inline-block" href="http://www.lionode.com/">kissan &copy; 2020 </a>
                     </div>
                 </div>
             </div>

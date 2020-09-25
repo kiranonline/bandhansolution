@@ -1,7 +1,154 @@
 const Stock = require("../models/Stock");
 const Cart = require("../models/Cart");
+const Order = require("../models/Order")
 const mongoose = require("mongoose");
 const { update } = require("../models/Stock");
+
+
+
+//ayushman
+exports.availableForCart = async(req, res, next) => {
+    try{
+        const product_id = req.body.product_id;
+        const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
+        // console.log(user_id);
+
+        let match_1={};
+        let lookup={};
+        let match_2={};
+
+        match_1.product = mongoose.Types.ObjectId(product_id);
+        match_1.stock = {$gt:0};
+
+        lookup.from = "users";
+        lookup.localField = "seller";
+        lookup.foreignField = "_id";
+        lookup.as = "seller_details";
+
+        match_2.pincode = {$in: "$seller_details.$deliverTo"};
+
+        const query = [
+            {$match:match_1},
+            {$lookup:lookup},
+            {$unwind:"$seller_details"},
+            {$match:{
+                "seller_details.deliverTo":{$in:[pincode]}
+            }}            
+        ]
+        // console.log(query);
+
+        let seller = await Stock.aggregate(query);
+        if(seller.length>0){
+            res.json({
+                status: true,
+                availableToAdd: true
+            })
+            
+        }else{
+            res.json({
+                status:false,
+                message:"No seller is delivering to your pincode"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.json({
+            status: true,
+            message:"Server Error"
+        })
+    }
+}
+
+exports.updatecart = async(req,res,next) => {
+
+    //Problem in fetching in cart array.
+    try{
+        const {cart, _id} = req.body;
+        
+
+        console.log(`id = ${_id}`)
+        console.log(cart)
+
+        if(!cart || !_id){
+            res.json({
+                status:false,
+                message: "Cart items not found"
+            })
+        }
+
+        const newCart = await Cart.findByIdAndUpdate(_id, {cart}, {new: true});
+        
+        if(newCart){
+            // console.log(cart_details[0].product_details);
+            res.json({
+                status:true,
+                data: newCart
+            })
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            status:false,
+            message: "Server Error"
+        })
+    }
+}
+
+exports.placeOrder = async(req,res) => {
+    try{
+        let user = req.user;
+        let {cart, totalCost, cart_id } = req.body
+
+        let currentOrder = new Order({
+            items: cart,
+            user: user._id,
+            totalCost,
+            currentStatus: "placed"
+        })
+
+        let savedOrder = await currentOrder.save();
+        if(savedOrder){
+            res.json({
+                status: true,
+                order: savedOrder
+            })
+            await Cart.findByIdAndUpdate(cart_id, {cart: []}, {new: true})
+
+        }
+        else{
+            throw "Not created!!"
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).status({
+            status: false,
+            message: "Not Created!"
+        })
+    }
+}
+
+exports.getOrder = async(req,res) => {
+    try{
+        let orders = await Order.find({user: req.user._id});
+        if(orders){
+            res.json({
+                status: true,
+                data: orders
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).status({
+            status: false,
+            message: "Falsed"
+        })
+    }
+}
+
+
 
 
 
@@ -12,7 +159,7 @@ exports.addtocart = async(req,res,next) =>{
     try{
         const product_id = req.body.product_id;
         const user_id = req.user._id;
-        const pincode = req.user.defaultAddress.address.pincode;
+        const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
         // console.log(user_id);
 
         let match_1={};
@@ -128,7 +275,7 @@ exports.fetchcart = async(req,res,next) => {
             // console.log(cart_details[0].product_details);
             res.json({
                 status:true,
-                data: cart_details
+                data: cart_details[0]
             })
         }else{
             res.json({

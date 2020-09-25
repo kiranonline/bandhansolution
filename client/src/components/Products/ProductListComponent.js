@@ -15,6 +15,28 @@ function ProductComponent(props) {
     
     let [productList,setProductList] = useState([]);
     let [isList, setIsList] = useState(true);
+    let [sortby, setSortBy] = useState("");
+
+    const sort = (e) => {
+        setSortBy(e.target.value);
+        
+        let URL = apis.GET_PRODUCT_LIST + window.location.search;
+        URL = URL + `&sortType=${e.target.value}`  
+
+        http.get(URL).then((result)=>{
+          console.log("res",result);
+          if(result.data.status){
+              setProductList(result.data.data)
+              props.fetchProducts(result.data.data)
+          }else{
+              console.log(result.data.message);
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+
+    }
 
     let activeStyle = {
         color: "orange"
@@ -102,16 +124,17 @@ function ProductComponent(props) {
                     <div className="d-flex ml-auto">
                         <label className="control-label">Sort By :</label>
                         <div className="sort-inner">
-                            <select id="input-sort" className="form-control">
-                            <option>Default</option>
-                            <option >Name (A - Z)</option>
-                            <option >Name (Z - A)</option>
-                            <option >Price (Low &gt; High)</option>
-                            <option >Price (High &gt; Low)</option>
-                            <option >Rating (Highest)</option>
-                            <option >Rating (Lowest)</option>
-                            <option >Model (A - Z)</option>
-                            <option >Model (Z - A)</option>
+                            <select value={sortby} id="input-sort" className="form-control"
+                            onChange = {(e) => sort(e)}
+                            >
+                                <option value="">Default</option>
+                                <option value="hightolowprice">Price (Low &gt; High)</option>
+                                <option value="lowtohighprice">Price (High &gt; Low)</option>
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Newest Last</option>
+                                <option value="maxsold">Maximum Sold</option>
+                                <option value="minsold">Minimum Sold</option>
+
                             </select>
                         </div>
                     </div>
@@ -125,7 +148,7 @@ function ProductComponent(props) {
                             
                             <div className="product-thumb row my-5" key={product._id}>
                                 <div className="image product-imageblock col-3"> 
-                                    <img src={`http://localhost:4500/${product.images[0]}`} alt="product1" title="product1" width="200px" style={{minWidth: "200px"}} /> 
+                                    <img src={`${apis.BASE_SERVER_URL}/${product.images[0]}`} alt={product.name} title={product.name} width="200px" style={{minWidth: "200px"}} /> 
                                     {/* <button type="button" className="addtocart-btn btn btn-primary" >Add To Cart</button> */}
                                 </div>
                                 <div className="caption product-detail col-8 offset-1 d-flex flex-column justify-content-center">
@@ -148,7 +171,7 @@ function ProductComponent(props) {
 
                                     {/* <div className="rating"> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i></span> </div> */}
                                         
-                                    <button type="button" className="btn btn-danger mt-2 w-25">Add to Cart</button>
+                                    <Link to={`/product/${product._id}`} type="button" className="btn btn-warning mt-2 w-25">Add to Cart</Link>
                                     
                                 </div>
                             </div>

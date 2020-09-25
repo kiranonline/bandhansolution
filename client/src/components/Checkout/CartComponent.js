@@ -7,15 +7,24 @@ import CategorySelector from '../GlobalComponents/CategorySelector';
 
 function CartComponent(props) {
     let [cartDetails,setcartDetails] = useState([]);
+    let [products, setProducts] = useState([]);
+
+    let [cart_id, setCartId] = useState("");
+    let [updating, setUpdating] = useState(false);
 
     const fetchCart = ()=>{
         //fetch cart details of logged in user.
         http.get(apis.FETCH_THE_CART).then((result)=>{
             // console.log(result);
             if(result.data.status){
-                console.log(result.data);
-                console.log(result.data.data[0].product_details)
-                setcartDetails(result.data.data[0].cart);
+                
+                setCartId(result.data.data._id)
+
+                setcartDetails(result.data.data.cart);
+                // console.log(result.data.cart);
+                setProducts(result.data.data.product_details);
+
+                
             }else{
                 console.log(result.data.message);
                 //Handle the error message.
@@ -29,11 +38,61 @@ function CartComponent(props) {
         fetchCart();
     },[]);
 
-    useEffect(()=>{
-        console.log(cartDetails);
-    },[cartDetails]);
+
+    const updateQty = (i, amount) => {
+        
+        setcartDetails(old => old.map(item => {
+
+            if (item._id !== i) return item;
+            return {...item, count: item.count + amount}    
+        }))
+
+        updatecart();
+    }
+
+    const deleteItem = async(productID) => {
+
+        if (!window.confirm("Are you sure you want to delete this, this is irreversible!")) return;
+
+        setProducts(old => old.filter(item => {
+            return item._id !== productID
+        }));
+
+        let x = cartDetails.filter(e => e.product !== productID);
+
+        setcartDetails(x);
+
+        updatecart(x) ;
+    }
+
+    const updatecart = (x = null) => {
+
+        setUpdating(true);
+
+        let data = {
+            _id: cart_id,
+            cart: cartDetails
+        }
+        if(x !== null){
+            data = {
+                ...data,
+                cart: x
+            }
+        }
 
 
+        http.post(apis.UPDATE_CART, data)
+            .then(res => {
+                if(res.data.status){
+                    console.log(res.data)
+                }
+            })
+            .catch(err => console.log(err))
+            .finally(() => setUpdating(false))
+    }   
+
+
+ 
     return (
         <div className="container">
             <ul className="breadcrumb">
@@ -48,26 +107,60 @@ function CartComponent(props) {
                             <tr>
                                 <td className="text-center">Image</td>
                                 <td className="text-left">Product Name</td>
-                                <td className="text-left">Model</td>
                                 <td className="text-left">Quantity</td>
                                 <td className="text-right">Unit Price</td>
                                 <td className="text-right">Total</td>
                             </tr>
                         </thead>
-                        {cartDetails.map((cart,index)=>(
+                        {products.map((product,index)=>(
                             <tbody key={index}>
                                 <tr>
-                                    <td className="text-center"><Link to="/product"><img className="img-thumbnail" title="women's clothing" alt="women's clothing" src="image/product/2product50x59.jpg" /></Link></td>
-                                    <td className="text-left"><Link to="/product">women's clothing</Link></td>
-                                    <td className="text-left">product 11</td>
+                                    <td className="text-center"><Link to={`/product/${product._id}`}><img className="img-thumbnail" title="women's clothing" alt="women's clothing" src={`${apis.BASE_SERVER_URL}/${product.images[0]}`} width="100px" /></Link></td>
+                                    
+                                    <td className="text-left"><Link to={`/product/${product._id}`}>{product.name}</Link></td>
+                        
                                     <td className="text-left"><div style={{maxWidth: "200px"}} className="input-group btn-block">
-                                        <input type="text" className="form-control quantity" disabled={true} size="1" value={cart.count} name="quantity" />
-                                        <span className="input-group-btn">
-                                        <button className="btn btn-primary" title="" data-toggle="tooltip" type="button" data-original-title="Update"><i className="fa fa-plus"></i></button>
-                                        <button  className="btn btn-danger" title="" data-toggle="tooltip" type="button" data-original-title="Remove"><i className="fa fa-minus"></i></button>
-                                        </span></div></td>
-                                    <td className="text-right">$254.00</td>
-                                    <td className="text-right">$254.00</td>
+
+                                         <div className="d-flex w-100 justify-content-center mt-2">
+                                            <input type="text" className="form-control quantity w-100" disabled={true} size="1" value={cartDetails[index].count} name="quantity" />
+
+                                            {
+                                                cartDetails[index].count === 1 ?
+                                                ""
+                                                :
+                                                (<button  className="btn btn-danger mx-1" title="" data-toggle="tooltip" type="button" data-original-title="Remove"
+                                                onClick={() => updateQty(cartDetails[index]._id,-1)}
+                                                disabled={updating}
+                                                >
+                                                    <i className="fa fa-minus"></i>
+                                                </button>)
+                                                
+                                                
+                                            }
+                                             
+
+                                            <button className="btn btn-primary" title="" data-toggle="tooltip" type="button" data-original-title="Update"
+                                            onClick={() => updateQty(cartDetails[index]._id, +1)}
+                                            disabled={updating}
+                                            >
+                                                <i className="fa fa-plus"></i>
+                                            </button>
+                                            
+                                         </div>
+
+                                         <div className="my-2 w-100">
+                                         <button className="btn btn-danger w-100" title="" data-toggle="tooltip" type="button" data-original-title="Update"
+                                            onClick={() => deleteItem(product._id)}
+                                            disabled={updating}
+                                            >
+                                                <i className="fa fa-trash"></i>
+                                                &nbsp;Delete Item
+                                            </button>
+                                         </div>
+                                        </div>
+                                    </td>
+                                    <td className="text-right">₹{product.salePrice ? product.salePrice : product.regularPrice}</td>
+                                    <td className="text-right">₹{product.salePrice ? product.salePrice * cartDetails[index].count : product.regularPrice * cartDetails[index].count}</td>
                                 </tr>
                             </tbody>
                         ))}
