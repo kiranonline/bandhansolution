@@ -678,7 +678,7 @@ function Dashboard(props) {
                                 {orders.map(order => {
                                     return(
                                         <div key={order._id}>
-                                            <h3>{order._id}: ₹{order.totalCost}</h3>
+                                            <h3>{order._id}: ₹{order.totalCost}: {order.currentStatus}</h3>
                                         </div>
                                     )
                                 })}
