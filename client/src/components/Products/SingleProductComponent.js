@@ -174,7 +174,7 @@ function SingleProductComponent(props) {
                                 <a className="mr-2" href={`/products/?category=${cat}`} key={cat} style={{textTransform: "capitalize"}}>
                                     
                                     <span className="badge badge-pill badge-warning p-2">
-                                        {props.categories ? props.categories.category_list.filter(e => e._id === cat)[0].name : ""}
+                                        {props.categories && props.categories.category_list && props.categories.category_list.length > 0 ? props.categories.category_list.filter(e => e._id === cat)[0].name : ""}
                                     </span>
                                 </a>
 
