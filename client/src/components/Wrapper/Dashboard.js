@@ -40,6 +40,9 @@ function Dashboard(props) {
 
     const [newProfilPicture, setNewProfilePicture] = useState({});
 
+    const [orders, setOrders] = useState([])
+    const [products, setProducts] = useState([])
+
     const uploadAvatar = () => {
 
         const formData = new FormData();
@@ -75,6 +78,15 @@ function Dashboard(props) {
     //     setSideBarCollapsed(!sideBarCollapsed);
     // }
 
+    const getOrders = () => {
+        http.get(apis.GET_ORDERS)
+            .then(res => {
+                console.log(res.data);
+                if(res.data.status);
+                setOrders(res.data.data);
+            })
+    }
+
     const getUserDetails = () => {
         http.get(apis.GET_USER_DETAILS).then((result)=>{
             console.log(result.data.data);
@@ -108,6 +120,7 @@ function Dashboard(props) {
 
         getUserDetails();
         getUserAddresses();
+        getOrders();
 
     }, [])
 
@@ -661,6 +674,14 @@ function Dashboard(props) {
                         (
                             <>
                                 <h3 className="h3">Order History</h3>
+
+                                {orders.map(order => {
+                                    return(
+                                        <div key={order._id}>
+                                            <h3>{order._id}: ₹{order.totalCost}</h3>
+                                        </div>
+                                    )
+                                })}
                             </>
                         ) 
                         : 

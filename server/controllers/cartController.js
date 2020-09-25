@@ -1,5 +1,6 @@
 const Stock = require("../models/Stock");
 const Cart = require("../models/Cart");
+const Order = require("../models/Order")
 const mongoose = require("mongoose");
 const { update } = require("../models/Stock");
 
@@ -93,6 +94,60 @@ exports.updatecart = async(req,res,next) => {
         })
     }
 }
+
+exports.placeOrder = async(req,res) => {
+    try{
+        let user = req.user;
+        let {cart, totalCost, cart_id } = req.body
+
+        let currentOrder = new Order({
+            items: cart,
+            user: user._id,
+            totalCost,
+            currentStatus: "placed"
+        })
+
+        let savedOrder = await currentOrder.save();
+        if(savedOrder){
+            res.json({
+                status: true,
+                order: savedOrder
+            })
+            await Cart.findByIdAndUpdate(cart_id, {cart: []}, {new: true})
+
+        }
+        else{
+            throw "Not created!!"
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).status({
+            status: false,
+            message: "Not Created!"
+        })
+    }
+}
+
+exports.getOrder = async(req,res) => {
+    try{
+        let orders = await Order.find({user: req.user._id});
+        if(orders){
+            res.json({
+                status: true,
+                data: orders
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).status({
+            status: false,
+            message: "Falsed"
+        })
+    }
+}
+
 
 
 

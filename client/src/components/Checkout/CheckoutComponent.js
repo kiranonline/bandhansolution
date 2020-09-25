@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import {connect} from "react-redux"
 import { setUserDetails } from "../../actions/authAction";
 import CategorySelector from '../GlobalComponents/CategorySelector';
@@ -8,7 +8,7 @@ import apis from "../../services/apis";
  
 
 function CheckoutComponent(props) {
-
+    const history = useHistory();
     const [orderPlaceable, isOrderPlaceable] = useState(false);
 
     const [defaultAddressId, setDefaultAddressId] = useState({});
@@ -192,6 +192,30 @@ function CheckoutComponent(props) {
             .finally(() => setUpdating(false))
     }   
 
+    const placeOrder = () => {
+        
+        const obj = {
+            cart: cartDetails,
+            totalCost: total,
+            cart_id
+        }
+
+        http.post(apis.PLACE_ORDERS, obj)
+            .then(res => {
+                console.log(res.data)
+                if(res.data.status){
+                    console.log(res.data)
+                    alert("Order placed successfully, see in your profile for order details")
+                    setTimeout(() => {
+                        history.push('/profile')
+                    },3000)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
         <div className="container">
             <ul className="breadcrumb">
@@ -314,7 +338,7 @@ function CheckoutComponent(props) {
                         
                         <p className="my-2">Estimated delivery date is 16/09/2020</p>
 
-                        <button className="btn btn-primary d-block w-50 ml-auto" disabled={!orderPlaceable}>Place order</button>
+                        <button className="btn btn-primary d-block w-50 ml-auto" disabled={!orderPlaceable} onClick={() => placeOrder()}>Place order</button>
                     </div>
                 </div>
 

@@ -28,7 +28,11 @@ const apis = {
 
     USER_UPDATE_PROFILE_PIC: "/apis/v1/user/update-profile-pic",
     UPDATE_CART: "/apis/v1/user/update-cart",
-    AVAILABLE_FOR_CART: "/apis/v1/user/available-for-cart"
+    AVAILABLE_FOR_CART: "/apis/v1/user/available-for-cart",
+
+
+    PLACE_ORDERS: "/apis/v1/user/place-order",
+    GET_ORDERS: "/apis/v1/user/get-orders"
 };
 
 export default apis;
