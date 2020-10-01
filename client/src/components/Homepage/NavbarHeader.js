@@ -22,6 +22,11 @@ function NavbarHeader(props) {
   //   history.push(`/products?search=${search_query}`);
   // }
 
+  let handleLogout = () => {
+    window.localStorage.setItem("Token", "");
+    window.location.reload();
+  }
+
     return (
       <div>
         <div id="simpleModal" className={`account-modal ${props.modalisopen.loading?"dblock":"dnone"}`}>
@@ -45,6 +50,11 @@ function NavbarHeader(props) {
                 <li className="nav-item hoverable">
                   <Link style={myaccount_item} className="nav-link spc" to="/profile">Profile</Link>
                 </li>
+
+                <li className="nav-item hoverable">
+                  <Link style={myaccount_item} className="nav-link spc" onClick={()=>handleLogout()}>Logout</Link>
+                </li>
+
                 <li className="nav-item mr-2">
                   <form className="d-md-none" action="#" encType="multipart/form-data" id="language">
                     <div className="btn-group">
@@ -56,6 +66,7 @@ function NavbarHeader(props) {
                     </div>
                   </form>
                 </li>
+                
               </ul>
             </div>
 
