@@ -8,7 +8,7 @@ function NewProduct({product}) {
       <div className="itemcard">
         <div className="product-thumb transition">
           <div className="image product-imageblock"> 
-            <img src={`${apis.BASE_SERVER_URL}/${product.images[0]}`} alt="product1" title="product1" width="200px" /> 
+            <img src={`${apis.BASE_SERVER_URL}${product.images[0]}`} alt="product1" title="product1" width="200px" /> 
             <Link to={`/product/${product._id}`} className="addtocart-btn btn btn-primary" >Add To Cart</Link>
           </div>
           <div className="caption product-detail p-0 m-0 mt-4">
