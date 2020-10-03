@@ -9,10 +9,10 @@ export default function ProductImageSlide(props:any) {
     };
 
     return (
-        <IonSlides pager={true} options={slideOpts} className="homepage-slider">
+        <IonSlides pager={true} options={slideOpts} className="product-description-slider">
             {props.images.map((ele:any,i:any)=>
                 <IonSlide key={i}>
-                    <img src={`${apis.BASE_SERVER_URL}/${ele}`} />
+                    <img src={`${apis.BASE_SERVER_URL}/${ele}`} className="product-description-slider-image"/>
                 </IonSlide>
             )
             }

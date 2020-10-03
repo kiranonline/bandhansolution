@@ -1,6 +1,6 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonBackButton, IonMenuButton,IonButtons } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonBackButton, IonIcon,IonButtons, IonButton } from '@ionic/react';
 import React,{useState,useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import { logout } from "../../actions/authAction";
 import './Product.css';
@@ -8,13 +8,15 @@ import http from '../../services/httpCall';
 import { Editor, EditorState, convertFromRaw } from "draft-js";
 import apis from "../../services/apis";
 import { openToast, loading } from "../../actions/loadingAction";
-import ProductImageSlide from "./ProductImageSlide"
+import ProductImageSlide from "./ProductImageSlide";
+import { starOutline, star, cartOutline, arrowBack } from 'ionicons/icons';
 
 
 const Product: React.FC = (props: any) => {
     const [productDescription,setProductDescription] = useState(() => EditorState.createEmpty());
     const [product,setProduct]:[any,any] = useState()
     const { id }:any = useParams();
+    const history = useHistory();
     
 
     let fetchProductDetails = ()=>{
@@ -47,13 +49,21 @@ const Product: React.FC = (props: any) => {
 
 
 
+    const goBack = ()=>{
+        history.goBack();
+    }
+
+
+
     return (
         <IonPage>
             <IonHeader>
                 <IonToolbar className="custom-header">
                     <IonButtons slot="start">
-                        <IonBackButton />
-                    </IonButtons>
+                        <IonButton onClick={goBack} className="product-description-back-button">
+                                <IonIcon slot="icon-only" icon={arrowBack} />
+                            </IonButton>
+                        </IonButtons>
                     <IonTitle className="custom-heading-text">Product</IonTitle>
                 </IonToolbar>
             </IonHeader>
@@ -62,9 +72,52 @@ const Product: React.FC = (props: any) => {
                     <div>
                         <ProductImageSlide images={product.images}/>
                         <div className="product-description-wrapper">
+
                             <h6 className="product-description-product-name">
                                 {product.name}
                             </h6>
+                            <div className="product-description-tag-container">
+                                {product.category.map((ele:any,i:any)=>
+                                    <span key={i} className="product-description-product-tag">
+                                        {ele.name}
+                                    </span>
+                                )}
+                            </div>
+                            
+                            <div className="product-description-price-container">
+                                {product.salePrice?
+                                    <>
+                                        <span className="price-striked-wrapper">
+                                            <span className="price-striked-inner sz-bg"><span>&#8377;</span>{product.regularPrice}</span>
+                                        </span>
+                                        <span className="price-striked-inner actual-price sz-bg"><span>&nbsp;&#8377;</span>{product.salePrice}</span>
+                                    </>
+                                    :
+                                    <span className="price-striked-inner actual-price sz-bg"><span>&nbsp;&#8377;</span>{product.regularPrice}</span>
+                                }
+                            </div>  
+
+                            <div className="product-description-add-to-cart">
+                                <IonButton expand="full" className="add-to-cart-button">
+                                    ADD TO CART
+                                    <IonIcon slot="end" icon={cartOutline} />
+                                </IonButton>
+                            </div>
+
+
+
+                            {/* <div className="product-description-star-container">
+                                <div className="">
+                                    <IonIcon icon={star} className="item-star"/>
+                                    <IonIcon icon={star} className="item-star" />
+                                    <IonIcon icon={star} className="item-star" />
+                                    <IonIcon icon={starOutline} className="item-star" />
+                                    <IonIcon icon={starOutline} className="item-star" />
+                                </div>
+
+                                
+                            </div> */}
+                            <Editor editorState={productDescription} readOnly={true} onChange={()=>null} />
                         </div>
                         
                     </div>
