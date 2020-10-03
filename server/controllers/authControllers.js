@@ -84,7 +84,8 @@ exports.createnormalUser= async(req,res,next) =>{
                 res.json({
                     status : true,
                     message : 'User registered sucessfully.',
-                    data:user._id
+                    data:user._id,
+                    otp: otp_number
                 })
 
             }

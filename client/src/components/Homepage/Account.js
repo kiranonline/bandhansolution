@@ -41,6 +41,7 @@ function Account(props) {
             if(result.data.status){
                 localStorage.setItem("Token", result.data.token);
                 props.login(result.data.token,result.data.data);
+                
                 props.modal(false);
             }else{
                 //code
@@ -62,8 +63,10 @@ function Account(props) {
         .then((result)=>{
             console.log(result);
             if(result.data.status){
+                
                 setshowotp(true);
                 setuserid(result.data.data);
+                alert(result.data.otp ? `Your OTP is ${result.data.otp}` : "123456 is your OTP")
             }else{
                 seterrormessage(result.data.message);
             }
