@@ -32,7 +32,8 @@ const apis = {
 
 
     PLACE_ORDERS: "/apis/v1/user/place-order",
-    GET_ORDERS: "/apis/v1/user/get-orders"
+    GET_ORDERS: "/apis/v1/user/get-orders",
+    CANCEL_ORDER: "/apis/v1/user/cancel-order",
 };
 
 export default apis;

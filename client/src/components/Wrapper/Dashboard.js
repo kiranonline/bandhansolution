@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from 'react';
+import { Link } from  'react-router-dom';
 import { connect } from "react-redux";
 import { setUserDetails } from "../../actions/authAction";
 import apis from "../../services/apis";
@@ -81,7 +82,7 @@ function Dashboard(props) {
     const getOrders = () => {
         http.get(apis.GET_ORDERS)
             .then(res => {
-                console.log(res.data);
+                console.log("ORDERS", res.data);
                 if(res.data.status);
                 setOrders(res.data.data);
             })
@@ -321,6 +322,24 @@ function Dashboard(props) {
 
     const startEditingAddress = (id) => {
         setnewAddress({...addresses.filter(e => e._id === id)[0]})
+    }
+
+    const cancelOrder = (id) => {
+        http.post(apis.CANCEL_ORDER,{orderId: id})
+            .then(res => {
+                if(res.data.status === true){
+                    console.log(res.data.data)
+                    setOrders(old => old.map(
+                        order => {
+                            if(order._id !== res.data.data._id) return order;
+                            else return {...order, currentStatus: res.data.data.currentStatus}
+                        }
+                    ))
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     return (
@@ -677,8 +696,63 @@ function Dashboard(props) {
 
                                 {orders.map(order => {
                                     return(
-                                        <div key={order._id}>
-                                            <h3>{order._id}: ₹{order.totalCost}: {order.currentStatus}</h3>
+                                        <div className="card my-2" key={order._id}>
+                                            <div className="card-body">
+                                                <h3 className="card-title h3"> <strong>Order ID:</strong> {order._id}</h3>
+                                                <h6 className={order.currentStatus != 'cancelled' ? ' text-success' : ' text-danger'}><strong>Current Status:</strong> {order.currentStatus}</h6>
+
+                                                {
+                                                    order.address && order.address !== {} ?
+                                                        <p className="text-dark">
+                                                            <strong>Address: </strong>
+                                                            {order.address.lineone}, {order.address.city} - {order.address.pincode}
+                                                        </p>
+                                                        :
+                                                        ""
+
+                                                }
+                                                
+                                                <div className="table-responsive">
+                                                    <table className="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <td className="text-left">Product Name</td>
+                                                                <td className="text-left">Quantity</td>
+                                                                <td className="text-right">Unit Price</td>
+                                                                <td className="text-right">Total</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {
+                                                                order.product_details.map((product, index) => 
+                                                                    <tr key={index}>
+                                    
+                                                                        <td className="text-left">
+                                                                            <Link to={`/product/${product._id}`}>{product.name}</Link>
+                                                                        </td>
+                                                            
+                                                                        <td className="text-left">
+                                                                            {order.items[index].count} 
+                                                                        </td>
+
+                                                                        <td className="text-right">₹{product.salePrice ? product.salePrice : product.regularPrice}</td>
+
+                                                                        <td className="text-right">₹{product.salePrice ? product.salePrice * order.items[index].count : product.regularPrice * order.items[index].count}</td>
+                                                                    </tr>   
+                                                                )
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            
+                                                <h3><strong>Total Cost: </strong> ₹{order.totalCost}</h3>
+                                                {
+                                                    order.currentStatus === "cancelled" || order.currentStatus === "delivered" ? 
+                                                    ""
+                                                    :
+                                                    <button onClick={() => cancelOrder(order._id)} className="btn btn-danger">Cancel order</button>
+                                                }
+                                            </div>
                                         </div>
                                     )
                                 })}

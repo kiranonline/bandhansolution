@@ -100,8 +100,8 @@ function CartComponent(props) {
             </ul>
 
             <div className="row">
-                <CategorySelector />
-                <div className="table-responsive col-md-9">
+
+                <div className="table-responsive col-md-12">
                     <table className="table table-bordered">
                         <thead>
                             <tr>

@@ -24,7 +24,7 @@ function CategorySelector(props) {
     }, [])
 
     return (
-        <div id="column-left" className="col-md-3 col-12 hidden-xs column-left">
+        <div id="column-left" className="col-lg-3 col-12 hidden-xs column-left">
             <div className="column-block">
                 <div className="column-block">
                     <div className="columnblock-title">

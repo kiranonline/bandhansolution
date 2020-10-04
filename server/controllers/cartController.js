@@ -13,6 +13,8 @@ exports.availableForCart = async(req, res, next) => {
         const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
         // console.log(user_id);
 
+        console.log("--------", pincode);
+
         let match_1={};
         let lookup={};
         let match_2={};
@@ -98,13 +100,16 @@ exports.updatecart = async(req,res,next) => {
 exports.placeOrder = async(req,res) => {
     try{
         let user = req.user;
-        let {cart, totalCost, cart_id } = req.body
+        let {cart, totalCost, cart_id, address = null } = req.body
+
+        console.log(address)
 
         let currentOrder = new Order({
             items: cart,
             user: user._id,
             totalCost,
-            currentStatus: "placed"
+            currentStatus: "placed",
+            address
         })
 
         let savedOrder = await currentOrder.save();
@@ -131,7 +136,22 @@ exports.placeOrder = async(req,res) => {
 
 exports.getOrder = async(req,res) => {
     try{
-        let orders = await Order.find({user: req.user._id});
+        let query = [
+            {$match: {user: req.user._id}},            
+            {$lookup: {
+                from :"products",
+                localField: "items.product",
+                foreignField: "_id",
+                as: "product_details"
+            }},
+            {
+                $sort: {
+                    'createdAt': 1
+                }
+            }
+        ]
+        let orders = await Order.aggregate(query);
+        
         if(orders){
             res.json({
                 status: true,
@@ -143,13 +163,50 @@ exports.getOrder = async(req,res) => {
         console.log(err);
         res.status(500).status({
             status: false,
-            message: "Falsed"
+            message: "Couldn't update"
         })
     }
 }
 
 
+exports.cancelOrder = async(req,res,next) => {
+    try{
+        let { orderId } = req.body;
+        let cancelledOrder = await Order.findOneAndUpdate(orderId, {currentStatus: "cancelled"}, {new: true})
+        console.log(cancelledOrder);
+        res.json({
+            status: true,
+            data: cancelledOrder
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.json({
+            status: false,
+            message: err
+        })
+    }
+}
 
+//temporary
+exports.deleteOrder = async(req,res,next) => {
+    try{
+        let { orderId } = req.body;
+        let deletedOrder = await Order.findByIdAndDelete(orderId)
+        console.log(deletedOrder);
+        res.json({
+            status: true,
+            data: deletedOrder
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.json({
+            status: false,
+            message: err
+        })
+    }
+}
 
 
 //shubham

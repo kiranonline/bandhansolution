@@ -26,8 +26,7 @@ const OrderSchema = new mongoose.Schema({
         default: "placed"
     },
     address: {
-        type: mongoose.Types.ObjectId,
-        ref: 'address'
+        type: Object
     }
 },{
     timestamps : true

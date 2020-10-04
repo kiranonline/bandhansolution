@@ -2,10 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from "react-router-dom"
 import {connect} from "react-redux"
 import { setUserDetails } from "../../actions/authAction";
+import { cartQuantity } from "../../actions/cartAction";
+
 import CategorySelector from '../GlobalComponents/CategorySelector';
 import http from "../../services/httpCall";
 import apis from "../../services/apis";
- 
+
 
 function CheckoutComponent(props) {
     const history = useHistory();
@@ -87,9 +89,10 @@ function CheckoutComponent(props) {
         setTotal(totalCost);
     },[cartDetails, products])
 
-    useEffect(() => {
+    const checkAvailibility = () => {
         let status = [];
         let flag = 0;
+
         cartDetails.forEach(e => {
             http.post(apis.AVAILABLE_FOR_CART, {product_id: e.product})
                 .then(res => {
@@ -98,7 +101,7 @@ function CheckoutComponent(props) {
                     }
                     else{
                         status.push(false)
-                        flag = 0;
+                        flag = 1;
                     }
                 })
                 .catch(err => {
@@ -111,11 +114,17 @@ function CheckoutComponent(props) {
                     else isOrderPlaceable(true)
                 })
         })
+    }
+
+    useEffect(() => {
+        checkAvailibility()
     }, [cartDetails])
 
     const handleDefaultAddressChange = (e) => {
         console.log(e.target.value);
-        setDefaultAddressId(e.target.value)
+        
+        setDefaultAddressId(e.target.value);
+
     }
 
 
@@ -141,8 +150,13 @@ function CheckoutComponent(props) {
                 if(res.data.status === true){
                     getUserDetails();
                     getUserAddresses();
+                    checkAvailibility();
                     setDefaultChange(true)
-                    setTimeout(() => {setDefaultChange(false)},3000)
+                    
+                    setTimeout(() => {
+                        setDefaultChange(false)
+                        // window.location.reload();
+                    },3000)
                 }
             })
             .catch(err => {
@@ -193,18 +207,22 @@ function CheckoutComponent(props) {
     }   
 
     const placeOrder = () => {
-        
+
+        console.log(props.Auth.userdetails.defaultAddress)
+
         const obj = {
             cart: cartDetails,
             totalCost: total,
-            cart_id
+            cart_id,
+            address: props.Auth.userdetails.defaultAddress
         }
 
         http.post(apis.PLACE_ORDERS, obj)
             .then(res => {
                 console.log(res.data)
                 if(res.data.status){
-                    console.log(res.data)
+                    console.log(res.data);
+                    cartQuantity(0);
                     alert("Order placed successfully, see in your profile for order details")
                     setTimeout(() => {
                         history.push('/profile')
@@ -223,10 +241,8 @@ function CheckoutComponent(props) {
             </ul>
             
             <div className="row">
-
-                <CategorySelector />
             
-                <div className="col-md-9 col-12">
+                <div className="col-12">
                     <h1 className="h2">
                         Checkout
                     </h1>
@@ -356,5 +372,6 @@ const mapStateToProps= (state) => ({
 })
 
 export default connect(mapStateToProps, {
-    setUserDetails
+    setUserDetails,
+    cartQuantity
 })(CheckoutComponent);

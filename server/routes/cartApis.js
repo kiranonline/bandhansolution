@@ -2,7 +2,7 @@ const express = require("express");
 const {body} = require("express-validator");
 const {isAuthenticated} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
-const { addtocart, updatecart, fetchcart, removecartitem, availableForCart, placeOrder, getOrder } = require("../controllers/cartController");
+const { addtocart, updatecart, fetchcart, removecartitem, availableForCart, placeOrder, getOrder, cancelOrder, deleteOrder } = require("../controllers/cartController");
 const router = express.Router();
 
 
@@ -32,5 +32,16 @@ router.post("/user/place-order",isAuthenticated, placeOrder)
 
 //+++++++++++++++++++++++++++++++++++++++ Place order  ++++++++++++++++++++++++++
 router.get("/user/get-orders",isAuthenticated, getOrder)
+
+
+//+++++++++++++++++++++++++++++++++++++++ Cancel order  ++++++++++++++++++++++++++
+router.post("/user/cancel-order",isAuthenticated,[
+    body("orderId").not().isEmpty()
+],errorHandler, cancelOrder)
+
+//+++++++++++++++++++++++++++++++++++++++ delete order temp  ++++++++++++++++++++++++++
+router.post("/user/delete-order",[
+    body("orderId").not().isEmpty()
+],errorHandler, deleteOrder)
 
 module.exports = router;

@@ -86,7 +86,7 @@ function ProductComponent(props) {
 
                 <CategorySelector />
 
-                <div id="content" className="col-md-9">
+                <div id="content" className="col-lg-9">
                 {/* <h2 className="category-title">Desktops</h2>
                 <div className="row category-banner">
                     <div className="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" className="img-thumbnail" /></div>
