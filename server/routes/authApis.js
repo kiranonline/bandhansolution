@@ -1,6 +1,6 @@
 const express = require("express");
 const {body, oneOf} = require("express-validator");
-const { LoginWithEmailAndPassword, getUserDetails } = require("../controllers/authControllers");
+const { LoginWithEmailAndPassword, getUserDetails, resnedOTP } = require("../controllers/authControllers");
 const { createnormalUser, otpverification,loginnormalUser } = require("../controllers/authControllers");
 const {isAuthenticated} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
@@ -28,6 +28,11 @@ router.post("/user/otpverification",[
     body("otp").not().isEmpty()
 ],errorHandler,otpverification);
 
+//+++++++++++++++++++++++++++ Resend OTP to the user ++++++++++++++++++++++++++++++
+router.post("/user/resend_otp",[
+    body("user_id").not().isEmpty()
+],errorHandler,resnedOTP);
+
 //++++++++++++++++++++++++++++++++++++++ Login Customer with email or phone number & password ++++++++++++++++++++++++++++++
 router.post("/user/login-with-email-or-phone-password",[
     body("phoneNumber").isNumeric().isLength({min:10,max:10}).withMessage('Not a valid phone number'),
@@ -36,7 +41,6 @@ router.post("/user/login-with-email-or-phone-password",[
 
 //++++++++++++++++++++++++++++++++++++++ Get user details ++++++++++++++++++++++++++++++
 router.get("/userdetails",isAuthenticated,getUserDetails); 
-
 
 
 

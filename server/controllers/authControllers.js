@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt=require("bcrypt");
 const saltRounds = 10;
 const JWT_KEY = process.env.JWT_SECRET_KEY;
-
+// for requesting
+const fetch = require('node-fetch');
 
 //kiran
 
@@ -66,7 +67,25 @@ exports.createnormalUser= async(req,res,next) =>{
         }else{
             let securepassword = await bcrypt.hash(req.body.password, saltRounds);
             let otp_number=Math.floor(100000 + Math.random() * 900000);
+
+            
+
+
             if(req.body.phoneNumber){
+                //this is the message sending part
+
+                const message = encodeURIComponent(`Your OTP for registering to Krishi is ${otp_number}. Please don't share your OTP with anyone else!`)
+
+                const URI = `https://api.textlocal.in/send/?apikey=ugNZijBNUDk-jSjhzXA26w3Zq2loX7Boja87bIp2P5&numbers=${req.body.phoneNumber}&message=${message}`
+
+                fetch(URI)
+                .then(res => res.json())
+                .then(res => console.log("OTP MESSAGE RESPONSE------------",res))
+                .catch(error => {
+                    console.log(error);
+                })
+
+
                 //create user with phone number.
                 let user = new User({
                     name : req.body.name,
@@ -96,6 +115,35 @@ exports.createnormalUser= async(req,res,next) =>{
         res.status(500).json({
             status : false,
             message : 'server error'
+        })
+    }
+}
+
+exports.resnedOTP = async(req,res,next)=> {
+    try {
+        let new_otp=Math.floor(100000 + Math.random() * 900000);
+        let user = await User.findByIdAndUpdate(req.body.user_id, {otp: new_otp}, {new: true});
+
+        const message = encodeURIComponent(`Your OTP for registering to Krishi is ${new_otp}. Please don't share your OTP with anyone else!`)
+
+        const URI = `https://api.textlocal.in/send/?apikey=ugNZijBNUDk-jSjhzXA26w3Zq2loX7Boja87bIp2P5&numbers=${user.phoneNumber}&message=${message}`
+
+        let OTPResponse = await fetch(URI)
+        OTPResponse = await OTPResponse.json()
+        console.log("OTP MESSAGE RESPONSE------------",OTPResponse)
+        
+        res.json({
+            status : true,
+            message : 'OTP resend successful',
+            data:user._id,
+            otp: new_otp
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            status: false,
+            message: "Somethinmg went wrong!"
         })
     }
 }

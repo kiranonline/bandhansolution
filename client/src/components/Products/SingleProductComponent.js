@@ -55,6 +55,10 @@ function SingleProductComponent(props) {
             // console.log(props.modalLoading.loading);
             props.modal(true);
         }
+        else if(!props.Auth.userdetails.defaultaddress){
+            console.log("No default address set");
+            setShowModal(true);
+        }
         else{
             http.post(apis.ADD_TO_CART,{
                 product_id:product._id
@@ -102,7 +106,7 @@ function SingleProductComponent(props) {
                             showModal ? 
                             (
                                 <div className="alert alert-danger" role="alert">
-                                    Sorry This product is not available for your default address. Change your default address at <Link to="/profile">Profile</Link> page to get the product.
+                                    Sorry This product is not available for your default address. Change/set your default address at <Link to="/profile" className="text-primary font-weight-bold">Profile</Link> page to get the product.
                                 </div>
                             )
                             :
