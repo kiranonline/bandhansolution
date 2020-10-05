@@ -15,7 +15,11 @@ const apis = {
     EDIT_ADDRESS : "/apis/v1/user/edit/address",
 
 
-    FETCH_PRODUCT_HIGHLIGHT : "/apis/v1/user/producthighlight"
+    FETCH_PRODUCT_HIGHLIGHT : "/apis/v1/user/producthighlight",
+
+
+
+    GET_SINGLE_PRODUCT : "/apis/v1/product"
     
 };
 

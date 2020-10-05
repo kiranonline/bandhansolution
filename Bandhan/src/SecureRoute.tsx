@@ -51,7 +51,7 @@ const SecureWrapper = ({match}:any)=>{
                     component={Profile}
                 />
                 <Route 
-                    path={`${match.url}/product`}
+                    path={`${match.url}/product/:id`}
                     component={Product}
                 />
                 <Route exact path={`${match.url}`} render={() => <Redirect to="/secure/home" />} />

@@ -30,9 +30,10 @@ function SingleProductComponent(props) {
     // console.log(id);
 
     const fetchProduct = ()=>{
+        console.log("fetching products+++++++++++")
         http.get(apis.GET_SINGLE_PRODUCT+`${id}`)
         .then((result)=>{
-            console.log(result);
+            console.log("++++++++++++++++++++product details+++++++++++++++++++",result.data);
             if(result.data.status){
                 setProduct(result.data.data);
                 setproductImage(result.data.data.images[0]);
@@ -174,11 +175,12 @@ function SingleProductComponent(props) {
                         </ul>
                                 
                         <div className="categoryButton">
-                            {productCategory.map(cat => 
-                                <a className="mr-2" href={`/products/?category=${cat}`} key={cat} style={{textTransform: "capitalize"}}>
+                            {productCategory.map((cat,i) => 
+                                <a className="mr-2" href={`/products/?category=${cat}`} key={i} style={{textTransform: "capitalize"}}>
                                     
                                     <span className="badge badge-pill badge-warning p-2">
-                                        {props.categories && props.categories.category_list && props.categories.category_list.length > 0 ? props.categories.category_list.filter(e => e._id === cat)[0].name : ""}
+                                        {/* {props.categories && props.categories.category_list && props.categories.category_list.length > 0 ? props.categories.category_list.filter(e => e._id === cat)[0].name : ""} */}
+                                        {cat.name}
                                     </span>
                                 </a>
 

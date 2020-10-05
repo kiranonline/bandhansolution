@@ -108,7 +108,7 @@ exports.singleProduct = async(req,res,next) =>{
     console.log(req.params);
     try{
         let product_id=req.params.id;
-        let product = await Product.findOne({_id:product_id,isActive:true});
+        let product = await Product.findOne({_id:product_id,isActive:true}).populate("category").exec();
         console.log(product);
         if(product){
                 res.json({

@@ -28,7 +28,7 @@ app.set("port",PORT);
 app.set("env",process.env.MODE);
 
 //header and basic protections
-app.use(helmet());
+//app.use(helmet());
 app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, key, Content-Type, Accept, access-control-allow-origin, Authorization, userid");
@@ -47,7 +47,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(compression());
+//app.use(compression());
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,"views"));
 
@@ -63,8 +63,11 @@ app.use("/apis/v1",addressApi);
 app.use("/apis/v1",cartApi);
 
 
+app.get('/admin/*', (req,res) =>{
+    res.sendFile(path.join(__dirname,"public","admin","index.html"))
+});
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/public/index.html'));
+    res.sendFile(path.join(__dirname,"public","index.html"))
 });
 
 
