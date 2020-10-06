@@ -56,7 +56,7 @@ function SingleProductComponent(props) {
             // console.log(props.modalLoading.loading);
             props.modal(true);
         }
-        else if(!props.Auth.userdetails.defaultaddress){
+        else if(!props.Auth.userdetails.defaultAddress){
             console.log("No default address set");
             setShowModal(true);
         }

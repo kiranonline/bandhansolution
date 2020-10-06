@@ -258,7 +258,7 @@ function Dashboard(props) {
                 } 
                 else{
                     setAddresses(old => [...old, res.data.data]);
-
+                    getUserDetails()
                     resetNewAddress();
                 }
             })

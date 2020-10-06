@@ -104,6 +104,11 @@ exports.editaddress = async(req,res,next) => {
                 user: req.user._id
         }, {new: true})
         console.log(address);
+        if(address.isdefault){
+            let user = await User.findByIdAndUpdate(req.user._id,{
+                defaultAddress : address
+            });
+        }
         res.json({
             status:true,
             message:"Address Edited",

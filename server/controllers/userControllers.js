@@ -11,6 +11,7 @@ const saltRounds = 10;
 //++++++++++++++++++++++++++++++++++++++ create user +++++++++++++++++++++++++++++++++++++
 exports.createUser = async(req,res,next)=>{
     try{
+        console.log("i am getting")
         let existingUser = await User.findOne({$or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}]})
         if(existingUser){
             res.json({

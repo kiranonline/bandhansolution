@@ -2,6 +2,7 @@ const { validationResult } =require("express-validator");
 
 exports.errorHandler = (req,res,next)=>{
     try{
+        console.log("i am called to check")
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             res.status(422).json({
