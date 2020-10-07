@@ -12,6 +12,30 @@ const OrderSchema = new mongoose.Schema({
             type: Number,
             required: true,
             default:1
+        },
+        seller:{
+            type : mongoose.Types.ObjectId,
+            ref : 'user'
+        },
+        stock:{
+            type : mongoose.Types.ObjectId,
+            ref : 'stock'
+        },
+        status:[{
+            name:{
+                type: String,
+                default: "placed"
+            },
+            date:{
+                type: Date,
+                default: new Date()
+            },
+            remark:{
+                type: String
+            }
+        }],
+        price:{
+            type: Number
         }
     }],
     user:{
