@@ -26,6 +26,19 @@ const columns = [
         dataIndex: 'stock',
         key: 'stock'
     },
+    {
+        title : 'Pin Codes',
+        dataIndex : 'deliverTo',
+        key:'deliverTo',
+        render : (data)=>{
+            let arr=data.map((ele,i)=>
+                <Tag key={i}>
+                    {ele}
+                </Tag>
+            )
+            return arr
+        }
+    },
     
 ]
 
