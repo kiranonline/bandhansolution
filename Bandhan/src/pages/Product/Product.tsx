@@ -54,6 +54,35 @@ const Product: React.FC = (props: any) => {
     }
 
 
+    const addToCart=()=>{
+        if(!props.Auth.isLoggedIn){
+            props.openToast("You need to login first")
+        }
+        else if(!props.Auth.userdetails.defaultAddress){
+            props.openToast("No default address set")
+        }
+        else{
+            console.log("all set");
+            props.loading(true);
+            http.post(apis.ADD_TO_CART,{
+                product_id:id
+            }).then((result)=>{
+                console.log(result.data);
+                if(result.data.status){
+                    props.openToast("Item added to cart")
+                }else{
+                    props.openToast(result.data.message)
+                }
+            }).catch((err)=>{
+                console.log(err);
+                props.openToast("server error")
+            }).finally(()=>{
+                props.loading(false);
+            })
+        }
+    }
+
+
 
     return (
         <IonPage>
@@ -98,7 +127,7 @@ const Product: React.FC = (props: any) => {
                             </div>  
 
                             <div className="product-description-add-to-cart">
-                                <IonButton expand="full" className="add-to-cart-button">
+                                <IonButton expand="full" className="add-to-cart-button" onClick={addToCart}>
                                     ADD TO CART
                                     <IonIcon slot="end" icon={cartOutline} />
                                 </IonButton>

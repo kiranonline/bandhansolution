@@ -19,7 +19,10 @@ const apis = {
 
 
 
-    GET_SINGLE_PRODUCT : "/apis/v1/product"
+    GET_SINGLE_PRODUCT : "/apis/v1/product",
+    ADD_TO_CART : "/apis/v1/user/add-to-cart",
+    FETCH_THE_CART : "/apis/v1//user/fetch-the-cart",
+    UPDATE_CART: "/apis/v1/user/update-cart",
     
 };
 

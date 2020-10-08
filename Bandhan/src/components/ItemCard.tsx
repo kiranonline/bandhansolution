@@ -1,17 +1,23 @@
 import React from 'react';
 import { IonCard,IonSkeletonText,IonCardContent,IonGrid, IonRow, IonCol, IonIcon } from '@ionic/react';
 import apis from "../services/apis";
-import {Link} from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import { starOutline, star } from 'ionicons/icons';
 
 
 
 
 export default function ItemCard(props:any) {
+    const history = useHistory()
+
+    const goTo =()=>{
+        history.push(`/secure/product/${props.data._id}`)
+    }  
+
     return (
         <div className="item-card-wrapper">
             {props.data?
-                <Link to={`/secure/product/${props.data._id}`}>
+                <div onClick={goTo} >
                     <img src={`${apis.BASE_SERVER_URL}/${props.data!.images[0]}`} />
                     <div>
                         <h6 className="itemName">
@@ -38,7 +44,7 @@ export default function ItemCard(props:any) {
                             }
                         </div>
                     </div>
-                </Link>
+                </div>
                 :
                 <IonSkeletonText animated style={{ width: '100%%',height:'200px' }}/>
             }
