@@ -62,6 +62,8 @@ exports.availableForCart = async(req, res, next) => {
     }
 }
 
+
+//to be used only for hard resetting the cart, for increment or decrement use the updated add to cart
 exports.updatecart = async(req,res,next) => {
 
     //Problem in fetching in cart array.
@@ -78,7 +80,6 @@ exports.updatecart = async(req,res,next) => {
                 message: "Cart items not found"
             })
         }
-
         const newCart = await Cart.findByIdAndUpdate(_id, {cart}, {new: true});
         
         if(newCart){
@@ -101,8 +102,6 @@ exports.placeOrder = async(req,res) => {
     try{
         let user = req.user;
         let {cart, totalCost, cart_id, address = null } = req.body
-
-        console.log(address)
 
         let currentOrder = new Order({
             items: cart,
@@ -146,7 +145,7 @@ exports.getOrder = async(req,res) => {
             }},
             {
                 $sort: {
-                    'createdAt': 1
+                    'createdAt': -1
                 }
             }
         ]
@@ -172,6 +171,7 @@ exports.getOrder = async(req,res) => {
 exports.cancelOrder = async(req,res,next) => {
     try{
         let { orderId } = req.body;
+        console.log(orderId);
         let cancelledOrder = await Order.findOneAndUpdate(orderId, {currentStatus: "cancelled"}, {new: true})
         console.log(cancelledOrder);
         res.json({
@@ -217,6 +217,7 @@ exports.addtocart = async(req,res,next) =>{
         const product_id = req.body.product_id;
         const user_id = req.user._id;
         const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
+        const countAdd = req.body.countAdd ? req.body.countAdd : 1; 
         // console.log(user_id);
 
         let match_1={};
@@ -248,7 +249,7 @@ exports.addtocart = async(req,res,next) =>{
             let cart_d = await Cart.findOne({user:mongoose.Types.ObjectId(user_id)});
             if(cart_d){
                 let cart_details = await Cart.findOneAndUpdate({user:mongoose.Types.ObjectId(user_id),"cart.product" : {$in:[product_id]}},{
-                    $inc: {"cart.$.count":1}
+                    $inc: {"cart.$.count":countAdd}
                 },{
                     new:true
                 });

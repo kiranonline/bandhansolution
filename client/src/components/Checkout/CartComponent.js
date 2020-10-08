@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 import http from "../../services/httpCall";
 import apis from "../../services/apis";
-import CategorySelector from '../GlobalComponents/CategorySelector';
+import { cartQuantity } from "../../actions/cartAction";
+
 
 function CartComponent(props) {
     let [cartDetails,setcartDetails] = useState([]);
@@ -24,7 +25,12 @@ function CartComponent(props) {
                 // console.log(result.data.cart);
                 setProducts(result.data.data.product_details);
 
-                
+                let count = 0;
+
+                result.data.data.cart.forEach(e => {
+                    count += e.count
+                })  
+                props.cartQuantity(count)
             }else{
                 console.log(result.data.message);
                 //Handle the error message.
@@ -41,14 +47,19 @@ function CartComponent(props) {
 
     const updateQty = (i, amount) => {
         
-        setcartDetails(old => old.map(item => {
+        props.cartQuantity(props.cart.count + amount)
+
+        let x = cartDetails.map(item => {
 
             if (item._id !== i) return item;
             return {...item, count: item.count + amount}    
-        }))
+        })
 
-        updatecart();
+        setcartDetails(x)
+
+        updatecart(x);
     }
+
 
     const deleteItem = async(productID) => {
 
@@ -180,9 +191,11 @@ function CartComponent(props) {
 const mapStateToProps= (state) => ({
     categories: state.FetchCategories,
     Auth: state.Auth,
-    modalLoading: state.Modal
+    modalLoading: state.Modal,
+    cart: state.CartQuantity
 })
 
 export default connect(mapStateToProps, {
+    cartQuantity
 })(CartComponent);
 

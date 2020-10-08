@@ -40,7 +40,7 @@ function NavbarHeader(props) {
         <nav id="menu" className="navbar navbar-expand-md py-3">
           <div className="container d-flex justify-content-between align-items-center flex-column flex-md-row">
             <div id="navbarSupportedContent">
-              <ul className="d-flex">
+              <ul className="d-flex flex-sm-row flex-column">
                 <li className="nav-item hoverable active">
                   <Link className="nav-link spc" to="/">Home <span className="sr-only">(current)</span></Link>
                 </li>
@@ -48,7 +48,7 @@ function NavbarHeader(props) {
                   <Link style={login_item} className="nav-link spc" to="#" onClick={()=>props.modal(true)}>Login</Link>
                 </li>
                 <li className="nav-item hoverable">
-                  <Link style={myaccount_item} className="nav-link spc" to="/profile">Profile</Link>
+                    <Link style={myaccount_item} className="nav-link spc" to="/profile">{props.auth.userdetails && props.auth.userdetails.name ? props.auth.userdetails.name : "Profile"}</Link>
                 </li>
 
                 <li className="nav-item hoverable">

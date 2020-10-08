@@ -91,7 +91,7 @@ function App(props) {
                       <TermsComponent />
                     </Route>
                     <PrivateRoute path="/">
-                        <PrivateComponent />
+                        <PrivateComponent location={props.location}/>
                     </PrivateRoute>
                     <Route>
                         <Redirect to="/" />

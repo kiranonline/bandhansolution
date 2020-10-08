@@ -90,6 +90,7 @@ function Dashboard(props) {
 
     const getUserDetails = () => {
         http.get(apis.GET_USER_DETAILS).then((result)=>{
+            
             console.log(result.data.data);
             if(result.data.status){
               props.setUserDetails(result.data.data);
@@ -118,6 +119,13 @@ function Dashboard(props) {
     }
 
     useEffect(() => {
+        
+        //might be implemented in future
+        console.log("PROPS.LOCATION", props.location)
+
+        if(props.location && props.location.state){
+            setCurrentActiveTab(props.location.state.page);
+        }
 
         getUserDetails();
         getUserAddresses();
@@ -325,6 +333,7 @@ function Dashboard(props) {
     }
 
     const cancelOrder = (id) => {
+        console.log(id);
         http.post(apis.CANCEL_ORDER,{orderId: id})
             .then(res => {
                 if(res.data.status === true){
@@ -420,7 +429,7 @@ function Dashboard(props) {
                                     </div>
                                     
                                     {
-                                        <div class="alert alert-primary" role="alert">
+                                        <div className="alert alert-primary" role="alert">
                                             Current File&nbsp; 
                                             <strong>
                                                 {newProfilPicture.name ? newProfilPicture.name : "None"}

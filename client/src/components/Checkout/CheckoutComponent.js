@@ -4,7 +4,6 @@ import {connect} from "react-redux"
 import { setUserDetails } from "../../actions/authAction";
 import { cartQuantity } from "../../actions/cartAction";
 
-import CategorySelector from '../GlobalComponents/CategorySelector';
 import http from "../../services/httpCall";
 import apis from "../../services/apis";
 
@@ -210,8 +209,22 @@ function CheckoutComponent(props) {
 
         console.log(props.Auth.userdetails.defaultAddress)
 
+        let newDetails = cartDetails.map((e,i) => {
+            return {
+                ...e, 
+                status: [{
+                    name: "Placed",
+                    date: Date.now(),
+                    remark: "Your item purchase was successfully placed" 
+                }],
+                price: products[i].salePrice ? products[i].salePrice * e.count : products[i].regularPrice * e.count
+            }
+        })
+
+        console.log(newDetails);
+
         const obj = {
-            cart: cartDetails,
+            cart: newDetails,
             totalCost: total,
             cart_id,
             address: props.Auth.userdetails.defaultAddress
@@ -222,15 +235,16 @@ function CheckoutComponent(props) {
                 console.log(res.data)
                 if(res.data.status){
                     console.log(res.data);
-                    cartQuantity(0);
-                    alert("Order placed successfully, see in your profile for order details")
-                    setTimeout(() => {
-                        history.push('/profile')
-                    },3000)
+                    props.cartQuantity(0);
+                    history.push('/order-success')
+                }
+                else{
+                    alert("Your order could not be placed!");
                 }
             })
             .catch(err => {
                 console.log(err);
+                alert("Your order could not be placed!");
             })
     }
 
@@ -298,6 +312,20 @@ function CheckoutComponent(props) {
                         </button>
 
                         <p className="mb-0"><span className="text-danger">*</span>Please note, setting it as a delivery address will make this address your default, which you can change from <Link to="/profile">profile</Link> page</p>
+                    </div>
+
+                    <div className="my-2 text-dark" style={{fontSize: "1.2rem"}}>
+                        <strong>Delivering to: </strong>
+                        {
+                            props.Auth.userdetails && props.Auth.userdetails.defaultAddress ? 
+                            <span>
+                                {props.Auth.userdetails.defaultAddress.lineone}, {props.Auth.userdetails.defaultAddress.city} - {props.Auth.userdetails.defaultAddress.pincode}
+                            </span>
+                            :
+                            <span>
+                                Not set
+                            </span>
+                        }
                     </div>
                     
 
