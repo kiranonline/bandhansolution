@@ -16,6 +16,7 @@ import "./Product.less";
 import {Link,useParams} from "react-router-dom";
 import { Editor, EditorState, convertFromRaw } from "draft-js";
 import ProductDetailsCommon from "./ProductDetailsCommon";
+import ProductStockAdmin from "./ProductStockAdmin"
 const { Title } = Typography;
 
 function ProductDetailsAdmin(props) {
@@ -61,6 +62,11 @@ function ProductDetailsAdmin(props) {
             <div className="product-details-inner padding-after-page-header" >
                 <ProductDetailsCommon productDescription={productDescription} productDetails={productDetails}/>
             </div>
+            <div className="product-stok-table-wrapper">
+                <h2>Seller Stock</h2>
+                <ProductStockAdmin _id={id}/>
+            </div>
+            
         </div>
     )
 }

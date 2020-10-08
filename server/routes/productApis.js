@@ -6,7 +6,8 @@ const {
     productDetailsForAdmin, 
     listProductsForSeller,
     productDetailsForSeller,
-    updateProductStockBySeller
+    updateProductStockBySeller,
+    stockListForAdmin
 } = require("../controllers/productControllers");
 const {isAuthenticated,isAdmin, isSeller} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
@@ -21,6 +22,12 @@ router.post(`/product/create`,isAuthenticated,isAdmin,[
 
 //++++++++++++++++++++++++++++++++ List Products for admin++++++++++++++++++++++++++++++++++
 router.post('/product/listforadmin',isAuthenticated,isAdmin,listProductsForAdmin);
+
+
+//++++++++++++++++++++++++++++++++ Stock List for admin++++++++++++++++++++++++++++++++++
+router.post('/product/stock-list-foradmin',[
+   body("productId").notEmpty() 
+],errorHandler,isAuthenticated,isAdmin,stockListForAdmin);
 
 //++++++++++++++++++++++++++++++++ Product details for admin
 router.get('/product/detailsofadmin/:id',isAuthenticated,isAdmin,productDetailsForAdmin);

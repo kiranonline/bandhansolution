@@ -73,6 +73,32 @@ exports.listProductsForAdmin = async(req,res,next)=>{
 
 
 
+exports.stockListForAdmin = async(req,res,next)=>{
+    try{
+        let productId=req.body.productId; 
+        let query = {product:productId};
+        let pageNumber = req.body.pageNumber || 1;
+        let pageSize = req.body.pageSize || 50;
+        pageNumber = parseInt(pageNumber);
+        pageSize = parseInt(pageSize);
+        console.log(pageNumber,pageSize)
+        let [stocks,totalStockSize] = await Promise.all([Stock.find(query).skip((pageNumber-1)*pageSize).limit(pageSize).populate("seller","name email phoneNumber deliverTo"),Stock.countDocuments(query)]);
+        res.json({
+            status : true,
+            message : "Products stocks sucessfully.",
+            data : stocks,
+            total : totalStockSize
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
 
 //++++++++++++++++++++++++++++++++++++++ product details for admin +++++++++++++++++++++++++++++++++++++
 exports.productDetailsForAdmin = async(req,res,next)=>{

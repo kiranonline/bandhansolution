@@ -23,6 +23,7 @@ const apis = {
     UPLOAD_PRODUCT_IMAGE : "/apis/v1/upload-product-image",
     LIST_PRODUCTS_FOR_ADMIN : "/apis/v1/product/listforadmin",
     PRODUCT_DETAILS_FOR_ADMIN : "/apis/v1/product/detailsofadmin",
+    STOCK_LIST_FOR_ADMIN:"/apis/v1/product/stock-list-foradmin",
 
     LIST_PRODUCT_FOR_SELLER : "/apis/v1/product/listforseller",
     PRODUCT_DETAILS_FOR_SELLER : "/apis/v1/product/detailsforseller",
