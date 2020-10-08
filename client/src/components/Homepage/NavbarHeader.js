@@ -48,7 +48,7 @@ function NavbarHeader(props) {
                   <Link style={login_item} className="nav-link spc" to="#" onClick={()=>props.modal(true)}>Login</Link>
                 </li>
                 <li className="nav-item hoverable">
-                    <Link style={myaccount_item} className="nav-link spc" to="/profile">{props.auth.userdetails && props.auth.userdetails.name ? props.auth.userdetails.name : "Profile"}</Link>
+                    <Link style={myaccount_item} className="nav-link spc" to="/profile">{props.auth.userdetails && props.auth.userdetails.name ? props.auth.userdetails.name.split(" ")[0] : "Profile"}</Link>
                 </li>
 
                 <li className="nav-item hoverable">
