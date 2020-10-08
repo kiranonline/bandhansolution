@@ -10,12 +10,12 @@ function SideBar(props) {
         <Sider key={props.Auth.userdetails} trigger={null} collapsible collapsed={props.sideBarCollapsed} className="dasboard-sidebar-wrapper">
             {
                 props.Auth.userdetails.userType==='admin'?
-                    <AdminSideBar />
+                    <AdminSideBar user={props.user} />
                 :null   
             }
             {
                 props.Auth.userdetails.userType==='seller'?
-                    <SellerSideBar />
+                    <SellerSideBar user={props.user} />
                 :null   
             }
         </Sider>

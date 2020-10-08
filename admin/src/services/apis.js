@@ -6,6 +6,8 @@ const apis = {
     
     LOGIN_WITH_EMAIL_AND_PASSWORD : "/apis/v1/login-with-email-password",
     GET_USER_DETAILS:"/apis/v1/userdetails",
+    GET_PROFILE_DETAILS:"/apis/v1/profiledetails",
+    UPDATE_PROFILE_DETAILS:"/apis/v1/update-profile",
 
 
     UPLOAD_USER_AVATAR:"/apis/v1/upload-avatar",

@@ -12,6 +12,7 @@ import CategoryList from "../Category/CategoryList";
 import ProductCreate from "../Product/ProductCreate";
 import ProductListAdmin from "../Product/ProductListAdmin";
 import ProductDetailsAdmin from "../Product/ProductDetailsAdmin";
+import MyProfile from "../Profile/MyProfile"
 
 import ProductListSeller from "../Product/ProductListSeller";
 import ProductDetailsSeller from "../Product/ProductDetailsSeller";
@@ -29,7 +30,7 @@ function Dashboard(props) {
             <Header toggleSideBar={toggleSideBar}/>
             <Row className="dashboard-content-container">
                 <Col>
-                    <SideBar sideBarCollapsed={sideBarCollapsed}/>
+                    <SideBar key={props.Auth.userdetails} sideBarCollapsed={sideBarCollapsed} user={props.Auth.userdetails}/>
                 </Col>
                 <Col className={"dashboard-content-col"+(sideBarCollapsed?" dashboadr-sidebar-collapsed":" dashboard-sidebar-normal")}>
                     <Layout.Content  className="dasboard-content-wrapper">
@@ -58,6 +59,9 @@ function Dashboard(props) {
                                     <Route exact={true} path="/dashboard/product/details/:id">
                                         <ProductDetailsAdmin />
                                     </Route>
+                                    <Route exact={true} path="/dashboard/profile/:id">
+                                        <MyProfile />
+                                    </Route>
                                 </Switch>
                             </div>
                             :
@@ -68,6 +72,9 @@ function Dashboard(props) {
                                     </Route>
                                     <Route exact={true} path="/dashboard/product/details/:id">
                                         <ProductDetailsSeller />
+                                    </Route>
+                                    <Route exact={true} path="/dashboard/profile/:id">
+                                        <MyProfile />
                                     </Route>
                                 </Switch>
                             </div>

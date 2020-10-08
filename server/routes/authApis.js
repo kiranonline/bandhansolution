@@ -1,6 +1,6 @@
 const express = require("express");
-const {body, oneOf} = require("express-validator");
-const { LoginWithEmailAndPassword, getUserDetails, resnedOTP } = require("../controllers/authControllers");
+const {body, oneOf, query} = require("express-validator");
+const { LoginWithEmailAndPassword, getUserDetails, resnedOTP, getProfileDetails, updateProfile } = require("../controllers/authControllers");
 const { createnormalUser, otpverification,loginnormalUser } = require("../controllers/authControllers");
 const {isAuthenticated} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
@@ -42,6 +42,26 @@ router.post("/user/login-with-email-or-phone-password",[
 //++++++++++++++++++++++++++++++++++++++ Get user details ++++++++++++++++++++++++++++++
 router.get("/userdetails",isAuthenticated,getUserDetails); 
 
+
+
+
+
+
+//++++++++++++++++++++++++++++++++++++++ Get profile details ++++++++++++++++++++++++++++++
+router.get("/profiledetails",[
+    query("_id").notEmpty()
+],errorHandler,isAuthenticated,getProfileDetails); 
+
+
+
+
+router.post('/update-profile',[
+    oneOf([
+        body("phoneNumber").isNumeric().isLength({min:10,max:10}).withMessage('Not a valid phone number'),
+        body("email").isEmail()
+    ]),
+    body("name").not().isEmpty()
+],errorHandler,isAuthenticated,updateProfile);
 
 
 module.exports = router;

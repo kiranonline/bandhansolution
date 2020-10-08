@@ -20,7 +20,7 @@ function UserList(props) {
     const [userData,setUserData] = useState([]);
     const [currentPage,setCurrentpage] = useState(1);
     const [totalData,setTotalData] = useState(0);
-    const [pageSize,setPageSize] = useState(1);
+    const [pageSize,setPageSize] = useState(10);
     const [userType,setUserType] = useState("customer");
 
     const pageChanger=(page)=>{

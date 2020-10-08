@@ -1,6 +1,7 @@
 import moment from "moment";
 import React from "react";
-import {Tag} from "antd";
+import {Tag, Button} from "antd";
+import { Link } from "react-router-dom";
 
 
 const columns = [
@@ -27,6 +28,16 @@ const columns = [
             <Tag color={'geekblue'}>
                 {moment(data).format("DD-MM-YYYY hh:mm")}
             </Tag>
+        )
+    },
+    {
+        title : 'CONTROLS',
+        dataIndex : 'createdAt',
+        key:'createdAt',
+        render : (data,row)=>(
+            <>
+                <Link to={`/dashboard/profile/${row._id}`}>Edit</Link>
+            </>
         )
     }
 ]

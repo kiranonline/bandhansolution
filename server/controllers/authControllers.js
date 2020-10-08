@@ -5,7 +5,7 @@ const saltRounds = 10;
 const JWT_KEY = process.env.JWT_SECRET_KEY;
 // for requesting
 const fetch = require('node-fetch');
-
+const mongoose = require("mongoose");
 //kiran
 
 //++++++++++++++++++++++++++++++++++++++ Login with email id and password +++++++++++++++++++++++++++++++++++++
@@ -247,4 +247,108 @@ exports.getUserDetails = (req,res,next)=>{
         message : "user details fetched",
         data : req.user
     })    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//++++++++++++++++++++++++++++++++ get profile details +++++++++++++++++++++++++++++++++++++++
+exports.getProfileDetails = async(req,res,next)=>{
+    try{
+        var user;
+        let _id = req.query._id;
+        if(req.user.userType==='admin' || req.user._id==_id){
+            user = await User.findOne({
+                isActive:true,
+                _id:_id
+            })
+            if(user){
+                res.json({
+                    status:true,
+                    message:"profile data fetched",
+                    data:user
+                })
+            }
+            else{
+                res.json({
+                    status:false,
+                    message:"invalid user id"
+                })
+            }
+        }
+        else{
+            res.json({
+                status:false,
+                message:"you can not fetch details of othe users"
+            })
+        }  
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    } 
+}
+
+
+
+
+//++++++++++++++++++++++++++++++++ get profile details +++++++++++++++++++++++++++++++++++++++
+exports.updateProfile = async(req,res,next)=>{
+    try{
+        let {name,email,phoneNumber,avatar,deliverTo,_id} = req.body;
+        if(req.user.userType==='admin' || req.user._id==_id){
+            let existingUser = await User.findOne({
+                $or:[{email:req.body.email},{phoneNumber:req.body.phoneNumber}],
+                _id : {
+                    $ne : mongoose.Types.ObjectId(_id)
+                }
+            })
+            if(existingUser){
+                res.json({
+                    status:false,
+                    message:"duplicate email or phone"
+                })
+            }
+            else{
+                let updatedUser = await User.findByIdAndUpdate(_id,
+                    {
+                        name,email,phoneNumber,avatar,deliverTo
+                    },
+                    {
+                        new:true
+                    }
+                )
+                console.log(updatedUser);
+                res.json({
+                    status:true,
+                    message:"user updated"
+                })
+            }
+        }
+        else{
+            res.json({
+                status:false,
+                message:"you can not change others profile"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    } 
 }
