@@ -18,7 +18,7 @@ function Header(props) {
                 <Col>
                     <Row gutter={20} align="middle">
                         <Col>
-                            <Link to="/dashboard">
+                            <Link to="/admin/dashboard">
                                 LOGO
                             </Link>
                         </Col>

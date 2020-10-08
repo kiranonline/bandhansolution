@@ -94,7 +94,7 @@ function UserCreate(props) {
                 className="site-page-header-responsive"
                 title="Create Users"
                 subTitle="Add new User"
-                extra={[<Link to="/dashboard/user/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>List Users</Button></Link>]}                
+                extra={[<Link to="/admin/dashboard/user/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>List Users</Button></Link>]}                
             />
             <div className="user-create-from padding-after-page-header" >
                 <Form

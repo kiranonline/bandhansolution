@@ -67,7 +67,7 @@ function UserList(props) {
                 className="site-page-header-responsive"
                 title="All Users"
                 subTitle="List all Users"
-                extra={[<Link to="/dashboard/user/create" key="1"><Button key="1" type="primary"  icon={<PlusCircleOutlined />}>Create User</Button></Link>]}                
+                extra={[<Link to="/admin/dashboard/user/create" key="1"><Button key="1" type="primary"  icon={<PlusCircleOutlined />}>Create User</Button></Link>]}                
             />
             <div className="user-list padding-after-page-header" >
                 <Table 

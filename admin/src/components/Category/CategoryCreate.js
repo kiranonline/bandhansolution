@@ -47,7 +47,7 @@ function CategoryCreate(props) {
                 className="site-page-header-responsive"
                 title="Create Category"
                 subTitle="Add new Category"
-                extra={[<Link to="/dashboard/category/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>List Categories</Button></Link>]}                
+                extra={[<Link to="/admin/dashboard/category/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>List Categories</Button></Link>]}                
             />
             <div className="category-create-from padding-after-page-header" >
                 <Form

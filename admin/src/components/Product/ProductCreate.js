@@ -170,7 +170,7 @@ function ProductCreate(props) {
                 className="site-page-header-responsive"
                 title="Create Product"
                 subTitle="Add new Product"
-                extra={[<Link to="/dashboard/product/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>List Products</Button></Link>]}                
+                extra={[<Link to="/admin/dashboard/product/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>List Products</Button></Link>]}                
             />
             <div className="product-create-from padding-after-page-header" >
                 <Form

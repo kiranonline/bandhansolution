@@ -64,7 +64,7 @@ function ProductListSeller(props) {
                 className="site-page-header-responsive"
                 title="All Products"
                 subTitle="List all products"
-                extra={[<Link to="/dashboard/product/create" key="1"><Button key="1" type="primary"  icon={<PlusCircleOutlined />}>Create Product</Button></Link>]}                
+                extra={[<Link to="/admin/dashboard/product/create" key="1"><Button key="1" type="primary"  icon={<PlusCircleOutlined />}>Create Product</Button></Link>]}                
             />
             <div className="product-list padding-after-page-header" >
                 <Table 

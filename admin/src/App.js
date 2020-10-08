@@ -23,17 +23,17 @@ let App = (props)=>{
             <Loader />
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/">
-                        <Redirect to={{pathname: "/dashboard"}}/>
+                    <Route exact path="/admin">
+                        <Redirect to={{pathname: "/admin/dashboard"}}/>
                     </Route>
-                    <LoginWrapper exact={true} path="/login">
+                    <LoginWrapper exact={true} path="/admin/login">
                         <Login />
                     </LoginWrapper>
-                    <PrivateRoute path="/dashboard">
+                    <PrivateRoute path="/admin/dashboard">
                         <DashboardWrapper />
                     </PrivateRoute>
                     <Route>
-                        <Redirect to="/" />
+                        <Redirect to="/admin" />
                     </Route>
                 </Switch>
             </BrowserRouter>

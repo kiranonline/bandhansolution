@@ -60,7 +60,7 @@ const columns = [
     {
         title : "Operations",
         render : (data)=>(
-            <Link to={`/dashboard/product/details/${data.productId}`}>
+            <Link to={`/admin/dashboard/product/details/${data.productId}`}>
                 <Button type="default">Details</Button>            
             </Link>
         )
