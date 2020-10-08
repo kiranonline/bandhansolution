@@ -36,7 +36,7 @@ const columns = [
         key:'createdAt',
         render : (data,row)=>(
             <>
-                <Link to={`/dashboard/profile/${row._id}`}>Edit</Link>
+                <Link to={`/admin/dashboard/profile/${row._id}`}>Edit</Link>
             </>
         )
     }

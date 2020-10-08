@@ -13,7 +13,7 @@ function PrivateRoute({ children,Auth, ...rest }) {
                 ) : (
                 <Redirect
                     to={{
-                        pathname: "/login",
+                        pathname: "/admin/login",
                         state: { from: location }
                     }}
                 />

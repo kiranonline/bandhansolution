@@ -57,7 +57,7 @@ function ProductDetailsAdmin(props) {
                 className="site-page-header-responsive"
                 title="Product Details"
                 subTitle={productDetails?productDetails.name:""}
-                extra={[<Link to="/dashboard/product/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>Product Lists</Button></Link>]}                
+                extra={[<Link to="/admin/dashboard/product/list" key="1"><Button key="1" type="primary"  icon={<UnorderedListOutlined />}>Product Lists</Button></Link>]}                
             />
             <div className="product-details-inner padding-after-page-header" >
                 <ProductDetailsCommon productDescription={productDescription} productDetails={productDetails}/>

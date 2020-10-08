@@ -38,28 +38,28 @@ function Dashboard(props) {
                             props.Auth.userdetails.userType && props.Auth.userdetails.userType==='admin'?
                             <div className="dashboard-content-inner">
                                 <Switch>
-                                    <Route exact={true} path="/dashboard/user/list">
+                                    <Route exact={true} path="/admin/dashboard/user/list">
                                         <UserList />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/user/create">
+                                    <Route exact={true} path="/admin/dashboard/user/create">
                                         <UserCreate />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/category/create">
+                                    <Route exact={true} path="/admin/dashboard/category/create">
                                         <CategoryCreate />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/category/list">
+                                    <Route exact={true} path="/admin/dashboard/category/list">
                                         <CategoryList />
                                     </Route> 
-                                    <Route exact={true} path="/dashboard/product/create">
+                                    <Route exact={true} path="/admin/dashboard/product/create">
                                         <ProductCreate />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/product/list">
+                                    <Route exact={true} path="/admin/dashboard/product/list">
                                         <ProductListAdmin />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/product/details/:id">
+                                    <Route exact={true} path="/admin/dashboard/product/details/:id">
                                         <ProductDetailsAdmin />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/profile/:id">
+                                    <Route exact={true} path="/admin/dashboard/profile/:id">
                                         <MyProfile />
                                     </Route>
                                 </Switch>
@@ -67,13 +67,13 @@ function Dashboard(props) {
                             :
                             <div className="dashboard-content-inner">
                                 <Switch>
-                                    <Route path="/dashboard/product/list">
+                                    <Route path="/admin/dashboard/product/list">
                                         <ProductListSeller />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/product/details/:id">
+                                    <Route exact={true} path="/admin/dashboard/product/details/:id">
                                         <ProductDetailsSeller />
                                     </Route>
-                                    <Route exact={true} path="/dashboard/profile/:id">
+                                    <Route exact={true} path="/admin/dashboard/profile/:id">
                                         <MyProfile />
                                     </Route>
                                 </Switch>

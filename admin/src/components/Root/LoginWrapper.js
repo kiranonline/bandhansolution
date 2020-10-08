@@ -16,7 +16,7 @@ function LoginWrapper({ children,Auth, ...rest }) {
                 (
                     <Redirect
                         to={{
-                            pathname: "/dashboard"
+                            pathname: "/admin/dashboard"
                         }}
                     />
                 )

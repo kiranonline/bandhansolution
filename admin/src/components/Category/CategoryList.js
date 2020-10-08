@@ -59,7 +59,7 @@ function CategoryList(props) {
                 className="site-page-header-responsive"
                 title="All Categories"
                 subTitle="List all Categories"
-                extra={[<Link to="/dashboard/category/create" key="1"><Button key="1" type="primary"  icon={<PlusCircleOutlined />}>Create Category</Button></Link>]}                
+                extra={[<Link to="/admin/dashboard/category/create" key="1"><Button key="1" type="primary"  icon={<PlusCircleOutlined />}>Create Category</Button></Link>]}                
             />
             <div className="category-list padding-after-page-header" >
                 <Table 
