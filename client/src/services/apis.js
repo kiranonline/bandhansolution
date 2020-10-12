@@ -35,6 +35,7 @@ const apis = {
     PLACE_ORDERS: "/apis/v1/user/place-order-actual",
     GET_ORDERS: "/apis/v1/user/get-orders",
     CANCEL_ORDER: "/apis/v1/user/cancel-order",
+    ORDER_DETAILS:"/apis/v1/order/details",
 };
 
 export default apis;

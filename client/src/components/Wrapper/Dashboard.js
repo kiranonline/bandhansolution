@@ -753,8 +753,9 @@ function Dashboard(props) {
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                            
-                                                <h3><strong>Total Cost: </strong> ₹{order.totalCost}</h3>
+                                                <Link to={`/order/${order._id}`}><button className="btn btn-success">Details</button></Link>
+                                                
+                                                {/* <h3><strong>Total Cost: </strong> ₹{order.totalCost}</h3> */}
                                                 {
                                                     order.currentStatus === "cancelled" || order.currentStatus === "delivered" ? 
                                                     ""

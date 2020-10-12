@@ -8,6 +8,7 @@ import CheckoutComponent from "../Checkout/CheckoutComponent";
 import { logout, setUserDetails } from "../../actions/authAction"; 
 import Dashboard from '../Wrapper/Dashboard';
 import OrderSuccessful from '../Checkout/OrderSuccessful';
+import OrderDetails from "../Order/OrderDetails"
 
 function PrivateComponents(props) {
 
@@ -25,6 +26,9 @@ function PrivateComponents(props) {
                     </Route> 
                     <Route exact={true} path="/order-success">
                         <OrderSuccessful location={props.location}/>
+                    </Route>   
+                    <Route exact={true} path="/order/:id">
+                        <OrderDetails/>
                     </Route>                
                 </Switch>
             {/* } */}
