@@ -32,7 +32,7 @@ const apis = {
     AVAILABLE_FOR_CART: "/apis/v1/user/available-for-cart",
 
 
-    PLACE_ORDERS: "/apis/v1/user/place-order",
+    PLACE_ORDERS: "/apis/v1/user/place-order-actual",
     GET_ORDERS: "/apis/v1/user/get-orders",
     CANCEL_ORDER: "/apis/v1/user/cancel-order",
 };

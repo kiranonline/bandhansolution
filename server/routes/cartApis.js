@@ -2,7 +2,7 @@ const express = require("express");
 const {body} = require("express-validator");
 const {isAuthenticated} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
-const { addtocart, updatecart, fetchcart, removecartitem, availableForCart, placeOrder, getOrder, cancelOrder, deleteOrder } = require("../controllers/cartController");
+const { placeOrderActual, addtocart, updatecart, fetchcart, removecartitem, availableForCart, placeOrder, getOrder, cancelOrder, deleteOrder } = require("../controllers/cartController");
 const router = express.Router();
 
 
@@ -43,5 +43,8 @@ router.post("/user/cancel-order",isAuthenticated,[
 router.post("/user/delete-order",[
     body("orderId").not().isEmpty()
 ],errorHandler, deleteOrder)
+
+
+router.post("/user/place-order-actual",isAuthenticated, placeOrderActual)
 
 module.exports = router;

@@ -16,6 +16,8 @@ import MyProfile from "../Profile/MyProfile"
 
 import ProductListSeller from "../Product/ProductListSeller";
 import ProductDetailsSeller from "../Product/ProductDetailsSeller";
+import OrderListSeller from "../Order/OrderList";
+import OrderDetails from "../Order/OrderDetails"
 
 
 function Dashboard(props) {
@@ -72,6 +74,12 @@ function Dashboard(props) {
                                     </Route>
                                     <Route exact={true} path="/admin/dashboard/product/details/:id">
                                         <ProductDetailsSeller />
+                                    </Route>
+                                    <Route exact={true} path="/admin/dashboard/orders">
+                                        <OrderListSeller />
+                                    </Route>
+                                    <Route exact={true} path="/admin/dashboard/order/details/:id">
+                                        <OrderDetails />
                                     </Route>
                                     <Route exact={true} path="/admin/dashboard/profile/:id">
                                         <MyProfile />

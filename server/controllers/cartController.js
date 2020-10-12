@@ -10,6 +10,7 @@ const { update } = require("../models/Stock");
 exports.availableForCart = async(req, res, next) => {
     try{
         const product_id = req.body.product_id;
+        const qty = req.body.qty || 1;
         const pincode = req.body.pincode ? req.body.pincode : req.user.defaultAddress.pincode;
         // console.log(user_id);
 
@@ -20,7 +21,7 @@ exports.availableForCart = async(req, res, next) => {
         let match_2={};
 
         match_1.product = mongoose.Types.ObjectId(product_id);
-        match_1.stock = {$gt:0};
+        match_1.stock = {$gte:qty};
 
         lookup.from = "users";
         lookup.localField = "seller";
@@ -40,6 +41,7 @@ exports.availableForCart = async(req, res, next) => {
         // console.log(query);
 
         let seller = await Stock.aggregate(query);
+        console.log(match_1,seller)
         if(seller.length>0){
             res.json({
                 status: true,
@@ -401,4 +403,121 @@ exports.removecartitem = async(req,res,next)=>{
         })
     }
 
+}
+
+
+
+exports.placeOrderActual = async(req,res) => {
+    try{
+        let user_id = req.user._id;
+        const pincode = req.user.defaultAddress.pincode;
+        let myCart = await Cart.findOne({
+            user : user_id
+        }).populate("cart.product")
+        console.log(myCart)
+        if(myCart && myCart.cart.length>0){
+            let arr = myCart.cart.map((ele)=>{
+                const product_id = ele.product._id;
+                const qty = ele.count;
+                let match_1={};
+                let lookup={};
+                match_1.product = mongoose.Types.ObjectId(product_id);
+                match_1.stock = {$gte:qty};
+                lookup.from = "users";
+                lookup.localField = "seller";
+                lookup.foreignField = "_id";
+                lookup.as = "seller_details";
+                const query = [
+                    {$match:match_1},
+                    {$lookup:lookup},
+                    {$unwind:"$seller_details"},
+                    {$match:{
+                        "seller_details.deliverTo":{$in:[pincode]}
+                    }}            
+                ]
+                return Stock.aggregate(query);
+            })
+            let isInStock = await Promise.all(arr);
+            let isPossible=true;
+            let stockToDeduct=[];
+            let deductQuequ=[]
+            
+            isInStock.forEach((ele,i)=>{
+                console.log(ele)
+                if(ele && Array.isArray(ele) && ele.length>0){
+                    stockToDeduct.push(ele[0]);
+                }
+                else{
+                    isPossible = (isPossible && false)
+                }
+            })
+            if(isPossible){
+                let newOrder = {
+                    user : req.user._id,
+                    currentStatus:"placed",
+                    address : req.user.defaultAddress
+                }
+                let totalCoast=0;
+                let items=[];
+                console.log("stocks to deduct",stockToDeduct)
+                stockToDeduct.forEach((ele,i)=>{
+                    deductQuequ.push(Stock.findByIdAndUpdate(ele._id,{
+                        $inc : { stock : (-1*myCart.cart[i].count) } 
+                    }))
+                    let iii={
+                        product : ele.product,
+                        count : myCart.cart[i].count,
+                        seller : ele.seller,
+                        stock : ele._id,
+                        status : [{
+                            name : "placed",
+                            date : new Date(),
+                            remark : "Order placed sucessfully."
+                        }]
+                    }
+                    if(myCart.cart[i].product.salePrice && !isNaN(myCart.cart[i].product.salePrice)){
+                        iii.totalPrice = myCart.cart[i].count*myCart.cart[i].product.salePrice;
+                        iii.unitPrice = myCart.cart[i].product.salePrice
+                        totalCoast += (myCart.cart[i].count*myCart.cart[i].product.salePrice)
+                    }
+                    else{
+                        iii.totalPrice = myCart.cart[i].count*myCart.cart[i].product.regularPrice;
+                        iii.unitPrice = myCart.cart[i].product.regularPrice
+                        totalCoast += (myCart.cart[i].count*myCart.cart[i].product.regularPrice)
+                    }
+                    
+                    items.push(iii)
+                })
+                newOrder.items = items;
+                let ord = new Order(newOrder)
+                myCart.cart=[]
+                let queryQueue = [ord.save(),...deductQuequ,myCart.save()]
+                await Promise.all(queryQueue)
+                res.json({
+                    status:true,
+                    message:"order created",
+                    data:newOrder
+                })
+            }
+            else{
+                res.json({
+                    status:false,
+                    message:"unable to place order"
+                })
+            }
+        }
+        else{
+            res.json({
+                status:false,
+                message:"unable to place order, empty cart"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).status({
+            status: false,
+            message: "Not Created!"
+        })
+    }
 }

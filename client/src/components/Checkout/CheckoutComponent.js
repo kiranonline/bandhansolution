@@ -91,27 +91,26 @@ function CheckoutComponent(props) {
     const checkAvailibility = () => {
         let status = [];
         let flag = 0;
-
-        cartDetails.forEach(e => {
-            http.post(apis.AVAILABLE_FOR_CART, {product_id: e.product})
-                .then(res => {
-                    if(res.data.status){
-                        status.push(true)
-                    }
-                    else{
-                        status.push(false)
-                        flag = 1;
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                    status.push(false);
-                })
-                .finally(() => {
-                    setStatusList(status);
-                    if(flag === 1) isOrderPlaceable(false)
-                    else isOrderPlaceable(true)
-                })
+        console.log("cart details",cartDetails);
+        let arr = cartDetails.map((e,i)=>http.post(apis.AVAILABLE_FOR_CART, {product_id: e.product,qty:e.count}))
+        Promise.all(arr).then((res)=>{
+            
+            res.forEach((elel)=>{
+                if(elel.data.status){
+                    status.push(true)
+                }
+                else{
+                    status.push(false)
+                    flag = 1;
+                }
+            })
+        }).catch((er)=>{
+            console.log(er);
+            status = arr.map((e)=>false)
+        }).finally(() => {
+            setStatusList(status);
+            if(flag === 1) isOrderPlaceable(false)
+            else isOrderPlaceable(true)
         })
     }
 
@@ -206,31 +205,7 @@ function CheckoutComponent(props) {
     }   
 
     const placeOrder = () => {
-
-        console.log(props.Auth.userdetails.defaultAddress)
-
-        let newDetails = cartDetails.map((e,i) => {
-            return {
-                ...e, 
-                status: [{
-                    name: "Placed",
-                    date: Date.now(),
-                    remark: "Your item purchase was successfully placed" 
-                }],
-                price: products[i].salePrice ? products[i].salePrice * e.count : products[i].regularPrice * e.count
-            }
-        })
-
-        console.log(newDetails);
-
-        const obj = {
-            cart: newDetails,
-            totalCost: total,
-            cart_id,
-            address: props.Auth.userdetails.defaultAddress
-        }
-
-        http.post(apis.PLACE_ORDERS, obj)
+        http.post(apis.PLACE_ORDERS,)
             .then(res => {
                 console.log(res.data)
                 if(res.data.status){

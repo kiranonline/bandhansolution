@@ -65,11 +65,18 @@ export const SellerSideBar = (props)=>(
             </Link>
         </Menu.Item>
         <Menu.Item  key="33">
+            <Link to={ `/admin/dashboard/orders`}>
+                <ShoppingCartOutlined />
+                <span>ORDERS</span>
+            </Link>
+        </Menu.Item>
+        <Menu.Item  key="34">
             <Link to={ `/admin/dashboard/profile/${props.user?props.user._id:""}`}>
                 <UserOutlined />
                 <span>PROFILE</span>
             </Link>
         </Menu.Item>
+        
     </Menu>
 )
 

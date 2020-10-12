@@ -27,7 +27,14 @@ const apis = {
 
     LIST_PRODUCT_FOR_SELLER : "/apis/v1/product/listforseller",
     PRODUCT_DETAILS_FOR_SELLER : "/apis/v1/product/detailsforseller",
-    UPDATE_PRODUCT_STOCK_SELLER : '/apis/v1/product/stock/updatebyseller'
+    UPDATE_PRODUCT_STOCK_SELLER : '/apis/v1/product/stock/updatebyseller',
+
+
+
+
+    GET_ORDERS_LIST:"/apis/v1/seller/get-my-orders",
+    ORDER_DETAILS:"/apis/v1/order/details",
+    UPDATE_ORDER_STATUS:"/apis/v1/order/update-status-details"
     
 };
 
