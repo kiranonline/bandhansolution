@@ -1,0 +1,98 @@
+Arguments: 
+  /home/kiran_online/.nvm/versions/node/v12.13.0/bin/node /usr/share/yarn/bin/yarn.js add @types/react-star-ratings
+
+PATH: 
+  /home/kiran_online/.nvm/versions/node/v12.13.0/bin:/home/kiran_online/anaconda3/bin:/home/kiran_online/anaconda3/condabin:/home/kiran_online/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/kiran_online/Android/Sdk/emulator:/home/kiran_online/Android/Sdk/tools:/home/kiran_online/Android/Sdk/tools/bin:/home/kiran_online/Android/Sdk/platform-tools
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  12.13.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@types%2freact-star-ratings: Not found
+      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66947:18)
+      at Request.self.callback (/usr/share/yarn/lib/cli.js:140665:22)
+      at Request.emit (events.js:210:5)
+      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141637:10)
+      at Request.emit (events.js:210:5)
+      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141559:12)
+      at Object.onceWrapper (events.js:299:28)
+      at IncomingMessage.emit (events.js:215:7)
+      at endReadableNT (_stream_readable.js:1183:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+
+npm manifest: 
+  {
+    "name": "Bandhan",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+      "@capacitor/android": "^2.4.0",
+      "@capacitor/core": "2.4.0",
+      "@ionic/react": "^5.0.7",
+      "@ionic/react-router": "^5.0.7",
+      "@testing-library/jest-dom": "^4.2.4",
+      "@testing-library/react": "^9.4.0",
+      "@testing-library/user-event": "^8.0.3",
+      "@types/axios": "^0.14.0",
+      "@types/jest": "^24.0.25",
+      "@types/node": "^12.12.24",
+      "@types/react": "^16.9.17",
+      "@types/react-dom": "^16.9.4",
+      "@types/react-redux": "^7.1.9",
+      "@types/react-router": "^5.1.4",
+      "@types/react-router-dom": "^5.1.3",
+      "@types/redux-logger": "^3.0.8",
+      "axios": "^0.20.0",
+      "ionicons": "^5.0.0",
+      "react": "^16.13.0",
+      "react-dom": "^16.13.0",
+      "react-hook-form": "^6.6.0",
+      "react-otp-input": "^2.0.2",
+      "react-redux": "^7.2.1",
+      "react-router": "^5.1.2",
+      "react-router-dom": "^5.1.2",
+      "react-scripts": "3.4.0",
+      "react-star-ratings": "^2.3.0",
+      "redux": "^4.0.5",
+      "redux-logger": "^3.0.6",
+      "redux-thunk": "^2.3.0",
+      "typescript": "3.8.3"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build && ionic capacitor sync",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "devDependencies": {
+      "@capacitor/cli": "2.4.0"
+    },
+    "description": "An Ionic project"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

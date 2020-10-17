@@ -1,0 +1,9 @@
+server/node_modules
+client/node_modules
+
+admin/node_modules
+admin/build
+
+Bandhan/node_modules
+Bandhan/android
+Bandhan/build

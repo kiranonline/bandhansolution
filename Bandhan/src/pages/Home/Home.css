@@ -1,0 +1,17 @@
+.custom-header{
+    --background: #a4c639;
+}
+.custom-heading-text{
+    color: #fff;
+}
+.homepage-slider{
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+.homepage-main-text-trending, .homepage-main-text-latest{
+    width: 100%;
+    text-align: center;
+}
+.homepage-main-text-latest{
+    margin-top: 20px;
+}
