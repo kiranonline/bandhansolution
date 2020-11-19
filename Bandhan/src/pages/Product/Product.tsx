@@ -10,6 +10,8 @@ import apis from "../../services/apis";
 import { openToast, loading } from "../../actions/loadingAction";
 import ProductImageSlide from "./ProductImageSlide";
 import { starOutline, star, cartOutline, arrowBack } from 'ionicons/icons';
+import { useIonViewWillEnter } from "@ionic/react";
+
 
 
 const Product: React.FC = (props: any) => {
@@ -43,9 +45,11 @@ const Product: React.FC = (props: any) => {
         })
     }
 
-    useEffect(()=>{
+
+    useIonViewWillEnter(() => {
         fetchProductDetails()
-    },[])
+    })
+
 
 
 

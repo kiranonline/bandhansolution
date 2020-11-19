@@ -151,13 +151,24 @@ function SingleProductComponent(props) {
                                 <h2 className="productpage-price">Price:&nbsp;
                                 {product.salePrice ? (
                                     <>
-                                    <span className='strikethrough text-danger'>Rs.{product.regularPrice}</span>&nbsp;
-                                    <span className="h4">Rs.{product.salePrice}</span>
+                                        <span className='strikethrough text-danger'>Rs.{product.regularPrice}</span>&nbsp;
+                                        <span className="h4">Rs.{product.salePrice}</span>
                                     </>
                                 ) :product.regularPrice
                                 || <Skeleton />
                                 }
+                                
                                 </h2>
+                                {product.properties ? (
+                                    <>
+                                        {product.properties.map((ele,i)=>(
+                                            <p key={i} style={{margin:'0px'}}>{ele.value} {ele.type}</p>
+                                        ))}
+                                    </>
+                                    
+                                ) : null
+                                || <Skeleton />
+                                }
                             </li>
                         </ul>
                         <hr className="my-2"/>

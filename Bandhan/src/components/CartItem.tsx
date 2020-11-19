@@ -15,14 +15,14 @@ export default function CartItem(props:any) {
                             <IonCol size="8">
                                 <h5 className="cart-item-name">{props.data.name}</h5>
                                 <h6 className="cart-item-unit-price">Unit Price : <span>&#8377;</span>{props.data.salePrice?props.data.salePrice:props.data.regularPrice}</h6>
-                                <h6 className="cart-item-unit-price">Total Price : <span>&#8377;</span>{props.data.salePrice?parseFloat(props.data.salePrice)*(props.cart.count):parseFloat(props.data.regularPrice)*(props.cart.count)}</h6>
+                                <h6 className="cart-item-unit-price">Total Price : <span>&#8377;</span>{props.data.salePrice?parseFloat(props.data.salePrice)*(props.cart?.count):parseFloat(props.data.regularPrice)*(props.cart?.count)}</h6>
                                 <div className="cart-item-controls">
                                     {
-                                        props.cart.count===1?null:
+                                        props.cart?.count===1?null:
                                         <IonButton onClick={()=>props.updateQty(props.cart._id,-1)} color="danger" size="small">-</IonButton>
 
                                     }
-                                    <IonButton color="light" size="small" disabled={true}>{props.cart.count}</IonButton>
+                                    <IonButton color="light" size="small" disabled={true}>{props.cart?.count}</IonButton>
                                     <IonButton onClick={()=>props.updateQty(props.cart._id,1)} color="success" size="small" >+</IonButton>
                                     <IonButton onClick={()=>props.deleteItem(props.cart._id)} color="danger" size="small">Remove</IonButton>
                                 </div>

@@ -8,17 +8,31 @@ const { update } = require("../models/Stock");
 
 exports.getMyOrders = async(req,res) => {
     try{
-        let query = {};
+        let query = [];
+        let q = [];
         let pageNumber = req.body.pageNumber || 1;
         let pageSize = req.body.pageSize || 50;
         pageNumber = parseInt(pageNumber);
         pageSize = parseInt(pageSize);
-        query=[
-            {
+        let sellerId = req.body.sellerId;
+        console.log(req.user.userType)
+        if(req.user.userType==='admin'){
+            console.log("in admin",sellerId)
+            q = [{
+                $match:{
+                    "items.seller" : mongoose.Types.ObjectId(sellerId)
+                }
+            }]
+        }
+        else{
+            q = [{
                 $match:{
                     "items.seller" : mongoose.Types.ObjectId(req.user._id)
                 }
-            },
+            }]
+        }
+        console.log(q)
+        query=[...q,
             {
                 $sort:{
                     "createdAt":-1
@@ -47,11 +61,7 @@ exports.getMyOrders = async(req,res) => {
         ];
         let [orders,total] = await Promise.all([
             Order.aggregate(query),
-            Order.aggregate([{
-                $match:{
-                    "items.seller" : mongoose.Types.ObjectId(req.user._id)
-                }
-            }])
+            Order.aggregate(q)
         ]) ;
         if(orders){
             res.json({
@@ -77,6 +87,7 @@ exports.getMyOrders = async(req,res) => {
 
 
 exports.getOrderDetails = async(req,res) => {
+    console.log("order details")
     try{
         let orderId = req.params.id;
         let order = await Order.findById(orderId).populate("user").populate("items.seller").populate("items.product")
@@ -105,12 +116,29 @@ exports.updateOrderStatus = async(req,res) => {
         if(order){
             order.items.forEach((ele,i)=>{
                 console.log(ele._id.toString(),"===",subOrderId,"      ",ele.seller,"=>",req.user._id)
-                if(ele._id.toString()==subOrderId && ele.seller.toString()==req.user._id){
-                    order.items[i].status.push({
-                        name : status,
-                        date:new Date(),
-                        remark:description
-                    })
+                // if(ele._id.toString()==subOrderId && ele.seller.toString()==req.user._id){
+                //     order.items[i].status.push({
+                //         name : status,
+                //         date:new Date(),
+                //         remark:description
+                //     })
+                // }
+                if(ele._id.toString()==subOrderId){
+                    if(req.user.userType==='admin'){
+                        order.items[i].status.push({
+                            name : status,
+                            date:new Date(),
+                            remark:description
+                        })
+                    }
+                    else if(ele.seller.toString()==req.user._id){
+                        order.items[i].status.push({
+                            name : status,
+                            date:new Date(),
+                            remark:description
+                        })
+                    }
+                    
                 }
                 console.log(order.items[i].status)
             })

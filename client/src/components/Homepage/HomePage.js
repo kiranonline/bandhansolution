@@ -34,7 +34,7 @@ function HomePage() {
         <div className="d-flex align-items-stretch justify-content-center flex-wrap">
           {
             highlighProducts
-              .map(product => <NewProduct key={product.id} product={product} />)
+              .map(product => <NewProduct key={product._id} product={product} />)
           }
         </div>
 
@@ -47,7 +47,7 @@ function HomePage() {
           <div className="d-flex align-items-stretch justify-content-center flex-wrap">
             {
               newProducts
-                .map(product => <NewProduct key={product.id} product={product} />)
+                .map(product => <NewProduct key={product._id} product={product} />)
             }
           </div>
         </div>

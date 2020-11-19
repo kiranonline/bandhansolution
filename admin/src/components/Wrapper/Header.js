@@ -9,6 +9,7 @@ import {
 import {Link} from "react-router-dom";
 import { logout } from "../../actions/authAction"; 
 import {connect} from "react-redux";
+import brandLogo from "../../static/brand-logo.png"
 
 
 function Header(props) {
@@ -19,7 +20,7 @@ function Header(props) {
                     <Row gutter={20} align="middle">
                         <Col>
                             <Link to="/admin/dashboard">
-                                LOGO
+                                <img src={brandLogo} style={{height:'50px'}}/>
                             </Link>
                         </Col>
                         <Col className="header-brand-name-wrapper">

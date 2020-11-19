@@ -1,5 +1,6 @@
 .product-description-back-button{
     --background : #fff;
+    color: #fff;
 }
 .product-description-wrapper{
     padding:10px

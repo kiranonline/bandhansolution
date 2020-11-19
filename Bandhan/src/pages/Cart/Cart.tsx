@@ -1,5 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
 import React,{useState,useEffect} from 'react';
+import { useIonViewWillEnter } from "@ionic/react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/authAction";
 import { openToast, loading } from "../../actions/loadingAction";
@@ -7,11 +8,13 @@ import CartItem from "../../components/CartItem"
 import apis from '../../services/apis';
 import http from '../../services/httpCall';
 import './Cart.css';
+import { useHistory } from 'react-router-dom';
 
 const Cart: React.FC = (props: any) => {
-    const [cartItems,setcartItems]:[any,any] = useState([undefined,undefined,undefined,undefined]);
+    const [cartItems,setcartItems]:[any,any] = useState([undefined,undefined,undefined,undefined,undefined]);
     const [cartCounts,setCartCounts]:[any,any] = useState([0,0,0,0])
-    const [cartId,setCartId]:[any,any]=useState()
+    const [cartId,setCartId]:[any,any]=useState();
+    const history = useHistory();
 
     const fetchCartData = ()=>{
         props.loading(true)
@@ -24,6 +27,7 @@ const Cart: React.FC = (props: any) => {
             }
             else{
                 props.openToast(result.data.message)
+                setcartItems([])
             }
         }).catch(err=>{
             console.log(err)
@@ -34,9 +38,10 @@ const Cart: React.FC = (props: any) => {
     }
 
 
-    useEffect(()=>{
+    useIonViewWillEnter(() => {
+        setcartItems([undefined,undefined,undefined,undefined,undefined])
         fetchCartData()
-    },[])
+    });
 
     const updateQty = (id:any, amount:number) => {
         let x = cartCounts.map((item:any) => {
@@ -75,6 +80,10 @@ const Cart: React.FC = (props: any) => {
         })
     }
 
+    const goToCheckout = ()=>{
+        history.push("/secure/checkout")
+    }
+
 
     return (
         <IonPage>
@@ -84,10 +93,22 @@ const Cart: React.FC = (props: any) => {
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                {cartItems.map((ele:any,i:any)=>(
-                    <CartItem deleteItem={deleteItem} updateQty={updateQty} key={i} data={ele} cart={cartCounts[i]}/>
-                ))}
-                <IonButton className="checkout-button" expand="full">CHECKOUT</IonButton>
+                {cartItems.length===0?
+                    <div style={{width:"100%",textAlign:"center"}}>
+                        <h1>Your cart is empty!</h1>
+                        <h4>How about some shopping</h4>
+                    </div>
+                    :
+                    <div >
+                        {cartItems.map((ele:any,i:any)=>(
+                            <CartItem deleteItem={deleteItem} updateQty={updateQty} key={i} data={ele} cart={cartCounts.find((e:any)=>e.product==ele?._id)}/>
+                        ))}
+                        {cartItems.length>0 && cartItems[0] && <IonButton onClick={goToCheckout} className="checkout-button" expand="full">CHECKOUT</IonButton> }
+                        
+                    </div>
+                }
+                
+                
             </IonContent>
         </IonPage>
     );

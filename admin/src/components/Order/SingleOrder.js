@@ -78,6 +78,7 @@ function SubOrder(props) {
                 <Descriptions.Item label="Ordered Quantity">{props.data.count}</Descriptions.Item>
                 <Descriptions.Item label="Unit Price">{props.data.unitPrice}</Descriptions.Item>
                 <Descriptions.Item label="Total Price">{props.data.totalPrice}</Descriptions.Item>
+                <Descriptions.Item label="Seller Name">{props.data.seller.name}</Descriptions.Item>
             </Descriptions>
             <div className="status-tracker">
                 <Timeline mode="left">

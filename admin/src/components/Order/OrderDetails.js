@@ -27,14 +27,19 @@ function OrderDetails(props) {
             console.log(result.data)
             if(result.data.status){
                 setOrderDetails(result.data.data);
-                let ords =[];
-                result.data.data.items.forEach(ele=>{
-                    if(ele.seller._id==result.data.userId){
-                        ords.push(ele)
-                    }
-                })
-                setMySubOrder(ords)
-                console.log("sub orders",ords)
+                if(props.Auth.userdetails.userType==='admin'){
+                    setMySubOrder(result.data.data.items)
+                }
+                else{
+                    let ords =[];
+                    result.data.data.items.forEach(ele=>{
+                        if(ele.seller._id==result.data.userId){
+                            ords.push(ele)
+                        }
+                    })
+                    setMySubOrder(ords)
+                    console.log("sub orders",ords)
+                }
             }
             else{
                 message.error(result.data.message)

@@ -6,7 +6,7 @@ import { Editor, EditorState, convertFromRaw } from "draft-js";
 const { Title } = Typography;
 
 
-export default function UpdateProductStockSeller(props) {
+export default function ProductDetailsCommon(props) {
     return (
         <Row gutter={16}>
             <Col span="8">
@@ -24,6 +24,9 @@ export default function UpdateProductStockSeller(props) {
                             <Title level={2}>{props.productDetails && props.productDetails.name}</Title>
                             {props.productDetails && <p className="regularPrice">Regular Price : {props.productDetails.regularPrice}</p>}
                             {props.productDetails && props.productDetails.salePrice && <p className="salePrice">Sale Price : {props.productDetails.salePrice}</p>}
+                            {props.productDetails && props.productDetails.properties && props.productDetails.properties.map((ele,i)=>(
+                                <p className="properties-single" key={i}>{ele.type} : {ele.value} </p>
+                            ))}
                         </Col>
                         <Col>
                             <Title level={4}>{props.productDetails && moment(props.productDetails.createdAt).format("DD-MM-YYYY")}</Title>

@@ -18,9 +18,9 @@ exports.createProduct = async(req,res,next)=>{
             images : req.body.images,
             regularPrice : req.body.regularPrice,
             salePrice : req.body.salePrice,
-            weight : req.body.weight,
             createdBy : req.user._id,
-            isActive : true
+            isActive : true,
+            properties:req.body.properties
         })
         console.log(product);
         let savedproduct = await product.save();
@@ -266,7 +266,8 @@ exports.productDetailsForSeller = async(req,res,next)=>{
                     "stockUpdated":"$updatedAt",
                     "category":1,
                     "stock":1,
-                    "description" : "$product.description"
+                    "description" : "$product.description",
+                    "properties":"$product.properties"
                 }
             }
         ])

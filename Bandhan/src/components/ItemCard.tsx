@@ -23,13 +23,13 @@ export default function ItemCard(props:any) {
                         <h6 className="itemName">
                             {props.data.name}
                         </h6>
-                        <div className="itemStars">
+                        {/* <div className="itemStars">
                             <IonIcon icon={star} className="item-star"/>
                             <IonIcon icon={star} className="item-star" />
                             <IonIcon icon={star} className="item-star" />
                             <IonIcon icon={starOutline} className="item-star" />
                             <IonIcon icon={starOutline} className="item-star" />
-                        </div>
+                        </div> */}
                         <div className="item-price-section">
                             {props.data.salePrice?
                                 <>

@@ -1,6 +1,7 @@
 import React,{ useState } from 'react';
 import {IonCard, IonModal, IonInput, IonHeader, IonItem,IonIcon, IonToolbar, IonButtons, IonButton, IonContent, IonTitle } from '@ionic/react';
 import {loading,openToast} from "../actions/loadingAction";
+import { setUserDetails } from "../actions/authAction"
 import {connect} from 'react-redux';
 import { useForm } from "react-hook-form";
 import { arrowBack } from 'ionicons/icons';
@@ -21,6 +22,19 @@ function AddressForm(props:any) {
         http.post(url,data).then((result)=>{
             console.log(result.data);
             props.openToast(result.data.message);
+            
+            http.get(apis.GET_USER_DETAILS).then((result)=>{
+                console.log(result);
+                if(result.data.status){
+                    props.setUserDetails(result.data.data);
+                }
+                else{
+                    props.logout();
+                }
+            }).catch((err)=>{
+                console.log(err);
+            })
+
             if(result.data.status){
                 props.closeModal();
             }
@@ -133,5 +147,6 @@ function AddressForm(props:any) {
 const mapStateToProps= (state:any) => ({})
 export default connect(mapStateToProps, { 
     loading,
-    openToast
+    openToast,
+    setUserDetails
 })(AddressForm);

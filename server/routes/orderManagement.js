@@ -11,7 +11,7 @@ const router = express.Router();
 
 
 //+++++++++++++++++++++++++++++++++++++++ create Product ++++++++++++++++++++++++++
-router.post(`/seller/get-my-orders`,isAuthenticated,isSeller,getMyOrders)
+router.post(`/seller/get-my-orders`,isAuthenticated,getMyOrders)
 
 
 router.get('/order/details/:id',isAuthenticated,getOrderDetails);
@@ -22,7 +22,7 @@ router.post('/order/update-status-details',[
     body("orderId").notEmpty() ,
     body("subOrderId").notEmpty(),
     body("status").notEmpty()
- ],errorHandler,isAuthenticated,isSeller,updateOrderStatus);
+ ],errorHandler,isAuthenticated,updateOrderStatus);
 
 
 
