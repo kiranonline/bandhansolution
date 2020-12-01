@@ -43,7 +43,10 @@ const ProductSchema = new mongoose.Schema({
         value:{
             type:String
         }
-    }]
+    }],
+    productVideo:{
+        type : String
+    }
 },{
     timestamps : true
 }) 

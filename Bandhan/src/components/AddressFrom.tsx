@@ -15,11 +15,13 @@ function AddressForm(props:any) {
 
     const onSubmit = (data:any)=>{
         let dataToSend = {...data};
+        delete dataToSend["l1"]
         console.log(data);
         props.loading(true);
         let url = props.modalMode==='edit'?apis.EDIT_ADDRESS:apis.ADD_ADDRESS;
         dataToSend.address_id = props.modalMode==='edit'?props.data._id:undefined;
-        http.post(url,data).then((result)=>{
+        console.log(dataToSend,url)
+        http.post(url,dataToSend).then((result)=>{
             console.log(result.data);
             props.openToast(result.data.message);
             
@@ -46,11 +48,29 @@ function AddressForm(props:any) {
         })
     }
 
+    React.useEffect(()=>{
+        console.log("from address from",props.data)
+        setValue('l1', props.data.lineone)
+        setValue('lineone', props.data.lineone)
+        setValue('locality', props.data.locality)
+        setValue('city', props.data.city)
+        setValue('district', props.data.district)
+        setValue('state', props.data.state)
+        setValue('country', props.data.country)
+        setValue('pincode', props.data.pincode)
+        setValue('lineone', props.data.lineone)
+    },[props.data])
+
+
+    
+    
+
 
     return (
         <IonModal 
             isOpen={props.isModalShowing}
             cssClass='add-address-modal'
+            
         >
             <IonContent>
                 <IonHeader className="ion-no-border">
@@ -64,6 +84,16 @@ function AddressForm(props:any) {
                     </IonToolbar>
                 </IonHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="address-add-form">
+                    <IonItem style={{display:"none"}}>
+                        <IonInput 
+                            placeholder="Address line 1" 
+                            type="text"
+                            name="l1"
+                            ref={register({
+                                required: false
+                            })}
+                        ></IonInput>
+                    </IonItem>
                     <IonItem className={"address-form-input" + (errors.lineone?" input-validation-error":"") }>
                         <IonInput 
                             placeholder="Address line 1" 

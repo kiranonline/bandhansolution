@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/admin/static/css/main.859bdebb.chunk.css",
-    "main.js": "/admin/static/js/main.b9c0dae3.chunk.js",
-    "main.js.map": "/admin/static/js/main.b9c0dae3.chunk.js.map",
+    "main.css": "/admin/static/css/main.706a94ac.chunk.css",
+    "main.js": "/admin/static/js/main.12e6ad1d.chunk.js",
+    "main.js.map": "/admin/static/js/main.12e6ad1d.chunk.js.map",
     "runtime-main.js": "/admin/static/js/runtime-main.725b2414.js",
     "runtime-main.js.map": "/admin/static/js/runtime-main.725b2414.js.map",
     "static/css/2.e3cf4cf6.chunk.css": "/admin/static/css/2.e3cf4cf6.chunk.css",
-    "static/js/2.f4afaf0e.chunk.js": "/admin/static/js/2.f4afaf0e.chunk.js",
-    "static/js/2.f4afaf0e.chunk.js.map": "/admin/static/js/2.f4afaf0e.chunk.js.map",
+    "static/js/2.0bcb399f.chunk.js": "/admin/static/js/2.0bcb399f.chunk.js",
+    "static/js/2.0bcb399f.chunk.js.map": "/admin/static/js/2.0bcb399f.chunk.js.map",
     "index.html": "/admin/index.html",
-    "precache-manifest.4e14f4af83913ed95eb438bd41bc33f8.js": "/admin/precache-manifest.4e14f4af83913ed95eb438bd41bc33f8.js",
+    "precache-manifest.18f4d40bf2169a2e2382b39df999d57e.js": "/admin/precache-manifest.18f4d40bf2169a2e2382b39df999d57e.js",
     "service-worker.js": "/admin/service-worker.js",
     "static/css/2.e3cf4cf6.chunk.css.map": "/admin/static/css/2.e3cf4cf6.chunk.css.map",
-    "static/css/main.859bdebb.chunk.css.map": "/admin/static/css/main.859bdebb.chunk.css.map",
-    "static/js/2.f4afaf0e.chunk.js.LICENSE.txt": "/admin/static/js/2.f4afaf0e.chunk.js.LICENSE.txt",
-    "static/media/brand-logo.png": "/admin/static/media/brand-logo.4b2ae729.png",
+    "static/css/main.706a94ac.chunk.css.map": "/admin/static/css/main.706a94ac.chunk.css.map",
+    "static/js/2.0bcb399f.chunk.js.LICENSE.txt": "/admin/static/js/2.0bcb399f.chunk.js.LICENSE.txt",
+    "static/media/brand-logo.png": "/admin/static/media/brand-logo.26748af0.png",
     "static/media/loader.gif": "/admin/static/media/loader.e6dcd181.gif",
     "static/media/login.less": "/admin/static/media/loginBg.b4668cd8.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.725b2414.js",
     "static/css/2.e3cf4cf6.chunk.css",
-    "static/js/2.f4afaf0e.chunk.js",
-    "static/css/main.859bdebb.chunk.css",
-    "static/js/main.b9c0dae3.chunk.js"
+    "static/js/2.0bcb399f.chunk.js",
+    "static/css/main.706a94ac.chunk.css",
+    "static/js/main.12e6ad1d.chunk.js"
   ]
 }

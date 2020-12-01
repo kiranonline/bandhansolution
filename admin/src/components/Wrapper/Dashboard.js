@@ -10,6 +10,7 @@ import UserCreate from "../Users/UserCreate";
 import CategoryCreate from "../Category/CategoryCreate";
 import CategoryList from "../Category/CategoryList";
 import ProductCreate from "../Product/ProductCreate";
+import ProductEdit from "../Product/ProductEdit"
 import ProductListAdmin from "../Product/ProductListAdmin";
 import ProductDetailsAdmin from "../Product/ProductDetailsAdmin";
 import MyProfile from "../Profile/MyProfile"
@@ -55,6 +56,9 @@ function Dashboard(props) {
                                     </Route> 
                                     <Route exact={true} path="/admin/dashboard/product/create">
                                         <ProductCreate />
+                                    </Route>
+                                    <Route exact={true} path="/admin/dashboard/product/edit/:id">
+                                        <ProductEdit />
                                     </Route>
                                     <Route exact={true} path="/admin/dashboard/product/list">
                                         <ProductListAdmin />

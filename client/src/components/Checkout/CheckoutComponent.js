@@ -318,7 +318,7 @@ function CheckoutComponent(props) {
                             <tbody>
                             {products.map((product,index)=>{
                                 let cd = cartDetails.find((e)=>e.product==product._id)
-                                retrun(
+                                return(
                                 <tr key={index} className={statusList[index] ? "" : "bg-warning" }>
                                     <td className="text-center"><Link to={`/product/${product._id}`}><img className="img-thumbnail" title="women's clothing" alt="product image" src={`${apis.BASE_SERVER_URL}${product.images[0]}`} width="100px" /></Link></td>
                                     

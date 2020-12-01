@@ -36,6 +36,13 @@ const apis = {
     GET_ORDERS: "/apis/v1/user/get-orders",
     CANCEL_ORDER: "/apis/v1/user/cancel-order",
     ORDER_DETAILS:"/apis/v1/order/details",
+
+
+
+
+
+    API_KEY_LOCATION_IQ : "pk.3677164e2f3425a36d5b009615e198a2",
+    API_KEY_OPEN_WEATHER : "092b62bb5b28a5a386dedaa38f48429b"
 };
 
 export default apis;

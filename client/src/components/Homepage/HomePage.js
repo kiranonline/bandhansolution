@@ -3,6 +3,7 @@ import Crousel from "./Crousel";
 import NewProduct from "./ProductCard";
 import http from "../../services/httpCall";
 import LatestNews from "./LatestNews";
+import WeatherWidget from "./WeatherWidget"
 
 
 function HomePage() {
@@ -11,6 +12,7 @@ function HomePage() {
   const [newProducts, setNewProducts] = useState([]);
   
   useEffect(() => {
+    console.log(navigator)
     http.get("/apis/v1/user/producthighlight/?limit=4&producttype=popular")
       .then(res => {
         console.log(res.data.data);
@@ -59,6 +61,8 @@ function HomePage() {
         </div>
       
         <LatestNews className="mt-6"/>
+
+        <WeatherWidget />
 
       {/* Each has 4 card component */}
       {/* product2 component  */}

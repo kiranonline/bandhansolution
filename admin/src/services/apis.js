@@ -20,6 +20,7 @@ const apis = {
 
 
     CREATE_PRODUCT : "/apis/v1/product/create",
+    EDIT_PRODUCT : "/apis/v1/product/edit",
     UPLOAD_PRODUCT_IMAGE : "/apis/v1/upload-product-image",
     LIST_PRODUCTS_FOR_ADMIN : "/apis/v1/product/listforadmin",
     PRODUCT_DETAILS_FOR_ADMIN : "/apis/v1/product/detailsofadmin",

@@ -3,6 +3,7 @@ const {body} = require("express-validator");
 const { 
     listProductsForAdmin, 
     createProduct, 
+    editProduct,
     productDetailsForAdmin, 
     listProductsForSeller,
     productDetailsForSeller,
@@ -19,6 +20,13 @@ router.post(`/product/create`,isAuthenticated,isAdmin,[
     body("name").not().isEmpty(),
     body("regularPrice").isNumeric()
 ],errorHandler,createProduct)
+
+
+//+++++++++++++++++++++++++++++++++++++++ create Product ++++++++++++++++++++++++++
+router.post(`/product/edit/:id`,isAuthenticated,isAdmin,[
+    body("name").not().isEmpty(),
+    body("regularPrice").isNumeric()
+],errorHandler,editProduct)
 
 //++++++++++++++++++++++++++++++++ List Products for admin++++++++++++++++++++++++++++++++++
 router.post('/product/listforadmin',isAuthenticated,isAdmin,listProductsForAdmin);

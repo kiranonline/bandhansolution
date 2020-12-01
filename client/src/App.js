@@ -16,7 +16,7 @@ import BrandHeader from './components/Homepage/BrandHeader';
 import NavbarHeader from './components/Homepage/NavbarHeader';
 import ProductListComponent from './components/Products/ProductListComponent';
 import SingleProductComponent from './components/Products/SingleProductComponent';
-
+import WhatsappButton from "./components/Extra/WhatsappButton"
 // import './App.css';
 
 
@@ -102,6 +102,8 @@ function App(props) {
                 </Switch>
             </BrowserRouter>
             <Footer />
+            <WhatsappButton />
+
         </React.Fragment>
   );
 }

@@ -55,9 +55,15 @@ const columns = [
     {
         title : "Operations",
         render : (data)=>(
-            <Link to={`/admin/dashboard/product/details/${data._id}`}>
-                <Button type="default">Details</Button>            
-            </Link>
+            <>
+                <Link to={`/admin/dashboard/product/details/${data._id}`}>
+                    <Button type="default">Details</Button>            
+                </Link>
+                <Link to={`/admin/dashboard/product/edit/${data._id}`}>
+                    <Button type="default">Edit</Button>            
+                </Link>
+            </>
+            
         )
     }
 ]

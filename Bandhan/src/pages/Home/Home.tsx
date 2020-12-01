@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton } from '@ionic/react';
 import React from 'react';
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom';
@@ -7,7 +7,8 @@ import HomePageSlide from "../../components/HomePageSlide";
 import HomePageTrending from "../../components/HomePageTrending";
 import HomePageLates from "../../components/HomePageLatest"
 import './Home.css';
-import { search } from 'ionicons/icons';
+import WeatherForeCast from "./WeatherForeCast"
+import { search, logoWhatsapp } from 'ionicons/icons';
 
 
 const Home: React.FC = (props: any) => {
@@ -39,6 +40,15 @@ const Home: React.FC = (props: any) => {
         <HomePageSlide />
         <HomePageTrending />
         <HomePageLates />
+        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <a href="https://api.whatsapp.com/send?phone=9563152391">
+            <IonFabButton className="whatsapp-share-button">
+              <IonIcon icon={logoWhatsapp} />
+            </IonFabButton>
+          </a>
+          
+        </IonFab>
+        <WeatherForeCast />
       </IonContent>
     </IonPage>
   );

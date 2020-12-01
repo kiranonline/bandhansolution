@@ -1,0 +1,10 @@
+.whatsapp-button-wrapper{
+    position: fixed;
+    z-index: 100;
+    bottom: 20px;
+    right:20px;
+    cursor: pointer;
+}
+.whatsapp-button-wrapper img{
+    width:60px;
+}

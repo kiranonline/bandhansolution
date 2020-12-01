@@ -20,7 +20,7 @@ import RichRextEditor from "../../services/TextEditor";
 import {EditorState,convertToRaw,ContentState} from 'draft-js';
 import "./Product.less";
 const { Option } = Select;
-const propertyKey = ["KG","Gram","Pack","Piece"]
+const propertyKey = ["KG","GRAM","Pack","Piece","LTR","ML"]
 
 function ProductCreate(props) {
     const [form] = Form.useForm(); 
@@ -101,7 +101,7 @@ function ProductCreate(props) {
         if(isAllImagePresent()){
             if(accepted){
                 let raw = convertToRaw(productDescription.getCurrentContent());
-                const {name,category,regularPrice,salePrice} = data;
+                const {name,category,regularPrice,salePrice,productVideo} = data;
                 let body = {
                     name,
                     category,
@@ -109,7 +109,8 @@ function ProductCreate(props) {
                     salePrice,
                     images : images.map(ele=>ele.link),
                     description : JSON.stringify(raw),
-                    properties
+                    properties,
+                    productVideo
                 }
                 console.log(body);
                 props.loading(true);
@@ -280,7 +281,14 @@ function ProductCreate(props) {
                                 <Input placeholder="Sale Price" type="number"  />
                             </Form.Item> 
                         </Col>
-                        
+                        <Col span="8">
+                            <Form.Item 
+                                label="Product Video( video Id only)" 
+                                name="productVideo"
+                            >
+                                <Input placeholder="Product video( video Id only)"  />
+                            </Form.Item>                         
+                        </Col>
                     </Row>
                     <p style={{marginBottom:'10px'}}>Product Properties</p>
                     
