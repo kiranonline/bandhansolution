@@ -40,6 +40,7 @@ export const setGeoCordinates = ()=> (dispatch) =>{
             console.log(position.coords);
             let { latitude,  longitude } = position.coords;
             axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${apis.API_KEY_OPEN_WEATHER}`).then((weather)=>{
+                //axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?units=metric&lat=${latitude}&lon=${longitude}&cnt=4&appid=${apis.API_KEY_OPEN_WEATHER}`).then((weather)=>{
                 console.log(weather.data)
                 dispatch({
                     type : 'SET_GEO_CORDINATES_WEATHER_DATA',
