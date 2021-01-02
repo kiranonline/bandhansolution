@@ -16,7 +16,7 @@ export default function UserDetailsCard(props:any) {
                         value={props.data?props.data.name:""}
                         disabled={true}
                     ></IonInput>
-                    <IonIcon icon={pencil}></IonIcon>
+                    {/* <IonIcon icon={pencil}></IonIcon> */}
                 </IonItem>
                 <IonItem className={"profilePage-input" }>
                     <IonInput 
@@ -25,7 +25,7 @@ export default function UserDetailsCard(props:any) {
                         value={props.data?props.data.email:""}
                         disabled={true}
                     ></IonInput>
-                    <IonIcon icon={pencil}></IonIcon>
+                    {/* <IonIcon icon={pencil}></IonIcon> */}
                 </IonItem>
                 <IonItem className={"profilePage-input" }>
                     <IonInput 
@@ -34,7 +34,7 @@ export default function UserDetailsCard(props:any) {
                         value={props.data?props.data.phoneNumber:""}
                         disabled={true}
                     ></IonInput>
-                    <IonIcon icon={pencil}></IonIcon>
+                    {/* <IonIcon icon={pencil}></IonIcon> */}
                 </IonItem>
             </IonCard>
         </div>

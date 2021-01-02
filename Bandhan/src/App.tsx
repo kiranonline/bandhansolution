@@ -6,7 +6,7 @@ import Loader from "./components/Loader";
 import Toast from "./components/Toast";
 import apis from "./services/apis";
 import http from "./services/httpCall"
-import { login, setUserDetails,logout } from "./actions/authAction";
+import { login, setUserDetails,logout, setGeoCordinates } from "./actions/authAction";
 import {connect} from 'react-redux';
 import { Plugins } from '@capacitor/core';
 import RouterWrapper from "./RouteWrapper";
@@ -48,7 +48,8 @@ const App: React.FC = (props:any) =>{
 
 
   useEffect(()=>{
-    fetchUserDetails()
+    fetchUserDetails();
+    props.setGeoCordinates()
   },[])
 
 
@@ -68,5 +69,6 @@ const mapStateToProps= (state:any) => ({})
 export default connect(mapStateToProps, { 
   login,
   setUserDetails,
-  logout
+  logout,
+  setGeoCordinates
 })(App);

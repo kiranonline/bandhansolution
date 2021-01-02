@@ -16,7 +16,7 @@ import BrandHeader from './components/Homepage/BrandHeader';
 import NavbarHeader from './components/Homepage/NavbarHeader';
 import ProductListComponent from './components/Products/ProductListComponent';
 import SingleProductComponent from './components/Products/SingleProductComponent';
-
+import WhatsappButton from "./components/Extra/WhatsappButton"
 // import './App.css';
 
 
@@ -30,19 +30,22 @@ function App(props) {
   }
 
   let fetchUserDetails = ()=>{
-        http.get(apis.GET_USER_DETAILS).then((result)=>{
-            console.log(result.data.data);
-            if(result.data.status){
-              props.setUserDetails(result.data.data);
-            }
-            else{
-              props.logout();
-            }
-        }).catch((err)=>{
-            console.log(err);
-            // Errorhandler(err,props.logout)
-            props.logout()
-        })
+    if(Token && Token!=="null" && Token!=="undefined"){
+      http.get(apis.GET_USER_DETAILS).then((result)=>{
+        console.log(result.data.data);
+        if(result.data.status){
+          props.setUserDetails(result.data.data);
+        }
+        else{
+          props.logout();
+        }
+      }).catch((err)=>{
+        console.log(err);
+        // Errorhandler(err,props.logout)
+        props.logout()
+      })
+    }
+        
     }
 
   let fetchCategories = () => {
@@ -99,6 +102,8 @@ function App(props) {
                 </Switch>
             </BrowserRouter>
             <Footer />
+            <WhatsappButton />
+
         </React.Fragment>
   );
 }

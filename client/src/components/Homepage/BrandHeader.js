@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux"
-import logo from './static/images/logo.png'
+import logo from '../../static/images/brand-logo.png'
 import {modal} from "../../actions/modalAction";
 import {cartQuantity} from "../../actions/cartAction";
 
@@ -22,7 +22,7 @@ function BrandHeader(props) {
         <div className="container p-3 w-100 d-flex justify-content-between align-items-center">
             
             <a id="logo" className="d-block" href="#">
-                <img src={logo} title="E-Commerce" alt="E-Commerce" className="img-responsive" />
+                <img src={logo} title="E-Commerce" alt="E-Commerce" className="img-responsive" style={{width:'70px'}} />
             </a> 
     
             <div className="header-right p-0">

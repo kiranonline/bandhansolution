@@ -28,8 +28,8 @@ const Signup = ()=>{
                         <IonIcon icon={arrowBackCircle} />
                     </IonFabButton>
                 </IonFab>
-                <h3 className="signup-text">Welcome to</h3>             
-                <img className="brand-logo" src={require("../../static/brand.png")} />
+                {/* <h3 className="signup-text">Welcome to</h3>              */}
+                <img className="brand-logo" src={require("../../static/brand-logo-actual.png")} />
                 {formState===1?
                         <MainSignUp  changeFromState={changeFromState}/>
                     :

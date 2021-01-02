@@ -52,8 +52,8 @@ const Login = (props:any)=>{
                         <IonIcon icon={personAddOutline} />
                     </IonFabButton>
                 </IonFab>
-                <h3 className="signup-text">Welcome to</h3>              
-                <img className="brand-logo" src={require("../../static/brand.png")} />
+                {/* <h3 className="signup-text">Welcome to</h3>               */}
+                <img className="brand-logo" src={require("../../static/brand-logo-actual.png")} />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <IonItem className={"signup-input" + (errors.phoneNumber?" input-validation-error":"") }>
                         <IonInput 

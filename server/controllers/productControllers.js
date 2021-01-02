@@ -18,9 +18,10 @@ exports.createProduct = async(req,res,next)=>{
             images : req.body.images,
             regularPrice : req.body.regularPrice,
             salePrice : req.body.salePrice,
-            weight : req.body.weight,
             createdBy : req.user._id,
-            isActive : true
+            isActive : true,
+            properties:req.body.properties,
+            productVideo : req.body.productVideo
         })
         console.log(product);
         let savedproduct = await product.save();
@@ -41,6 +42,41 @@ exports.createProduct = async(req,res,next)=>{
 }
 
 
+
+
+//++++++++++++++++++++++++++++++++++++++ edit product by admin +++++++++++++++++++++++++++++++++++++
+exports.editProduct = async(req,res,next)=>{
+    try{
+        let id = req.params.id;
+        console.log(id)
+        let product = {
+            name : req.body.name,
+            category : req.body.category,
+            description : req.body.description,
+            images : req.body.images,
+            regularPrice : req.body.regularPrice,
+            salePrice : req.body.salePrice,
+            createdBy : req.user._id,
+            isActive : true,
+            properties:req.body.properties,
+            productVideo : req.body.productVideo
+        }
+        console.log(product);
+        let savedProduct = await Product.findByIdAndUpdate(id,product)
+        console.log(savedProduct)
+        res.json({
+            status : true,
+            message : 'Product updated sucessfully.'
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
 
 
 
@@ -266,7 +302,8 @@ exports.productDetailsForSeller = async(req,res,next)=>{
                     "stockUpdated":"$updatedAt",
                     "category":1,
                     "stock":1,
-                    "description" : "$product.description"
+                    "description" : "$product.description",
+                    "properties":"$product.properties"
                 }
             }
         ])

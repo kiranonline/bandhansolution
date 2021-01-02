@@ -12,13 +12,25 @@ export default function AddressList() {
     const [isModalShowing, setIsModalShowing] = useState(false);
     const [isAddressFetching,setIsAddressFetching] = useState(false);
     const [modalMode,setModalMode] = useState("create");
-    const [editAddressData,setEditAddressData] = useState();
+    const [editAddressData,setEditAddressData] = useState({});
     const [addresses,setAddresses] = useState([]);
 
     const openModal = ()=> setIsModalShowing(true);
     const closeModal = ()=> { 
         setIsModalShowing(false);
         fetchAddresses();
+    }
+
+    const editAddress = (data:any)=>{
+        setModalMode("edit");
+        setEditAddressData(data)
+        openModal()
+    }
+
+    const createNew = ()=>{
+        setModalMode("create");
+        setEditAddressData({})
+        openModal()
     }
 
 
@@ -56,14 +68,9 @@ export default function AddressList() {
                         <h6>You don't have any address</h6>
                     </div>
                     :
-                    addresses.map((ele:any,i:any)=> <AddressCard data={ele} key={i} />)
+                    addresses.map((ele:any,i:any)=> <AddressCard editAddress={editAddress} fetchAddresses={fetchAddresses} data={ele} key={i} hasDeleteKey={addresses.length>1}/>)
                 }
-
-
-
-
-
-                <IonButton onClick={openModal} expand="full" className="add-address-button">
+                <IonButton onClick={createNew} expand="full" className="add-address-button">
                     ADD ADDRESS
                 </IonButton>
                 <AddreeFrom data={editAddressData} modalMode={modalMode} closeModal={closeModal} isModalShowing={isModalShowing}/>             

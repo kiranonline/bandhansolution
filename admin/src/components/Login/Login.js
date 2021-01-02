@@ -8,6 +8,7 @@ import { Typography, Form, Input, Button, message } from 'antd';
 import { MailOutlined , LockOutlined } from '@ant-design/icons';
 import { login, setUserDetails, logout } from "../../actions/authAction"
 import "./login.less";
+import brandLogo from "../../static/brand-logo.png"
 
 
 
@@ -37,6 +38,8 @@ function Login(props) {
         <div className="login-page-container">
             <div className="login-section-wrapper">
                 <Typography.Title level={1}>BANDHAN</Typography.Title>
+                
+                <img src={brandLogo} style={{width:'100px',marginBottom:'20px'}} />
                 <p className="brand-sub-name">ADMIN PANEL</p>
                 <Form
                     name="login-form"
@@ -75,11 +78,11 @@ function Login(props) {
                             Log in
                         </Button>
                     </Form.Item>
-                    <Form.Item>
+                    {/* <Form.Item>
                         <a className="login-form-forgot" href="">
                             Forgot password
                         </a>
-                    </Form.Item>
+                    </Form.Item> */}
                 </Form>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonBackButton, IonIcon,IonButtons, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonBackButton, IonIcon,IonButtons, IonButton, IonGrid, IonCol, IonRow } from '@ionic/react';
 import React,{useState,useEffect} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -10,6 +10,8 @@ import apis from "../../services/apis";
 import { openToast, loading } from "../../actions/loadingAction";
 import ProductImageSlide from "./ProductImageSlide";
 import { starOutline, star, cartOutline, arrowBack } from 'ionicons/icons';
+import { useIonViewWillEnter } from "@ionic/react";
+
 
 
 const Product: React.FC = (props: any) => {
@@ -43,9 +45,12 @@ const Product: React.FC = (props: any) => {
         })
     }
 
-    useEffect(()=>{
+
+    useIonViewWillEnter(() => {
+        setProduct()
         fetchProductDetails()
-    },[])
+    })
+
 
 
 
@@ -126,6 +131,22 @@ const Product: React.FC = (props: any) => {
                                 }
                             </div>  
 
+                            <div className="product-unit-container">
+                                <IonGrid>
+                                    {product.properties && product.properties.map((ele:any,i:any)=>(
+                                        <IonRow key={i}>
+                                            <IonCol>
+                                                {ele.type}
+                                            </IonCol>
+                                            <IonCol>
+                                                {ele.value}
+                                            </IonCol>
+                                        </IonRow>
+                                    ))}
+                                    
+                                </IonGrid>
+                            </div>
+
                             <div className="product-description-add-to-cart">
                                 <IonButton expand="full" className="add-to-cart-button" onClick={addToCart}>
                                     ADD TO CART
@@ -147,6 +168,15 @@ const Product: React.FC = (props: any) => {
                                 
                             </div> */}
                             <Editor editorState={productDescription} readOnly={true} onChange={()=>null} />
+
+                            {product.productVideo &&
+                                <div className="product-video-container">
+                                    <iframe width="100%"
+                                        src={`https://www.youtube.com/embed/${product.productVideo}?controls=1`}>
+                                    </iframe>
+                                </div>
+                            }
+                            
                         </div>
                         
                     </div>

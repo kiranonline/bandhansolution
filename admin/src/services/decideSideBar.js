@@ -53,6 +53,12 @@ export const AdminSideBar = (props)=>(
                 </Link>
             </Menu.Item>
         </Menu.SubMenu>
+        <Menu.Item  key="admin-44">
+            <Link to={ `/admin/dashboard/orders`}>
+                <ShoppingCartOutlined />
+                <span>ORDERS</span>
+            </Link>
+        </Menu.Item>
     </Menu>
 )
 

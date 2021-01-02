@@ -22,9 +22,6 @@ const ProductSchema = new mongoose.Schema({
     salePrice : {
         type : Number
     },
-    weight:{
-        type : Number,
-    },
     createdBy : {
         type : mongoose.Types.ObjectId,
         ref : 'user'
@@ -38,6 +35,17 @@ const ProductSchema = new mongoose.Schema({
         type:Number,
         default:0,
         required:true
+    },
+    properties:[{
+        type:{
+            type:String
+        },
+        value:{
+            type:String
+        }
+    }],
+    productVideo:{
+        type : String
     }
 },{
     timestamps : true

@@ -32,7 +32,7 @@ const SignUpOTP = (props:any)=>{
                 });
                 props.loading(false);
                 props.login(result.data.token,result.data.data);
-                history.push("/home")
+                history.push("/secure/home")
             }
             else{
                 props.openToast(result.data.message);

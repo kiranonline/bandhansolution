@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import {
     LoadingOutlined,
     PlusCircleOutlined,
+    MinusCircleOutlined,
     PlusOutlined,
     UnorderedListOutlined
 } from '@ant-design/icons';
@@ -19,10 +20,12 @@ import RichRextEditor from "../../services/TextEditor";
 import {EditorState,convertToRaw,ContentState} from 'draft-js';
 import "./Product.less";
 const { Option } = Select;
+const propertyKey = ["KG","GRAM","Pack","Piece","LTR","ML"]
 
 function ProductCreate(props) {
     const [form] = Form.useForm(); 
     const [images,setImages] = useState([{link:null,loading:false,hasremove:false}]);
+    const [properties,setProperties] = useState([])
     const [allCategories,setAllCategories] = useState([]);
     const [productDescription, setProductDescription] = useState(() => EditorState.createEmpty())
 
@@ -86,37 +89,53 @@ function ProductCreate(props) {
     },[])
 
     const onFinish = (data)=>{
-        if(isAllImagePresent()){
-            let raw = convertToRaw(productDescription.getCurrentContent());
-            const {name,category,regularPrice,salePrice,weight} = data;
-            let body = {
-                name,
-                category,
-                regularPrice,
-                salePrice,
-                weight,
-                images : images.map(ele=>ele.link),
-                description : JSON.stringify(raw)
+        let accepted=true;
+        properties.forEach((ele,i)=>{
+            if(ele && ele.type && ele.value){
+                
             }
-            console.log(body);
-            props.loading(true);
-            http.post(apis.CREATE_PRODUCT,body).then((result)=>{
-                if(result.data.status){
-                    message.success(result.data.message);
-                    form.resetFields();
-                    setImages([{link:null,loading:false,hasremove:false}]);
-                    const editorState = EditorState.push(productDescription, ContentState.createFromText(''));
-                    setProductDescription(editorState);
+            else{
+                accepted = false;
+            }
+        })
+        if(isAllImagePresent()){
+            if(accepted){
+                let raw = convertToRaw(productDescription.getCurrentContent());
+                const {name,category,regularPrice,salePrice,productVideo} = data;
+                let body = {
+                    name,
+                    category,
+                    regularPrice,
+                    salePrice,
+                    images : images.map(ele=>ele.link),
+                    description : JSON.stringify(raw),
+                    properties,
+                    productVideo
                 }
-                else{
-                    message.error(result.data.message)
-                }
-            }).catch((err)=>{
-                console.log(err);
-                Errorhandler(err,props.logout);
-            }).finally(()=>{
-                props.loading(false);
-            })
+                console.log(body);
+                props.loading(true);
+                http.post(apis.CREATE_PRODUCT,body).then((result)=>{
+                    if(result.data.status){
+                        message.success(result.data.message);
+                        form.resetFields();
+                        setImages([{link:null,loading:false,hasremove:false}]);
+                        const editorState = EditorState.push(productDescription, ContentState.createFromText(''));
+                        setProductDescription(editorState);
+                    }
+                    else{
+                        message.error(result.data.message)
+                    }
+                }).catch((err)=>{
+                    console.log(err);
+                    Errorhandler(err,props.logout);
+                }).finally(()=>{
+                    props.loading(false);
+                })
+            }
+            else{
+                message.error('Please clear the unwanted properties')   
+            }
+            
         }
         else{
             message.error('Please upload all images or remove them')   
@@ -162,6 +181,30 @@ function ProductCreate(props) {
         return flag
     }
 
+
+    const addProperty = ()=>{
+        let p = [...properties]
+        p.push({type:"",value:""})
+        setProperties(p)
+    }
+
+
+    const setPropertyType = (index,value)=>{
+        let p = [...properties]
+        p[index].type=value;
+        setProperties(p)
+    }
+    const changePropertyValue = (index,value)=>{
+        let p = [...properties]
+        p[index].value=value;
+        setProperties(p)
+    }
+
+    const removeProperty = (index)=>{
+        let p = [...properties]
+        p.splice(index, 1);
+        setProperties(p)
+    }
 
 
     return (
@@ -240,13 +283,57 @@ function ProductCreate(props) {
                         </Col>
                         <Col span="8">
                             <Form.Item 
-                                label="Weight (in KG)" 
-                                name="weight"
+                                label="Product Video( video Id only)" 
+                                name="productVideo"
                             >
-                                <Input placeholder="Weight" type="number"  />
-                            </Form.Item> 
+                                <Input placeholder="Product video( video Id only)"  />
+                            </Form.Item>                         
                         </Col>
                     </Row>
+                    <p style={{marginBottom:'10px'}}>Product Properties</p>
+                    
+                        {properties.map((ele,i)=>(
+                            <Row gutter={16} key={i} style={{marginBottom:'5px'}}>
+                                <Col span="8" >
+                                    <Select
+                                        showSearch
+                                        placeholder="Select a property"
+                                        style={{width:"100%"}}
+                                        value={ele.type}
+                                        filterOption={(input, option) =>
+                                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }
+                                        onChange={(val)=>setPropertyType(i,val)}
+                                    >
+                                        <Select.Option key={11111} value={""}>please select a key</Select.Option>
+                                        {
+                                            
+                                            propertyKey.map((eleee,ii)=>(
+                                                <Select.Option key={ii} value={eleee}>{eleee}</Select.Option>
+                                            ))
+                                        }
+                                        
+                                    </Select>
+                                </Col>
+                                <Col span="8" >
+                                    <Input type="text" onChange={(val)=>changePropertyValue(i,val.target.value)} placeholder="please enter the value" value={ele.value} />
+                                </Col>
+                                <Col span="8" >
+                                    <Button onClick={()=>removeProperty(i)}>
+                                        remove
+                                    </Button>
+                                </Col>
+                            </Row>
+                            
+                        ))}
+                    
+                    <Row gutter={16} justify="end" style={{marginBottom:'30px'}}>
+                        <Col>
+                            <Button type="default" onClick={addProperty}>Add Propert</Button>
+                        </Col>
+                    </Row>
+
+
                     <p style={{marginBottom:'10px'}}>Product Images</p>
 
                     <Row gutter={16}>

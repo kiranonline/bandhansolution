@@ -316,7 +316,9 @@ function CheckoutComponent(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                            {products.map((product,index)=>(
+                            {products.map((product,index)=>{
+                                let cd = cartDetails.find((e)=>e.product==product._id)
+                                return(
                                 <tr key={index} className={statusList[index] ? "" : "bg-warning" }>
                                     <td className="text-center"><Link to={`/product/${product._id}`}><img className="img-thumbnail" title="women's clothing" alt="product image" src={`${apis.BASE_SERVER_URL}${product.images[0]}`} width="100px" /></Link></td>
                                     
@@ -325,7 +327,7 @@ function CheckoutComponent(props) {
                                     <td className="text-left">
                                         <div className="input-group btn-block">
 
-                                        <input type="text" className="form-control quantity w-100" disabled={true} size="1" value={cartDetails[index].count} name="quantity" />
+                                        <input type="text" className="form-control quantity w-100" disabled={true} size="1" value={cd.count} name="quantity" />
 
                                         <div className="my-2 w-100">
                                         <button className="btn btn-danger w-100" title="" data-toggle="tooltip" type="button" data-original-title="Update"
@@ -339,9 +341,9 @@ function CheckoutComponent(props) {
                                         </div>
                                     </td>
                                     <td className="text-right">₹{product.salePrice ? product.salePrice : product.regularPrice}</td>
-                                    <td className="text-right">₹{product.salePrice ? product.salePrice * cartDetails[index].count : product.regularPrice * cartDetails[index].count}</td>
+                                    <td className="text-right">₹{product.salePrice ? product.salePrice * cd.count : product.regularPrice * cd.count}</td>
                                 </tr>
-                            ))}
+                            )})}
                                 <tr>
                                     <td className="text-right" colSpan="4">Total Cost:</td>
                                     

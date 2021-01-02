@@ -123,7 +123,9 @@ function CartComponent(props) {
                                 <td className="text-right">Total</td>
                             </tr>
                         </thead>
-                        {products.map((product,index)=>(
+                        {products.map((product,index)=>{
+                            let cd = cartDetails.find((e)=>e.product==product._id)
+                            return (
                             <tbody key={index}>
                                 <tr>
                                     <td className="text-center"><Link to={`/product/${product._id}`}><img className="img-thumbnail" title="women's clothing" alt="product image" src={`${apis.BASE_SERVER_URL}${product.images[0]}`} width="100px" /></Link></td>
@@ -133,14 +135,14 @@ function CartComponent(props) {
                                     <td className="text-left"><div style={{maxWidth: "200px"}} className="input-group btn-block">
 
                                          <div className="d-flex w-100 justify-content-center mt-2">
-                                            <input type="text" className="form-control quantity w-100" disabled={true} size="1" value={cartDetails[index].count} name="quantity" />
+                                            <input type="text" className="form-control quantity w-100" disabled={true} size="1" value={cd.count} name="quantity" />
 
                                             {
-                                                cartDetails[index].count === 1 ?
+                                                cd.count === 1 ?
                                                 ""
                                                 :
                                                 (<button  className="btn btn-danger mx-1" title="" data-toggle="tooltip" type="button" data-original-title="Remove"
-                                                onClick={() => updateQty(cartDetails[index]._id,-1)}
+                                                onClick={() => updateQty(cd._id,-1)}
                                                 disabled={updating}
                                                 >
                                                     <i className="fa fa-minus"></i>
@@ -151,7 +153,7 @@ function CartComponent(props) {
                                              
 
                                             <button className="btn btn-primary" title="" data-toggle="tooltip" type="button" data-original-title="Update"
-                                            onClick={() => updateQty(cartDetails[index]._id, +1)}
+                                            onClick={() => updateQty(cd._id, +1)}
                                             disabled={updating}
                                             >
                                                 <i className="fa fa-plus"></i>
@@ -171,10 +173,10 @@ function CartComponent(props) {
                                         </div>
                                     </td>
                                     <td className="text-right">₹{product.salePrice ? product.salePrice : product.regularPrice}</td>
-                                    <td className="text-right">₹{product.salePrice ? product.salePrice * cartDetails[index].count : product.regularPrice * cartDetails[index].count}</td>
+                                    <td className="text-right">₹{product.salePrice ? product.salePrice * cd.count : product.regularPrice * cd.count}</td>
                                 </tr>
                             </tbody>
-                        ))}
+                        )})}
                     </table>
                 </div>
             </div>
