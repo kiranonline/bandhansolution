@@ -19,8 +19,8 @@ const apis = {
 
     UPLOAD_USER_AVATAR:"/apis/v1/upload-avatar",
     UPDATE_PASSWORD:"/apis/v1/user/update-password",
-    
-    
+
+
     GET_ADDRESS_LIST:"/apis/v1/user/get/address",
     ADD_NEW_ADDRESS:"/apis/v1/user/add/address",
     EDIT_ADDRESS:"/apis/v1/user/edit/address",
@@ -36,6 +36,12 @@ const apis = {
     GET_ORDERS: "/apis/v1/user/get-orders",
     CANCEL_ORDER: "/apis/v1/user/cancel-order",
     ORDER_DETAILS:"/apis/v1/order/details",
+
+
+
+
+
+    LIST_POSTERS:"/apis/v1/list-poster",
 
 
 

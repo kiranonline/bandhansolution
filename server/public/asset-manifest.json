@@ -1,22 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.abe55023.chunk.css",
-    "main.js": "/static/js/main.ec8463aa.chunk.js",
-    "main.js.map": "/static/js/main.ec8463aa.chunk.js.map",
+    "main.js": "/static/js/main.08939c94.chunk.js",
+    "main.js.map": "/static/js/main.08939c94.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.83c3e0c4.js",
     "runtime-main.js.map": "/static/js/runtime-main.83c3e0c4.js.map",
-    "static/css/2.d370cae6.chunk.css": "/static/css/2.d370cae6.chunk.css",
-    "static/js/2.283793d6.chunk.js": "/static/js/2.283793d6.chunk.js",
-    "static/js/2.283793d6.chunk.js.map": "/static/js/2.283793d6.chunk.js.map",
+    "static/css/2.5acc0661.chunk.css": "/static/css/2.5acc0661.chunk.css",
+    "static/js/2.973e2562.chunk.js": "/static/js/2.973e2562.chunk.js",
+    "static/js/2.973e2562.chunk.js.map": "/static/js/2.973e2562.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1c476d56a8fb82f7b594c19c2696c243.js": "/precache-manifest.1c476d56a8fb82f7b594c19c2696c243.js",
+    "precache-manifest.eb13fbf2c34e7dcd18a3613418fd63af.js": "/precache-manifest.eb13fbf2c34e7dcd18a3613418fd63af.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.d370cae6.chunk.css.map": "/static/css/2.d370cae6.chunk.css.map",
+    "static/css/2.5acc0661.chunk.css.map": "/static/css/2.5acc0661.chunk.css.map",
     "static/css/main.abe55023.chunk.css.map": "/static/css/main.abe55023.chunk.css.map",
-    "static/js/2.283793d6.chunk.js.LICENSE.txt": "/static/js/2.283793d6.chunk.js.LICENSE.txt",
-    "static/media/Main-Banner1.jpg": "/static/media/Main-Banner1.3962801b.jpg",
-    "static/media/Main-Banner2.jpg": "/static/media/Main-Banner2.743784f7.jpg",
-    "static/media/Main-Banner3.jpg": "/static/media/Main-Banner3.d1bd938d.jpg",
+    "static/js/2.973e2562.chunk.js.LICENSE.txt": "/static/js/2.973e2562.chunk.js.LICENSE.txt",
     "static/media/brand-logo.png": "/static/media/brand-logo.26748af0.png",
     "static/media/product1.jpg": "/static/media/product1.482e1496.jpg",
     "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
@@ -26,9 +23,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.83c3e0c4.js",
-    "static/css/2.d370cae6.chunk.css",
-    "static/js/2.283793d6.chunk.js",
+    "static/css/2.5acc0661.chunk.css",
+    "static/js/2.973e2562.chunk.js",
     "static/css/main.abe55023.chunk.css",
-    "static/js/main.ec8463aa.chunk.js"
+    "static/js/main.08939c94.chunk.js"
   ]
 }

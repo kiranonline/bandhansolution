@@ -1,24 +1,38 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import banner1 from './static/images/Main-Banner1.jpg';
-import banner2 from './static/images/Main-Banner2.jpg';
-import banner3 from './static/images/Main-Banner3.jpg';
+import http from "../../services/httpCall"
+import apis from "../../services/apis"
 
-function Crousel() {
+function Crousel(props) {
+    const [posters, setPosters] = useState([])
+    const fetchPosters = ()=>{
+        http.get(apis.LIST_POSTERS)
+        .then(res => {
+            console.log(res.data.data);
+            setPosters(res.data.data);
+        })
+    }
+    useEffect(()=>{
+        fetchPosters()
+    },[])
     return (
-            <OwlCarousel
+        <OwlCarousel
             className="owl-theme"
             items="1"
             loop
             autoplay
             dots
-            >
-                <div className="item"> <a href="/"><img src={banner1} alt="main-banner1" className="img-responsive" /></a> </div>
-                <div className="item"> <a href="/"><img src={banner2} alt="main-banner2" className="img-responsive" /></a> </div>
-                <div className="item"> <a href="/"><img src={banner3} alt="main-banner3" className="img-responsive" /></a> </div>
-            </OwlCarousel>
+        >
+            {posters.map((ele,i)=>
+                <div key={i} className="item">
+                    <a href="/">
+                        <img src={`${apis.BASE_SERVER_URL}${ele}`} alt="main-banner1" className="img-responsive" />
+                    </a>
+                </div>
+            )}
+        </OwlCarousel>
     )
 }
 

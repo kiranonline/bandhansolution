@@ -1,0 +1,18 @@
+{
+  "LoginPage": {
+    "LoginForm": {
+      "phoneField": "Enter Phone Number",
+      "passwordField": "Enter password",
+      "loginButton": "LOGIN"
+    }
+  },
+  "SignUpPage": {
+    "SignUpMainForm": {
+      "phoneField": "Enter Phone Number",
+      "passwordField": "Enter password",
+      "nameField": "Enter Name",
+      "emailField": "Enter Email",
+      "submitButton": "Signup"
+    }
+  }
+}

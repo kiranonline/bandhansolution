@@ -5,10 +5,13 @@ import { useForm } from "react-hook-form";
 import {loading,openToast} from "../../actions/loadingAction";
 import apis from "../../services/apis";
 import http from "../../services/httpCall";
-
+import { useTranslation } from 'react-i18next';
 
 const MainSignUp = (props:any)=>{
     const {register,handleSubmit,watch,errors,setValue,reset,} = useForm({mode: "onSubmit",reValidateMode: "onChange"});
+    const { t } = useTranslation();
+
+
 
     const onSubmit = (data:any)=>{
         console.log(data);
@@ -35,8 +38,8 @@ const MainSignUp = (props:any)=>{
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
             <IonItem className={"signup-input" + (errors.name?" input-validation-error":"") }>
-                <IonInput 
-                    placeholder="Enter Name" 
+                <IonInput
+                    placeholder={t('SignUpPage.SignUpMainForm.nameField')}
                     type="text"
                     name="name"
                     ref={register({
@@ -45,8 +48,8 @@ const MainSignUp = (props:any)=>{
                 ></IonInput>
             </IonItem>
             <IonItem className={"signup-input" + (errors.phoneNumber?" input-validation-error":"") }>
-                <IonInput 
-                    placeholder="Enter Phone Number" 
+                <IonInput
+                    placeholder={t('SignUpPage.SignUpMainForm.phoneField')}
                     type="number"
                     name="phoneNumber"
                     ref={register({
@@ -57,16 +60,16 @@ const MainSignUp = (props:any)=>{
                 ></IonInput>
             </IonItem>
             <IonItem className={"signup-input" + (errors.email?" input-validation-error":"") }>
-                <IonInput 
-                    placeholder="Enter Email" 
+                <IonInput
+                    placeholder={t('SignUpPage.SignUpMainForm.emailField')}
                     type="email"
                     name="email"
                     ref={register}
                 ></IonInput>
             </IonItem>
             <IonItem className={"signup-input" + (errors.password?" input-validation-error":"") }>
-                <IonInput 
-                    placeholder="Enter Password" 
+                <IonInput
+                    placeholder={t('SignUpPage.SignUpMainForm.passwordField')}
                     type="password"
                     name="password"
                     ref={register({
@@ -74,14 +77,14 @@ const MainSignUp = (props:any)=>{
                     })}
                 ></IonInput>
             </IonItem>
-            <IonButton expand="full" type="submit" className="signup-button normal">Signup</IonButton>
+            <IonButton expand="full" type="submit" className="signup-button normal">{t('SignUpPage.SignUpMainForm.submitButton')}</IonButton>
         </form>
     )
 }
 
 
 const mapStateToProps= (state:any) => ({})
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
     loading,
     openToast
 })(MainSignUp);

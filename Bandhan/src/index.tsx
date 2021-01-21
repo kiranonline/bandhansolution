@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
@@ -20,11 +20,14 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import "./App.css";
+import "./i18next";
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <Suspense fallback={<div>Loading...</div>}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </Suspense>
 ,document.getElementById('root'));
 
 

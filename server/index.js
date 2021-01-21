@@ -19,8 +19,8 @@ const productlistApi = require("./routes/productlistApi");
 const addressApi =require("./routes/addressApi");
 const cartApi =require("./routes/cartApis");
 const orderManagement = require("./routes/orderManagement")
-
-//port 
+const posterManagement = require("./routes/posterApi")
+//port
 const PORT = process.env.PORT || 4500;
 
 //app declaration
@@ -63,6 +63,7 @@ app.use("/apis/v1",productlistApi);
 app.use("/apis/v1",addressApi);
 app.use("/apis/v1",cartApi);
 app.use("/apis/v1",orderManagement)
+app.use("/apis/v1",posterManagement)
 
 
 app.get('/admin/*', (req,res) =>{

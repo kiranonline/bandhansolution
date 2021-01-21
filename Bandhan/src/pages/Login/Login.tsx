@@ -9,11 +9,14 @@ import { personAddOutline,homeOutline } from 'ionicons/icons';
 import { Plugins } from '@capacitor/core';
 import {loading,openToast} from "../../actions/loadingAction";
 import {login} from "../../actions/authAction";
+import { useTranslation } from 'react-i18next';
 const { Storage } = Plugins;
 
 
 const Login = (props:any)=>{
     const {register,handleSubmit,watch,errors,setValue,reset,} = useForm({mode: "onSubmit",reValidateMode: "onChange"});
+    const { t } = useTranslation();
+
 
     console.log("3")
 
@@ -43,10 +46,10 @@ const Login = (props:any)=>{
     }
 
 
-    
+
     return(
         <IonPage>
-            <IonContent fullscreen={true} className="login-page-wrapper ion-padding">   
+            <IonContent fullscreen={true} className="login-page-wrapper ion-padding">
                 <IonFab vertical="top" horizontal="end" slot="fixed">
                     <IonFabButton className="custom-back" routerLink="/signup">
                         <IonIcon icon={personAddOutline} />
@@ -56,8 +59,8 @@ const Login = (props:any)=>{
                 <img className="brand-logo" src={require("../../static/brand-logo-actual.png")} />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <IonItem className={"signup-input" + (errors.phoneNumber?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="Enter Phone Number" 
+                        <IonInput
+                            placeholder={t('LoginPage.LoginForm.phoneField')}
                             type="number"
                             name="phoneNumber"
                             ref={register({
@@ -68,8 +71,8 @@ const Login = (props:any)=>{
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"signup-input" + (errors.password?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="Enter Password" 
+                        <IonInput
+                            placeholder={t('LoginPage.LoginForm.passwordField')}
                             type="password"
                             name="password"
                             ref={register({
@@ -77,21 +80,21 @@ const Login = (props:any)=>{
                             })}
                         ></IonInput>
                     </IonItem>
-                    <IonButton expand="full" type="submit" className="login-button normal">Login</IonButton>
+                    <IonButton expand="full" type="submit" className="login-button normal">{t('LoginPage.LoginForm.loginButton')}</IonButton>
                 </form>
-                <IonButton expand="full" className="login-button google">
+                {/* <IonButton expand="full" className="login-button google">
                     Login with google
                 </IonButton>
                 <IonButton expand="full" className="login-button facebook">
                     Login with Facebook
-                </IonButton>
+                </IonButton> */}
             </IonContent>
         </IonPage>
     )
 }
 
 const mapStateToProps= (state:any) => ({})
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
     loading,
     openToast,
     login

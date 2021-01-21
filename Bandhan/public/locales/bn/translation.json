@@ -1,0 +1,18 @@
+{
+  "LoginPage": {
+    "LoginForm": {
+      "phoneField": "ফোন নম্বর প্রবেশ করান",
+      "passwordField": "পাসওয়ার্ড প্রবেশ করান",
+      "loginButton": "লগইন"
+    }
+  },
+  "SignUpPage": {
+    "SignUpMainForm": {
+      "phoneField": "ফোন নম্বর প্রবেশ করান",
+      "passwordField": "পাসওয়ার্ড প্রবেশ করান",
+      "nameField": "নাম প্রবেশ করান",
+      "emailField": "ইমেইল প্রবেশ করান",
+      "submitButton": "সাইন আপ করুন"
+    }
+  }
+}

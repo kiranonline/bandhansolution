@@ -1,0 +1,18 @@
+{
+  "LoginPage": {
+    "LoginForm": {
+      "phoneField": "फोन नंबर दर्ज करें",
+      "passwordField": "पासवर्ड दर्ज करें",
+      "loginButton": "लॉगिन"
+    }
+  },
+  "SignUpPage": {
+    "SignUpMainForm": {
+      "phoneField": "फोन नंबर दर्ज करें",
+      "passwordField": "पासवर्ड दर्ज करें",
+      "nameField": "नाम दर्ज करें",
+      "emailField": "ईमेल दर्ज करें",
+      "submitButton": "पंजीकरण"
+    }
+  }
+}

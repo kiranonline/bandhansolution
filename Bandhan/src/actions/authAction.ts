@@ -6,6 +6,13 @@ const { Storage, Geolocation } = Plugins;
 
 
 
+export const changeLanguage = (lang:string) => {
+    return {
+        type: 'CHANGE_LANGUAGE',
+        payload:lang
+    };
+};
+
 
 export const login = (token:any,userdetails:any) => {
     http.defaults.headers.common['Authorization']='Bearer '+ token;
@@ -23,10 +30,10 @@ export const logout = ()=> (dispatch:any) => {
         })
     })
 };
-  
 
 
-  
+
+
 
 export const setUserDetails = (user:any)=>{
     return {
@@ -54,7 +61,7 @@ export const setUserDetails = (user:any)=>{
 //             payload : []
 //         })
 //     })
- 
+
 // }
 
 
@@ -66,7 +73,7 @@ export const setGeoCordinates = ()=> (dispatch:any) =>{
     })
     Geolocation.getCurrentPosition().then((cordinates:any)=>{
         console.log("cordinates...",cordinates.coords);
-        let { latitude,  longitude }:any = cordinates.coords 
+        let { latitude,  longitude }:any = cordinates.coords
         axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${apis.API_KEY_OPEN_WEATHER}`).then((weather)=>{
             console.log(weather.data)
             dispatch({
