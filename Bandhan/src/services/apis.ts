@@ -3,7 +3,7 @@ const apis = {
 
     BASE_LOCAL_URL : envoirnment === "development" ? "http://localhost:8100" : "",
     BASE_SERVER_URL : envoirnment === "development"? "http://localhost:4500": "https://bandhansolutions.herokuapp.com",
-    
+
     REGISTER : "/apis/v1/user/createnormal",
     OTP_VERIFICATION : "/apis/v1/user/otpverification",
     LOGIN_WITH_EMAIL_OR_PHONE : "/apis/v1/user/login-with-email-or-phone-password",
@@ -43,13 +43,13 @@ const apis = {
 
 
 
-
+    LIST_POSTERS:"/apis/v1/list-poster",
 
 
 
     API_KEY_LOCATION_IQ : "pk.3677164e2f3425a36d5b009615e198a2",
     API_KEY_OPEN_WEATHER : "092b62bb5b28a5a386dedaa38f48429b"
-    
+
 };
 
 export default apis;
