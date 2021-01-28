@@ -2,9 +2,10 @@ import React from 'react';
 import { IonCard,IonSkeletonText,IonButton,IonGrid, IonRow, IonCol, IonIcon } from '@ionic/react';
 import moment from "moment";
 import apis from '../../services/apis';
-
+import { useTranslation } from 'react-i18next';
 
 export default function OrderProduct(props:any) {
+    const { t } = useTranslation();
     return (
         <IonCard className={"OrderProduct"}>
             <IonGrid>
@@ -14,9 +15,9 @@ export default function OrderProduct(props:any) {
                     </IonCol>
                     <IonCol size="8">
                         <h5 className="cart-item-name">{props.data.product.name}</h5>
-                        <h6 className="cart-item-unit-price">Unit Price : <span>&#8377;</span>{props.data.unitPrice}</h6>
-                        <h6 className="cart-item-unit-price">Total Price : <span>&#8377;</span>{props.data.totalPrice}</h6>
-                        <h6 className="cart-item-unit-price">Count : {props.data.count}</h6>                        
+                        <h6 className="cart-item-unit-price">{t('orderDetails.unitPrice')} : <span>&#8377;</span>{props.data.unitPrice}</h6>
+                        <h6 className="cart-item-unit-price">{t('orderDetails.totalPrice')} : <span>&#8377;</span>{props.data.totalPrice}</h6>
+                        <h6 className="cart-item-unit-price">{t('orderDetails.count')} : {props.data.count}</h6>
                     </IonCol>
                 </IonRow>
             </IonGrid>

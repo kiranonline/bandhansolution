@@ -1,8 +1,13 @@
 import React from 'react';
 import { IonCard,IonSkeletonText,IonButton,IonGrid, IonRow, IonCol, IonIcon } from '@ionic/react';
 import apis from '../services/apis';
+import { useTranslation } from 'react-i18next';
+
 
 export default function CartItem(props:any) {
+    const { t } = useTranslation()
+
+
     return (
         <div className="cart-item-wrapper">
             {props.data?
@@ -14,8 +19,8 @@ export default function CartItem(props:any) {
                             </IonCol>
                             <IonCol size="8">
                                 <h5 className="cart-item-name">{props.data.name}</h5>
-                                <h6 className="cart-item-unit-price">Unit Price : <span>&#8377;</span>{props.data.salePrice?props.data.salePrice:props.data.regularPrice}</h6>
-                                <h6 className="cart-item-unit-price">Total Price : <span>&#8377;</span>{props.data.salePrice?parseFloat(props.data.salePrice)*(props.cart?.count):parseFloat(props.data.regularPrice)*(props.cart?.count)}</h6>
+                                <h6 className="cart-item-unit-price">{t('orderDetails.unitPrice')} : <span>&#8377;</span>{props.data.salePrice?props.data.salePrice:props.data.regularPrice}</h6>
+                                <h6 className="cart-item-unit-price">{t('orderDetails.totalPrice')} : <span>&#8377;</span>{props.data.salePrice?parseFloat(props.data.salePrice)*(props.cart?.count):parseFloat(props.data.regularPrice)*(props.cart?.count)}</h6>
                                 <div className="cart-item-controls">
                                     {
                                         props.cart?.count===1?null:
@@ -24,9 +29,11 @@ export default function CartItem(props:any) {
                                     }
                                     <IonButton color="light" size="small" disabled={true}>{props.cart?.count}</IonButton>
                                     <IonButton onClick={()=>props.updateQty(props.cart._id,1)} color="success" size="small" >+</IonButton>
-                                    <IonButton onClick={()=>props.deleteItem(props.cart._id)} color="danger" size="small">Remove</IonButton>
+                                    <IonButton onClick={()=>props.deleteItem(props.cart._id)} color="danger" size="small">
+                                    {t('orderDetails.removetext')}
+                                    </IonButton>
                                 </div>
-                                
+
                             </IonCol>
                         </IonRow>
                     </IonGrid>

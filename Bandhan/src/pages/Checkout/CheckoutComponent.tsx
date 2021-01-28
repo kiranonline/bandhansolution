@@ -11,7 +11,7 @@ import { arrowBack } from 'ionicons/icons';
 import { useIonViewWillEnter } from "@ionic/react";
 import AddressSlider from "./AddressSlider";
 import CheckoutItem from "./CheckoutItem"
-
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -26,6 +26,8 @@ const Checkout: React.FC = (props: any) => {
     const [statusList, setStatusList] = useState([]);
     const [orderPlaceable, isOrderPlaceable] = useState(false);
     const history = useHistory();
+    const { t } = useTranslation()
+
 
     const goBack = ()=>{
         history.goBack();
@@ -65,10 +67,10 @@ const Checkout: React.FC = (props: any) => {
                 setcartDetails(result.data.data.cart);
                 console.log("cart++++++++++",result.data.data.cart,"\n product++++++++",result.data.data.product_details);
                 setProducts(result.data.data.product_details);
-                if(result.data.data.product_details.length===0){    
+                if(result.data.data.product_details.length===0){
                     history.goBack()
                 }
-                
+
             }else{
                 console.log(result.data.message);
             }
@@ -86,7 +88,7 @@ const Checkout: React.FC = (props: any) => {
         if(cartDetails && Array.isArray(cartDetails) && cartDetails.length>0 && products && Array.isArray(products) && products.length>0){
             cartDetails.forEach((item:any, index:any) => {
                 if(products && products[index]){
-                    totalCost += products[index].salePrice ?  products[index].salePrice * item.count : products[index].regularPrice * item.count; 
+                    totalCost += products[index].salePrice ?  products[index].salePrice * item.count : products[index].regularPrice * item.count;
                 }
             })
             console.log("totalCost",totalCost)
@@ -180,7 +182,7 @@ const Checkout: React.FC = (props: any) => {
         let y = products.filter((e:any)=>e._id!==productID)
         let x = cartDetails.filter((e:any) => e.product !== productID);
         console.log(productID,x)
-        
+
         updatecart(x,y) ;
     }
 
@@ -203,10 +205,10 @@ const Checkout: React.FC = (props: any) => {
                 console.log(res.data)
                 setcartDetails(x);
                 setProducts(y);
-                if(x.length===0){    
+                if(x.length===0){
                     history.goBack()
                 }
-                
+
             }
             else{
                 props.openToast(res.data.message);
@@ -217,7 +219,7 @@ const Checkout: React.FC = (props: any) => {
             props.openToast("server error");
         })
         .finally(() => props.loading(false))
-    }   
+    }
 
 
 
@@ -237,7 +239,7 @@ const Checkout: React.FC = (props: any) => {
         else{
             return false
         }
-        
+
     }
 
 
@@ -271,7 +273,9 @@ const Checkout: React.FC = (props: any) => {
                                 <IonIcon slot="icon-only" icon={arrowBack} />
                             </IonButton>
                         </IonButtons>
-                    <IonTitle className="custom-heading-text">Checkout</IonTitle>
+                    <IonTitle className="custom-heading-text">
+                        {t('checkoutPage.checkoutText')}
+                    </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
@@ -280,9 +284,11 @@ const Checkout: React.FC = (props: any) => {
                     <CheckoutItem isOk={isAvailableLocal(ele._id)} deleteItem={deleteItem} key={i} data={ele} cart={cartDetails.find((e:any)=>e.product==ele?._id)}/>
                 ))}
                 <div className="order-summary">
-                    <h5>Total : {total}</h5>
+                    <h5>{t('checkoutPage.totalText')} : {total}</h5>
                 </div>
-                <IonButton onClick={placeOrder} disabled={!orderPlaceable} expand="full" className="place-final-order">Place order</IonButton>
+                <IonButton onClick={placeOrder} disabled={!orderPlaceable} expand="full" className="place-final-order">
+                {t('checkoutPage.placeOrder')}
+                </IonButton>
             </IonContent>
         </IonPage>
     );

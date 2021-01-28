@@ -9,7 +9,7 @@ import apis from "../../services/apis";
 import { openToast, loading } from "../../actions/loadingAction";
 import { arrowBack } from 'ionicons/icons';
 import { useIonViewWillEnter } from "@ionic/react";
-
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -18,6 +18,7 @@ const SearchPage: React.FC = (props: any) => {
     const [searchText, setSearchText] = useState('');
     const [categories,setCategories]:[any,any] = useState([undefined,undefined,undefined,undefined,undefined]);
     const history = useHistory();
+    const { t } = useTranslation();
 
     const goBack = ()=>{
         history.goBack();
@@ -69,25 +70,25 @@ const SearchPage: React.FC = (props: any) => {
                                 <IonIcon slot="icon-only" icon={arrowBack} />
                             </IonButton>
                         </IonButtons>
-                    <IonTitle className="custom-heading-text">Search</IonTitle>
+                    <IonTitle className="custom-heading-text">{t('SearchPage.headerText')}</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
                 <div className="search-bar-wrapper">
-                    <IonSearchbar placeholder="Search item" value={searchText} onIonChange={e => setSearchText(e.detail.value!)}/>
+                    <IonSearchbar placeholder={t('SearchPage.searchBarPlaceHolder')} value={searchText} onIonChange={e => setSearchText(e.detail.value!)}/>
                     <IonButton className="search-result-button" onClick={searchGetResult}>
-                        Search
+                        {t('SearchPage.headerText')}
                     </IonButton>
                 </div>
 
                 <IonCard>
-                    <h3 style={{textAlign:"center"}}>Select a category</h3>
-                    {loadingCategories ? 
+                    <h3 style={{textAlign:"center"}}>{t('SearchPage.categorySelectHeader')}</h3>
+                    {loadingCategories ?
                         <IonSkeletonText animated style={{ width: '100%%',height:'100px' }}/>
                         :
                         <div className="category-container">
                             {categories.length===0?
-                                <h4>No categories</h4>
+                                <h4>{t('SearchPage.noCategoryText')}</h4>
                                 :
                                 categories.map((ele:any,i:any)=>{
                                     if(ele){
@@ -95,11 +96,11 @@ const SearchPage: React.FC = (props: any) => {
                                     }
                                 })
                             }
-                            
+
                         </div>
                     }
                 </IonCard>
-                
+
             </IonContent>
         </IonPage>
     );

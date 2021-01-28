@@ -9,11 +9,13 @@ import HomePageLates from "../../components/HomePageLatest"
 import './Home.css';
 import WeatherForeCast from "./WeatherForeCast"
 import { search, logoWhatsapp } from 'ionicons/icons';
-
+import { useTranslation } from 'react-i18next';
 
 const Home: React.FC = (props: any) => {
   console.log("2")
   const history = useHistory();
+  const { t } = useTranslation()
+
 
   const IamPressed = () => {
     console.log("yooo")
@@ -28,7 +30,9 @@ const Home: React.FC = (props: any) => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="custom-header">
-          <IonTitle className="custom-heading-text">Home</IonTitle>
+          <IonTitle className="custom-heading-text">
+            {t('homePage.headerText')}
+          </IonTitle>
           <IonButtons slot="secondary">
             <IonButton className="search-button" onClick={goToSearch}>
               <IonIcon slot="icon-only" icon={search} />
@@ -46,7 +50,7 @@ const Home: React.FC = (props: any) => {
               <IonIcon icon={logoWhatsapp} />
             </IonFabButton>
           </a>
-          
+
         </IonFab>
         <WeatherForeCast />
       </IonContent>

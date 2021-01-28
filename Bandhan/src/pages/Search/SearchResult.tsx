@@ -10,13 +10,15 @@ import { openToast, loading } from "../../actions/loadingAction";
 import { arrowBack } from 'ionicons/icons';
 import { useIonViewWillEnter } from "@ionic/react";
 import ItemCard from "../../components/ItemCard"
-
+import { useTranslation } from 'react-i18next';
 
 
 const SearcResult: React.FC = (props: any) => {
     const [productList,setProductList]:[any,any] = useState([]);
     const [sortby, setSortBy] = useState("");
     const history = useHistory();
+    const { t } = useTranslation();
+
 
     const goBack = ()=>{
         history.goBack();
@@ -66,11 +68,13 @@ const SearcResult: React.FC = (props: any) => {
                                 <IonIcon slot="icon-only" icon={arrowBack} />
                             </IonButton>
                         </IonButtons>
-                    <IonTitle className="custom-heading-text">Result</IonTitle>
+                    <IonTitle className="custom-heading-text">
+                        {t('SearchresultPage.headerText')}
+                    </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                <IonItem>
+                {/* <IonItem>
                     <IonLabel>Sort By</IonLabel>
                     <IonSelect value={sortby} onIonChange={e => setSortBy(e.detail.value)}>
                         <IonSelectOption value="">Default</IonSelectOption>
@@ -81,17 +85,17 @@ const SearcResult: React.FC = (props: any) => {
                         <IonSelectOption value="maxsold">Maximum Sold</IonSelectOption>
                         <IonSelectOption value="minsold">Minimum Sold</IonSelectOption>
                     </IonSelect>
-                </IonItem>
+                </IonItem> */}
                 <IonGrid>
                     <IonRow>
                         {productList.map((ele:any,i:any)=>(
                             <IonCol size="6" key={i} className="ion-no-padding">
                                 <ItemCard data={ele}/>
                             </IonCol>
-                            
-                        ))} 
+
+                        ))}
                     </IonRow>
-                </IonGrid>       
+                </IonGrid>
             </IonContent>
         </IonPage>
     );

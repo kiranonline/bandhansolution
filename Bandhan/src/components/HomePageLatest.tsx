@@ -5,12 +5,12 @@ import {loading,openToast} from "../actions/loadingAction";
 import apis from "../services/apis";
 import http from "../services/httpCall";
 import ItemCard from "./ItemCard"
-
+import { useTranslation } from 'react-i18next';
 
 
 function HomePageLates(props:any) {
     const [trendingItems,setTrendingitems]:[any,any] = useState([undefined,undefined,undefined,undefined]);
-
+    const { t } = useTranslation()
 
     let fetchLatestItems = ()=>{
         http.get(`${apis.FETCH_PRODUCT_HIGHLIGHT}?limit=4&producttype=new`)
@@ -26,7 +26,7 @@ function HomePageLates(props:any) {
         .catch((err)=>{
             console.log(err)
             props.openToast("server error");
-        })        
+        })
     }
 
 
@@ -36,7 +36,9 @@ function HomePageLates(props:any) {
 
     return (
         <div>
-            <h4 className="homepage-main-text-latest">Latest Products</h4>
+            <h4 className="homepage-main-text-latest">
+                {t('homePage.lates')}
+            </h4>
             <IonGrid>
                 <IonRow>
                     {trendingItems.map((ele:any,i:any)=>(
@@ -44,7 +46,7 @@ function HomePageLates(props:any) {
                             <ItemCard data={ele}/>
                         </IonCol>
                     ))}
-                    
+
                 </IonRow>
             </IonGrid>
         </div>
@@ -53,7 +55,7 @@ function HomePageLates(props:any) {
 
 
 const mapStateToProps= (state:any) => ({})
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
     loading,
     openToast
 })(HomePageLates);

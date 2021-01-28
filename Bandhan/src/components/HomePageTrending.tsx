@@ -6,12 +6,12 @@ import apis from "../services/apis";
 import http from "../services/httpCall";
 import { constructOutline } from 'ionicons/icons';
 import ItemCard from "../components/ItemCard"
-
+import { useTranslation } from 'react-i18next';
 
 
 function HomePageTrending(props:any) {
     const [trendingItems,setTrendingitems]:[any,any] = useState([undefined,undefined,undefined,undefined]);
-
+    const { t } = useTranslation()
 
     let fetchTrendingItems = ()=>{
         http.get(`${apis.FETCH_PRODUCT_HIGHLIGHT}?limit=4&producttype=popular`)
@@ -27,7 +27,7 @@ function HomePageTrending(props:any) {
         .catch((err)=>{
             console.log(err)
             props.openToast("server error");
-        })        
+        })
     }
 
 
@@ -37,7 +37,9 @@ function HomePageTrending(props:any) {
 
     return (
         <div>
-            <h4 className="homepage-main-text-trending">Trending Products</h4>
+            <h4 className="homepage-main-text-trending">
+                {t('homePage.trending')}
+            </h4>
             <IonGrid>
                 <IonRow>
                     {trendingItems.map((ele:any,i:any)=>(
@@ -45,7 +47,7 @@ function HomePageTrending(props:any) {
                             <ItemCard data={ele}/>
                         </IonCol>
                     ))}
-                    
+
                 </IonRow>
             </IonGrid>
         </div>
@@ -54,7 +56,7 @@ function HomePageTrending(props:any) {
 
 
 const mapStateToProps= (state:any) => ({})
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
     loading,
     openToast
 })(HomePageTrending);

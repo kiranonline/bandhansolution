@@ -13,6 +13,77 @@
       "nameField": "নাম প্রবেশ করান",
       "emailField": "ইমেইল প্রবেশ করান",
       "submitButton": "সাইন আপ করুন"
+    },
+    "SignUpOTP": {
+      "otpBox": "OTP লিখুন",
+      "submitButton": "বৈধ করুন"
     }
+  },
+  "SearchPage": {
+    "headerText": "সন্ধান",
+    "searchBarPlaceHolder": "সন্ধান বিষয়োপকরণ",
+    "categorySelectHeader": "একটি শ্রেণী নির্বাচন করুন",
+    "noCategoryText": "কোন বিভাগ নেই"
+  },
+  "SearchresultPage": {
+    "headerText": "ফলাফল"
+  },
+  "profilePage": {
+    "headertext": "প্রোফাইল",
+    "logoutButtonText": "লগ আউট করুন"
+  },
+  "productPage": {
+    "headerText": "পণ্য",
+    "addToCartButtonText": "কার্ট যোগ করুন "
+  },
+  "orderCard": {
+    "id": "Id",
+    "orderedOn": "আদেশ দেওয়া",
+    "deliverTo": "সরবরাহ করা"
+  },
+  "orderDetails": {
+    "unitPrice": "একক দাম",
+    "totalPrice": "মোট দাম",
+    "count": "গণনা",
+    "removetext": "অপসারণ",
+    "orderSuccess": "অর্ডার সাফল্য ",
+    "orderSuccessMessage": "আপনার অর্ডার suceffully স্থাপন করা হয় "
+  },
+  "orderListPage": {
+    "pageHeader": "অর্ডার ",
+    "empthOrderList": "আপনার অর্ডার তালিকা খালি! ",
+    "shopping": "কিছু শপিং সম্পর্কে "
+  },
+  "homePage": {
+    "headerText": "বাড়ি",
+    "locationpermNotGranted": "অবস্থানের অনুমতি দেওয়া হয়নি ",
+    "grantPermission": "অনুদান অনুমতি",
+    "lates": "সর্বশেষ পণ্য",
+    "trending": "ট্রেন্ডিং পণ্য"
+  },
+  "addresspage": {
+    "makeDefault": "ডিফল্ট করা",
+    "noAddress": "আপনার কোনও ঠিকানা নেই"
+  },
+  "checkoutPage": {
+    "checkoutText": "চেকআউট ",
+    "totalText": "মোট ",
+    "placeOrder": "অর্ডার "
+  },
+  "cartPage": {
+    "headerText": "ঝুড়ি",
+    "empthCart": "তোমার থলে তো খালি!",
+    "shopping": "কিছু শপিং সম্পর্কে"
+  },
+  "addAddress": {
+    "headertext": "ঠিকানা যোগ করুন",
+    "addressline1": "ঠিকানা লাইন 1",
+    "addressline2": "ঠিকানা লাইন ২",
+    "locality": "লোকালয়",
+    "city": "শহর",
+    "district": "জেলা",
+    "state": "রাষ্ট্র",
+    "country": "দেশ",
+    "picCode": "পিন কোড"
   }
 }

@@ -9,12 +9,17 @@ import apis from '../../services/apis';
 import http from '../../services/httpCall';
 import './Cart.css';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 const Cart: React.FC = (props: any) => {
     const [cartItems,setcartItems]:[any,any] = useState([undefined,undefined,undefined,undefined,undefined]);
     const [cartCounts,setCartCounts]:[any,any] = useState([0,0,0,0])
     const [cartId,setCartId]:[any,any]=useState();
     const history = useHistory();
+    const { t } = useTranslation()
+
+
 
     const fetchCartData = ()=>{
         props.loading(true)
@@ -26,7 +31,7 @@ const Cart: React.FC = (props: any) => {
                 setCartId(result.data.data._id)
             }
             else{
-                props.openToast(result.data.message)
+                //props.openToast(result.data.message)
                 setcartItems([])
             }
         }).catch(err=>{
@@ -46,7 +51,7 @@ const Cart: React.FC = (props: any) => {
     const updateQty = (id:any, amount:number) => {
         let x = cartCounts.map((item:any) => {
             if (item._id !== id) return item;
-            return {...item, count: item.count + amount}    
+            return {...item, count: item.count + amount}
         })
         console.log(x);
         syncCart(x)
@@ -89,14 +94,16 @@ const Cart: React.FC = (props: any) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar className="custom-header">
-                    <IonTitle className="custom-heading-text">Cart</IonTitle>
+                    <IonTitle className="custom-heading-text">
+                        {t('cartPage.headerText')}
+                    </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
                 {cartItems.length===0?
                     <div style={{width:"100%",textAlign:"center"}}>
-                        <h1>Your cart is empty!</h1>
-                        <h4>How about some shopping</h4>
+                        <h1>{t('cartPage.empthCart')}</h1>
+                        <h4>{t('cartPage.shopping')}</h4>
                     </div>
                     :
                     <div >
@@ -104,11 +111,11 @@ const Cart: React.FC = (props: any) => {
                             <CartItem deleteItem={deleteItem} updateQty={updateQty} key={i} data={ele} cart={cartCounts.find((e:any)=>e.product==ele?._id)}/>
                         ))}
                         {cartItems.length>0 && cartItems[0] && <IonButton onClick={goToCheckout} className="checkout-button" expand="full">CHECKOUT</IonButton> }
-                        
+
                     </div>
                 }
-                
-                
+
+
             </IonContent>
         </IonPage>
     );

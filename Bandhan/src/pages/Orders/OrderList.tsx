@@ -10,10 +10,14 @@ import http from '../../services/httpCall';
 import './OrderList.css';
 import { useHistory } from 'react-router-dom';
 import OrderCard from "./OrderCard"
+import { useTranslation } from 'react-i18next';
+
 
 const OrderList: React.FC = (props: any) => {
     const [orderData,setOrderData]:[any,any] = useState([undefined,undefined,undefined,undefined,undefined,undefined]);
     const history = useHistory();
+    const { t } = useTranslation();
+
 
     const fetchOrderItems = ()=>{
         props.loading(true)
@@ -52,7 +56,9 @@ const OrderList: React.FC = (props: any) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar className="custom-header">
-                    <IonTitle className="custom-heading-text">Orders</IonTitle>
+                    <IonTitle className="custom-heading-text">
+                        {t('orderListPage.pageHeader')}
+                    </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
@@ -62,10 +68,14 @@ const OrderList: React.FC = (props: any) => {
                 {orderData && Array.isArray(orderData) && orderData.length===0
                     &&
                     <div style={{width:"100%",textAlign:"center"}}>
-                        <h1>Your order list is empty!</h1>
-                        <h4>How about some shopping</h4>
+                        <h1>
+                            {t('orderListPage.empthOrderList')}
+                        </h1>
+                        <h4>
+                            {t('orderListPage.shopping')}
+                        </h4>
                     </div>
-                }      
+                }
             </IonContent>
         </IonPage>
     );

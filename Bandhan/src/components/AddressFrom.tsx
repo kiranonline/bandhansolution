@@ -7,11 +7,12 @@ import { useForm } from "react-hook-form";
 import { arrowBack } from 'ionicons/icons';
 import http from '../services/httpCall';
 import apis from '../services/apis';
-
+import { useTranslation } from 'react-i18next';
 
 //++++++++++++++add addres++++++++++++++++++
 function AddressForm(props:any) {
     const {register,handleSubmit,watch,errors,setValue,reset,} = useForm({mode: "onSubmit",reValidateMode: "onChange"});
+    const { t } = useTranslation()
 
     const onSubmit = (data:any)=>{
         let dataToSend = {...data};
@@ -24,7 +25,7 @@ function AddressForm(props:any) {
         http.post(url,dataToSend).then((result)=>{
             console.log(result.data);
             props.openToast(result.data.message);
-            
+
             http.get(apis.GET_USER_DETAILS).then((result)=>{
                 console.log(result);
                 if(result.data.status){
@@ -62,15 +63,15 @@ function AddressForm(props:any) {
     },[props.data])
 
 
-    
-    
+
+
 
 
     return (
-        <IonModal 
+        <IonModal
             isOpen={props.isModalShowing}
             cssClass='add-address-modal'
-            
+
         >
             <IonContent>
                 <IonHeader className="ion-no-border">
@@ -80,13 +81,15 @@ function AddressForm(props:any) {
                                 <IonIcon slot="icon-only" icon={arrowBack} />
                             </IonButton>
                         </IonButtons>
-                        <IonTitle>Add Address</IonTitle>
+                        <IonTitle>
+                            {t('addAddress.headertext')}
+                        </IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="address-add-form">
                     <IonItem style={{display:"none"}}>
-                        <IonInput 
-                            placeholder="Address line 1" 
+                        <IonInput
+                            placeholder={t('addAddress.addressline1')}
                             type="text"
                             name="l1"
                             ref={register({
@@ -95,8 +98,8 @@ function AddressForm(props:any) {
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"address-form-input" + (errors.lineone?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="Address line 1" 
+                        <IonInput
+                            placeholder={t('addAddress.addressline2')}
                             type="text"
                             name="lineone"
                             ref={register({
@@ -105,8 +108,8 @@ function AddressForm(props:any) {
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"address-form-input" + (errors.locality?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="Locality" 
+                        <IonInput
+                            placeholder={t('addAddress.locality')}
                             type="text"
                             name="locality"
                             ref={register({
@@ -115,8 +118,8 @@ function AddressForm(props:any) {
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"address-form-input" + (errors.city?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="City" 
+                        <IonInput
+                            placeholder={t('addAddress.city')}
                             type="text"
                             name="city"
                             ref={register({
@@ -125,8 +128,8 @@ function AddressForm(props:any) {
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"address-form-input" + (errors.district?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="District" 
+                        <IonInput
+                            placeholder={t('addAddress.district')}
                             type="text"
                             name="district"
                             ref={register({
@@ -135,8 +138,8 @@ function AddressForm(props:any) {
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"address-form-input" + (errors.state?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="Stater" 
+                        <IonInput
+                            placeholder={t('addAddress.state')}
                             type="text"
                             name="state"
                             ref={register({
@@ -145,8 +148,8 @@ function AddressForm(props:any) {
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"address-form-input" + (errors.country?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="Country" 
+                        <IonInput
+                            placeholder={t('addAddress.country')}
                             type="text"
                             name="country"
                             ref={register({
@@ -155,8 +158,8 @@ function AddressForm(props:any) {
                         ></IonInput>
                     </IonItem>
                     <IonItem className={"address-form-input" + (errors.pincode?" input-validation-error":"") }>
-                        <IonInput 
-                            placeholder="Pin code" 
+                        <IonInput
+                            placeholder={t('addAddress.picCode')}
                             type="text"
                             name="pincode"
                             ref={register({
@@ -166,7 +169,9 @@ function AddressForm(props:any) {
                             })}
                         ></IonInput>
                     </IonItem>
-                    <IonButton expand="full" type="submit" className="add-address-button">Add Address</IonButton>
+                    <IonButton expand="full" type="submit" className="add-address-button">
+                        {t('addAddress.headertext')}
+                    </IonButton>
                 </form>
             </IonContent>
         </IonModal>
@@ -175,7 +180,7 @@ function AddressForm(props:any) {
 
 
 const mapStateToProps= (state:any) => ({})
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
     loading,
     openToast,
     setUserDetails

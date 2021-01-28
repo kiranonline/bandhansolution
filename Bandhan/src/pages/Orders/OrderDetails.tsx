@@ -10,7 +10,7 @@ import { openToast, loading } from "../../actions/loadingAction";
 import { arrowBack } from 'ionicons/icons';
 import { useIonViewWillEnter } from "@ionic/react";
 import OrderProduct from "./OrderDetailsProduct"
-
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -19,6 +19,7 @@ const OrderDetails: React.FC = (props: any) => {
     const [orderDetails, setOrderDetails]:[any,any] = useState();
     const {id}:any = useParams();
     const history = useHistory();
+    const { t } = useTranslation();
 
     const goBack = ()=>{
         history.goBack();
@@ -31,7 +32,7 @@ const OrderDetails: React.FC = (props: any) => {
         props.loading(true)
         http.get(`${apis.ORDER_DETAILS}/${id}`).then((result)=>{
             console.log(result.data)
-            
+
             if(result.data.status){
                 setOrderDetails(result.data.data);
             }
@@ -48,7 +49,7 @@ const OrderDetails: React.FC = (props: any) => {
     useIonViewWillEnter(()=>{
         fetchOrderDetails();
     })
- 
+
 
     return (
         <IonPage>
@@ -59,16 +60,16 @@ const OrderDetails: React.FC = (props: any) => {
                                 <IonIcon slot="icon-only" icon={arrowBack} />
                             </IonButton>
                         </IonButtons>
-                    <IonTitle className="custom-heading-text">Order : {id}</IonTitle>
+                    <IonTitle className="custom-heading-text">{t('orderCard.id')}  : {id}</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                {orderDetails && orderDetails.address && 
+                {orderDetails && orderDetails.address &&
                     <div className="order-details-address" >
-                        <h5>Deliver to</h5>
+                        <h5>{t('orderCard.deliverTo')} </h5>
                         <h6>
                             {`
-                                ${orderDetails.address.lineone}, 
+                                ${orderDetails.address.lineone},
                                 ${orderDetails.address.locality}
                             `}
                         </h6>

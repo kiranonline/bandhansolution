@@ -6,15 +6,18 @@ import ProfilePageImage from "../../components/ProfilePageImage";
 import UserDetailsCard from "../../components/UserDetailsCard";
 import AddressList from "../../components/AddressList";
 import './Profile.css';
-
+import { useTranslation } from 'react-i18next';
 
 
 
 const Profile: React.FC = (props: any) => {
+    const { t } = useTranslation();
 
     const Logout = ()=>{
         props.logout()
     }
+
+
     return(
         <IonPage>
             <IonHeader>
@@ -22,7 +25,7 @@ const Profile: React.FC = (props: any) => {
                     <IonButtons slot="start">
                         <IonBackButton icon="arrow-back-outline" text="go back"/>
                     </IonButtons>
-                    <IonTitle className="custom-heading-text">Profile</IonTitle>
+                    <IonTitle className="custom-heading-text">{t('profilePage.headertext')}</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
@@ -31,7 +34,7 @@ const Profile: React.FC = (props: any) => {
                 <UserDetailsCard data={props.Auth.userdetails} />
                 <AddressList />
                 <IonButton onClick={Logout} expand="full" className="log-out-button">
-                    Log out
+                    {t('profilePage.logoutButtonText')}
                 </IonButton>
             </IonContent>
         </IonPage>

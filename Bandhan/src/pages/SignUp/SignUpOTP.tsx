@@ -7,7 +7,8 @@ import {login} from "../../actions/authAction";
 import apis from "../../services/apis";
 import http from "../../services/httpCall";
 import { Plugins } from '@capacitor/core';
-import {useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 const { Storage } = Plugins;
 
 
@@ -15,7 +16,7 @@ const { Storage } = Plugins;
 const SignUpOTP = (props:any)=>{
     const {register,handleSubmit,watch,errors,setValue,reset,} = useForm({mode: "onSubmit",reValidateMode: "onChange"});
     const history = useHistory();
-
+    const { t } = useTranslation();
 
     const onSubmit = (data:any)=>{
         console.log(data);
@@ -54,17 +55,18 @@ const SignUpOTP = (props:any)=>{
                         required: true,
                         minLength:6,
                         maxLength:6
-                      })}
+                    })}
+                    placeholder={t('SignUpPage.SignUpOTP.otpBox')}
                 ></IonInput>
-            </IonItem>   
-            <IonButton expand="full" type="submit" className="signup-button normal">Validate</IonButton>
+            </IonItem>
+            <IonButton expand="full" type="submit" className="signup-button normal">{t('SignUpPage.SignUpOTP.submitButton')}</IonButton>
         </form>
     )
 }
 
 
 const mapStateToProps= (state:any) => ({})
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
     loading,
     openToast,
     login

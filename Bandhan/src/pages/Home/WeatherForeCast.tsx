@@ -2,8 +2,13 @@ import React from 'react'
 import { connect } from "react-redux";
 import { IonSkeletonText, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonGrid, IonCol, IonRow, IonCard } from '@ionic/react';
 import { setGeoCordinates } from "../../actions/authAction"
+import { useTranslation } from 'react-i18next';
+
 
 function WeatherForeCast(props:any) {
+    const { t } = useTranslation()
+
+
     return (
         <>
         {props.Auth.weatherInfo.fetchingWeatherInfo?
@@ -45,17 +50,21 @@ function WeatherForeCast(props:any) {
                 </div>
                 :
                 <div className="permission-not-granted-wrapper">
-                    <h5>Location permission not granted</h5>
-                    
-                    <IonButton onClick={props.setGeoCordinates} className="grant-permission-button">Grant Permission</IonButton>
+                    <h5>
+                        {t('homePage.locationpermNotGranted')}
+                    </h5>
+
+                    <IonButton onClick={props.setGeoCordinates} className="grant-permission-button">
+                        {t('homePage.grantPermission')}
+                    </IonButton>
                 </div>
             }
             </>
         }
-            
-            
+
+
         </>
-        
+
     )
 }
 

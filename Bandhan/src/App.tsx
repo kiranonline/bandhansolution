@@ -30,7 +30,7 @@ const App: React.FC = (props:any) =>{
       props.changeLanguage(Language.value)
     }
     else{
-      props.changeLanguage("en")
+      props.changeLanguage("bn")
     }
   }
 

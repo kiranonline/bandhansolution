@@ -11,7 +11,7 @@ import { openToast, loading } from "../../actions/loadingAction";
 import ProductImageSlide from "./ProductImageSlide";
 import { starOutline, star, cartOutline, arrowBack } from 'ionicons/icons';
 import { useIonViewWillEnter } from "@ionic/react";
-
+import { useTranslation } from 'react-i18next';
 
 
 const Product: React.FC = (props: any) => {
@@ -19,7 +19,7 @@ const Product: React.FC = (props: any) => {
     const [product,setProduct]:[any,any] = useState()
     const { id }:any = useParams();
     const history = useHistory();
-    
+    const { t } = useTranslation();
 
     let fetchProductDetails = ()=>{
         props.loading(true)
@@ -31,7 +31,7 @@ const Product: React.FC = (props: any) => {
                 const contentState = convertFromRaw(JSON.parse(result.data.data.description));
                 const editorState = EditorState.createWithContent(contentState);
                 setProductDescription(editorState);
-                
+
             }else{
                 console.log(result.data.message);
                 props.openToast(result.data.message)
@@ -98,7 +98,7 @@ const Product: React.FC = (props: any) => {
                                 <IonIcon slot="icon-only" icon={arrowBack} />
                             </IonButton>
                         </IonButtons>
-                    <IonTitle className="custom-heading-text">Product</IonTitle>
+                    <IonTitle className="custom-heading-text">{t('productPage.headerText')}</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
@@ -117,7 +117,7 @@ const Product: React.FC = (props: any) => {
                                     </span>
                                 )}
                             </div>
-                            
+
                             <div className="product-description-price-container">
                                 {product.salePrice?
                                     <>
@@ -129,7 +129,7 @@ const Product: React.FC = (props: any) => {
                                     :
                                     <span className="price-striked-inner actual-price sz-bg"><span>&nbsp;&#8377;</span>{product.regularPrice}</span>
                                 }
-                            </div>  
+                            </div>
 
                             <div className="product-unit-container">
                                 <IonGrid>
@@ -143,13 +143,13 @@ const Product: React.FC = (props: any) => {
                                             </IonCol>
                                         </IonRow>
                                     ))}
-                                    
+
                                 </IonGrid>
                             </div>
 
                             <div className="product-description-add-to-cart">
                                 <IonButton expand="full" className="add-to-cart-button" onClick={addToCart}>
-                                    ADD TO CART
+                                    {t('productPage.addToCartButtonText')}
                                     <IonIcon slot="end" icon={cartOutline} />
                                 </IonButton>
                             </div>
@@ -165,7 +165,7 @@ const Product: React.FC = (props: any) => {
                                     <IonIcon icon={starOutline} className="item-star" />
                                 </div>
 
-                                
+
                             </div> */}
                             <Editor editorState={productDescription} readOnly={true} onChange={()=>null} />
 
@@ -176,9 +176,9 @@ const Product: React.FC = (props: any) => {
                                     </iframe>
                                 </div>
                             }
-                            
+
                         </div>
-                        
+
                     </div>
                     :
                     null
