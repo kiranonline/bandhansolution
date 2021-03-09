@@ -6,11 +6,13 @@ const { Storage, Geolocation } = Plugins;
 
 
 
-export const changeLanguage = (lang:string) => {
-    return {
+export const changeLanguage = (lang:string) =>async(dispatch:any) => {
+    console.log(lang)
+    await Storage.set({ key: 'default_language', value:lang });
+    dispatch({
         type: 'CHANGE_LANGUAGE',
         payload:lang
-    };
+    })
 };
 
 

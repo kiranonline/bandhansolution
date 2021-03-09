@@ -29,9 +29,6 @@ const App: React.FC = (props:any) =>{
     if(Language.value && Language.value!=="null" && Language.value!=="undefined"){
       props.changeLanguage(Language.value)
     }
-    else{
-      props.changeLanguage("bn")
-    }
   }
 
 
@@ -59,6 +56,7 @@ const App: React.FC = (props:any) =>{
     fetchUserDetails();
     props.setGeoCordinates()
   },[])
+
 
 
   return(
