@@ -1,7 +1,9 @@
 const express = require("express");
 const {body, oneOf, query} = require("express-validator");
-const { LoginWithEmailAndPassword, getUserDetails, resnedOTP, getProfileDetails, updateProfile } = require("../controllers/authControllers");
+const bcrypt=require("bcrypt");
+const { LoginWithEmailAndPassword, getUserDetails, resnedOTP, getProfileDetails, updateProfile, forgotpassword, changepassword, resendotppasswordchange } = require("../controllers/authControllers");
 const { createnormalUser, otpverification,loginnormalUser } = require("../controllers/authControllers");
+const User = require("../models/User");
 const {isAuthenticated} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
 const router = express.Router();
@@ -32,6 +34,29 @@ router.post("/user/otpverification",[
 router.post("/user/resend_otp",[
     body("user_id").not().isEmpty()
 ],errorHandler,resnedOTP);
+
+
+//++++++++++++++++++++++++++++++++ Forgot password, (send the otp) ++++++++++++++++++++++++++++++++++
+router.post("/user/forgotpassword",[
+    body("phoneNumber").not().isEmpty()
+],errorHandler, forgotpassword)
+
+
+
+//++++++++++++++++++++++++++++++++ Resend otp for forgot password ++++++++++++++++++++++++++++++++++
+router.post("/user/resendotppasswordchange", [
+    body("phoneNumber").not().isEmpty()
+],errorHandler, resendotppasswordchange)
+
+
+//++++++++++++++++++++++++++++++++ Change password ++++++++++++++++++++++++++++++++++
+router.post("/user/changepassword",[
+    body("otpnumber").not().isEmpty(),
+    body("newpassword").not().isEmpty(),
+    body("phoneNumber").not().isEmpty()
+],errorHandler, changepassword)
+
+
 
 //++++++++++++++++++++++++++++++++++++++ Login Customer with email or phone number & password ++++++++++++++++++++++++++++++
 router.post("/user/login-with-email-or-phone-password",[

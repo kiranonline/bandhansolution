@@ -275,6 +275,20 @@
   color:rgb(22, 160, 68)
 }
 
+.login-forgotpassword{
+  margin-top: 10px;
+}
+
+.login-forgotpassword a{
+  color: black;
+  border-bottom: 1px solid black;
+  transition: color 0.2s ease-in-out;
+}
+
+.login-forgotpassword a:hover{
+  color: #595f6e;
+}
+
 @media (max-width: 500px){
   .sidePart img{
     width: 90%;

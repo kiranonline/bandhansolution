@@ -195,6 +195,116 @@ exports.otpverification= async(req,res,next)=>{
 }
 
 
+
+//++++++++++++++++++++++++++++++++++++++ Forgot password +++++++++++++++++++++++++++++++++++++
+exports.forgotpassword = async(req,res)=>{
+    try{
+        const {phoneNumber} = req.body;
+        let otpnumber=Math.floor(100000 + Math.random() * 900000);
+        console.log(otpnumber)
+        console.log(phoneNumber);
+        // verify the number and push the otp in this user's otp array
+        // then send it to the frontend
+        
+        let updateduser = await User.findOneAndUpdate({phoneNumber: phoneNumber},{
+            $push: {
+                otp: otpnumber
+            }
+        },{new:true})
+        if(!updateduser){
+            res.json({
+                status:false,
+                message:"sorry, this phone number not exists"
+            })
+        }else{
+            console.log(updateduser)
+            res.json({
+                status:true,
+                message:"otp sent",
+                otp: updateduser.otp[0],
+                phoneNumber
+            })
+        }
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+    
+}
+
+
+
+//++++++++++++++++++++++++++++++++++++++ Resend otp for password change +++++++++++++++++++++++++++++++++++++
+exports.resendotppasswordchange = async(req,res)=>{
+    try{
+        let { phoneNumber } = req.body;
+
+        // check the otp in user's db having the above phoneNumber and send the otp
+        let user = await User.findOne({phoneNumber});
+        console.log(user);
+        if(user){
+            res.json({
+                status:true,
+                message: "otp resent",
+                otp: user.otp[0]
+            })
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
+
+
+//++++++++++++++++++++++++++++++++++++++ Change password +++++++++++++++++++++++++++++++++++++
+exports.changepassword = async(req,res)=>{
+    try{
+        // validate otp came from frontend
+        const { phoneNumber, otpnumber, newpassword } = req.body;
+
+        let password = await bcrypt.hash(newpassword, 10);
+        
+        let user = await User.findOneAndUpdate({
+            phoneNumber:phoneNumber,
+            otp: {
+                $in: otpnumber
+            }
+        },{
+            password: password,
+            $pull: {
+                otp: otpnumber 
+            }
+        },{new:true});
+        if(!user){
+            res.json({
+                status:false,
+                message:"sorry, we didn't find your mobile number registered"
+            });
+        }else{
+            res.json({
+                status:true,
+                message:"password successfully changed"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : false,
+            message : 'server error'
+        })
+    }
+}
+
+
 //++++++++++++++++++++++++++++++++++++++ Login User with phoneNumber & password +++++++++++++++++++++++++++++++++++++
 exports.loginnormalUser= async(req,res,next)=>{
     try{

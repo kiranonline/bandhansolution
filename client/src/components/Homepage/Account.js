@@ -8,6 +8,7 @@ import { loading } from "../../actions/loadingAction";
 import { modal } from "../../actions/modalAction";
 import { login, setUserDetails,logout } from "../../actions/authAction";
 import './Account.css';
+import Leaves from "./static/images/leaves.png"
 
 function Account(props) {
     const [inview,changeinview] = useState('login');
@@ -158,7 +159,8 @@ function Account(props) {
                         
                         <div className="registerForm d-flex flex-md-row flex-col justify-content-around align-items-center">
                             <div className="sidePart d-md-block d-none" style={{paddingRight: "30px"}}>
-                                        <img width="100%" src="https://acad.xlri.ac.in/evening/images/login.svg" alt="Login Guy" className="login-img"></img>
+                                <img width="100%" src={Leaves} alt=""/>
+                                        {/* <img width="100%" src="https://acad.xlri.ac.in/evening/images/login.svg" alt="Login Guy" className="login-img"></img> */}
                             </div>
                             <form className="login-form d-flex flex-column justify-content-center align-itmes-center" onSubmit={handleSubmit(onSubmitLogin)}>
                                 <h3 className="h3 mb-3">Welcome</h3>
@@ -207,6 +209,10 @@ function Account(props) {
                                         </button>
                                     </div>
                                 </div>
+                                
+                                <div className="login-forgotpassword">
+                                    <Link to="/forgotpassword" onClick={()=>{props.modal(false);}}>forgot your password?</Link>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -215,6 +221,7 @@ function Account(props) {
             ):
             (
                 <React.Fragment>
+                    {/*  */}
                     <div className={`otp-field ${showotpfield? "dblock":"dnone"}`}>
                         <h3 className="h3 text-center mb-3">Enter your OTP</h3>
 

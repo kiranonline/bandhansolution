@@ -29,6 +29,7 @@ function NavbarHeader(props) {
 
     return (
       <div>
+        {/* props.modalisopen.loading */}
         <div id="simpleModal" className={`account-modal ${props.modalisopen.loading?"dblock":"dnone"}`}>
           <div className="account-modal-content">
             <span className="closeBtn" onClick={()=> props.modal(false)}>&times;</span>

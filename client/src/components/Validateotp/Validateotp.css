@@ -1,0 +1,17 @@
+.validateotp-field{
+    /* background: blue; */
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.validateotp-field-inner{
+    /* background: brown; */
+    width: 640px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

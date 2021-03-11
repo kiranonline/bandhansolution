@@ -16,7 +16,10 @@ import BrandHeader from './components/Homepage/BrandHeader';
 import NavbarHeader from './components/Homepage/NavbarHeader';
 import ProductListComponent from './components/Products/ProductListComponent';
 import SingleProductComponent from './components/Products/SingleProductComponent';
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import WhatsappButton from "./components/Extra/WhatsappButton"
+import Validateotp from './components/Validateotp/Validateotp';
+import ChangePassword from './components/ChangePassword/ChangePassword';
 // import './App.css';
 
 
@@ -92,6 +95,9 @@ function App(props) {
                     </Route>
                     <Route path="/terms">
                       <TermsComponent />
+                    </Route>
+                    <Route exact path="/forgotpassword">
+                      <ForgotPassword />
                     </Route>
                     <PrivateRoute path="/">
                         <PrivateComponent location={props.location}/>
