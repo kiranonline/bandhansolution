@@ -1,0 +1,39 @@
+.signup-page-wrapper{
+    --background: green url("../../static/Login-with_overlay.png") no-repeat center center / cover;
+    text-align: center;
+}
+.signup-text{
+    color:#fff;
+    margin-top: 70px;
+    margin-bottom:20px;
+}
+.brand-logo{
+    width:35%;
+    margin-bottom: 70px;
+    margin-top: 70px;
+}
+.signup-input{
+    --background:transparent;
+    color:#fff;
+    --highlight-background: unset;
+    border:1.5px solid #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.signup-button{
+    height: 40px;
+    border-radius: 50px;
+    margin-bottom: 5px;
+}
+.signup-button.normal{
+    --background:#fff;
+    color: black;
+}
+.signup-button.google{
+    --background:#DE5246;
+    color: #fff;
+}
+.signup-button.facebook{
+    --background:#3B5998;
+    color: #fff;
+}

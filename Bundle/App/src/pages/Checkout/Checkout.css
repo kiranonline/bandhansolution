@@ -1,0 +1,20 @@
+.address-card-checkout{
+    border:1.5px solid #E6E6FA;
+    margin: 0 !important;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    padding:12px;
+    text-align: left;
+    width: 90%;
+    min-height: 200px;
+}
+.makde-default-address-button,.place-final-order,.go-home{
+    --background:#a4c639;
+}
+.order-summary{
+    text-align: center;
+    margin-top: 50px;
+}
+.not-okay{
+    background-color: rgb(247, 221, 221);
+}

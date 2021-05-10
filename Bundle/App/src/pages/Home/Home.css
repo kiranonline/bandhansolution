@@ -1,0 +1,60 @@
+.custom-header{
+    --background: #a4c639;
+}
+.custom-heading-text{
+    color: #fff;
+}
+.homepage-slider{
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+.homepage-main-text-trending, .homepage-main-text-latest{
+    width: 100%;
+    text-align: center;
+}
+.homepage-main-text-latest{
+    margin-top: 20px;
+}
+.search-button{
+    color: #fff;
+}
+.whatsapp-share-button{
+    --background: #25D366;
+}
+.custom-weather-row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.custom-weather-col{
+    flex:1;
+}
+.permission-not-granted-wrapper{
+    width:100%;
+    text-align: center;
+    padding-top:50px;
+    padding-bottom: 50px;
+    background-color: rgb(228, 240, 220);
+}
+.grant-permission-button{
+    --background:#a4c639;
+}
+.weather-box{
+    padding:10px;
+}
+.weather-box-icon{
+    width:50%;
+    margin-left: 25%;
+    color:red
+}
+.weather-box h5{
+    text-align: center;
+}
+.custom-weather-inner-row{
+    align-items:center;
+    justify-content: space-between;
+}
+.custom-weather-inner-row p{
+    padding: 0;
+    margin: 0;
+}

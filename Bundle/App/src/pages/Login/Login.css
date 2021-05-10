@@ -1,0 +1,44 @@
+.login-page-wrapper {
+  --background: green url("../../static/Login-with_overlay.png") no-repeat
+    center center / cover;
+  text-align: center;
+}
+.login-text-wrapper {
+  --background: transparent;
+  --highlight-background: unset;
+  text-align: center !important;
+  margin-top: 100px;
+}
+.login-text {
+  color: #fff;
+  text-align: center;
+}
+.login-page-wrapper .brand-logo {
+  width: 55%;
+  margin-bottom: 200px;
+}
+.login-input {
+  --background: transparent;
+  color: #fff;
+  --highlight-background: unset;
+  border: 1.5px solid #fff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.login-button {
+  height: 40px;
+  border-radius: 50px;
+  margin-bottom: 5px;
+}
+.login-button.normal {
+  --background: #fff;
+  color: black;
+}
+.login-button.google {
+  --background: #de5246;
+  color: #fff;
+}
+.login-button.facebook {
+  --background: #3b5998;
+  color: #fff;
+}
