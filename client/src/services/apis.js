@@ -9,6 +9,10 @@ const apis = {
     REGITER_WITH_EMAIL_OR_PHONE : "/apis/v1/user/createnormal",
     OTP_VERIFICATION : "/apis/v1/user/otpverification",
     RESEND_OTP : "/apis/v1/user/resend_otp",
+    FORGOT_PASSWORD : "/apis/v1/user/forgotpassword",
+    RESEND_OTP_PASSWORD_CHANGE : "/apis/v1/user/resendotppasswordchange",
+    CHANGE_PASSWORD : "/apis/v1/user/changepassword",
+
     GET_CATEGORY_LIST : "/apis/v1/user/category/list",
     GET_PRODUCT_LIST : "/apis/v1/user/productlist/",
     GET_SINGLE_PRODUCT : "/apis/v1/product/",
