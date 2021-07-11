@@ -1,0 +1,89 @@
+{
+  "LoginPage": {
+    "LoginForm": {
+      "phoneField": "Enter Phone Number",
+      "passwordField": "Enter password",
+      "loginButton": "LOGIN"
+    }
+  },
+  "SignUpPage": {
+    "SignUpMainForm": {
+      "phoneField": "Enter Phone Number",
+      "passwordField": "Enter password",
+      "nameField": "Enter Name",
+      "emailField": "Enter Email",
+      "submitButton": "Signup"
+    },
+    "SignUpOTP": {
+      "otpBox": "Enter OTP",
+      "submitButton": "Validate"
+    }
+  },
+  "SearchPage": {
+    "headerText": "Search",
+    "searchBarPlaceHolder": "Search Item",
+    "categorySelectHeader": "Select a category",
+    "noCategoryText": "No categories"
+  },
+  "SearchresultPage": {
+    "headerText": "Result"
+  },
+  "profilePage": {
+    "headertext": "Profile",
+    "logoutButtonText": "Log Out"
+  },
+  "productPage": {
+    "headerText": "Product",
+    "addToCartButtonText": "Add to cart"
+  },
+  "orderCard": {
+    "id": "Id",
+    "orderedOn": "Ordered On",
+    "deliverTo": "Deliver To"
+  },
+  "orderDetails": {
+    "unitPrice": "Unit Price",
+    "totalPrice": "Total price",
+    "count": "Count",
+    "removetext": "Remove",
+    "orderSuccess": "Order Success",
+    "orderSuccessMessage": "your order is placed suceffully"
+  },
+  "orderListPage": {
+    "pageHeader": "Orders",
+    "empthOrderList": "Your order list is empty!",
+    "shopping": "How about some shopping"
+  },
+  "homePage": {
+    "headerText": "Home",
+    "locationpermNotGranted": "Location permission not granted",
+    "grantPermission": "Grant Permission",
+    "lates": "Latest Product",
+    "trending": "Trending Products"
+  },
+  "addresspage": {
+    "makeDefault": "Make Default",
+    "noAddress": "You don't have any address"
+  },
+  "checkoutPage": {
+    "checkoutText": "Checkout",
+    "totalText": "total",
+    "placeOrder": "Place Order"
+  },
+  "cartPage": {
+    "headerText": "Cart",
+    "empthCart": "Your cart is empty!",
+    "shopping": "How about some shopping"
+  },
+  "addAddress": {
+    "headertext": "Add Address",
+    "addressline1": "Address line 1",
+    "addressline2": "Address line 2",
+    "locality": "Locality",
+    "city": "City",
+    "district": "District",
+    "state": "State",
+    "country": "Country",
+    "picCode": "Pin code"
+  }
+}

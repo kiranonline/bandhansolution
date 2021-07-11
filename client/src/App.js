@@ -16,7 +16,10 @@ import BrandHeader from './components/Homepage/BrandHeader';
 import NavbarHeader from './components/Homepage/NavbarHeader';
 import ProductListComponent from './components/Products/ProductListComponent';
 import SingleProductComponent from './components/Products/SingleProductComponent';
-
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import WhatsappButton from "./components/Extra/WhatsappButton"
+import Validateotp from './components/Validateotp/Validateotp';
+import ChangePassword from './components/ChangePassword/ChangePassword';
 // import './App.css';
 
 
@@ -30,19 +33,22 @@ function App(props) {
   }
 
   let fetchUserDetails = ()=>{
-        http.get(apis.GET_USER_DETAILS).then((result)=>{
-            console.log(result.data.data);
-            if(result.data.status){
-              props.setUserDetails(result.data.data);
-            }
-            else{
-              props.logout();
-            }
-        }).catch((err)=>{
-            console.log(err);
-            // Errorhandler(err,props.logout)
-            props.logout()
-        })
+    if(Token && Token!=="null" && Token!=="undefined"){
+      http.get(apis.GET_USER_DETAILS).then((result)=>{
+        console.log(result.data.data);
+        if(result.data.status){
+          props.setUserDetails(result.data.data);
+        }
+        else{
+          props.logout();
+        }
+      }).catch((err)=>{
+        console.log(err);
+        // Errorhandler(err,props.logout)
+        props.logout()
+      })
+    }
+        
     }
 
   let fetchCategories = () => {
@@ -90,6 +96,9 @@ function App(props) {
                     <Route path="/terms">
                       <TermsComponent />
                     </Route>
+                    <Route exact path="/forgotpassword">
+                      <ForgotPassword />
+                    </Route>
                     <PrivateRoute path="/">
                         <PrivateComponent location={props.location}/>
                     </PrivateRoute>
@@ -99,6 +108,8 @@ function App(props) {
                 </Switch>
             </BrowserRouter>
             <Footer />
+            <WhatsappButton />
+
         </React.Fragment>
   );
 }

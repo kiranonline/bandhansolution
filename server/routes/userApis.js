@@ -1,6 +1,8 @@
 const express = require("express");
 const {body, oneOf} = require("express-validator");
+const { forgotpassword } = require("../controllers/authControllers");
 const { createUser, listUsers,productlist, updatePassword, updateProfilePic} = require("../controllers/userControllers");
+const User = require("../models/User");
 const {isAuthenticated,isAdmin} = require("../services/authUtils");
 const {errorHandler}  = require("../services/error");
 const router = express.Router();

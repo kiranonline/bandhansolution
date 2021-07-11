@@ -4,6 +4,11 @@ client/node_modules
 admin/node_modules
 admin/build
 
+admin1/node_modules
+admin1/build
+
 Bandhan/node_modules
 Bandhan/android
 Bandhan/build
+
+node_modules/

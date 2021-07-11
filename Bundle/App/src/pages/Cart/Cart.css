@@ -1,0 +1,20 @@
+.cart-item-image{
+    
+}
+.cart-item-wrapper .cart-item-name{
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #a4c639;
+}
+.cart-item-wrapper .cart-item-unit-price{
+    margin: 0;
+    margin-bottom: 3px;
+    color: #a4c639;
+}
+.cart-item-controls{
+    padding-top: 15px;
+}
+.checkout-button{
+    --background: #a4c639;
+}

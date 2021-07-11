@@ -1,0 +1,89 @@
+{
+  "LoginPage": {
+    "LoginForm": {
+      "phoneField": "फोन नंबर दर्ज करें",
+      "passwordField": "पासवर्ड दर्ज करें",
+      "loginButton": "लॉगिन"
+    }
+  },
+  "SignUpPage": {
+    "SignUpMainForm": {
+      "phoneField": "फोन नंबर दर्ज करें",
+      "passwordField": "पासवर्ड दर्ज करें",
+      "nameField": "नाम दर्ज करें",
+      "emailField": "ईमेल दर्ज करें",
+      "submitButton": "पंजीकरण"
+    },
+    "SignUpOTP": {
+      "otpBox": "ओटीपी डालें",
+      "submitButton": "मान्य"
+    }
+  },
+  "SearchPage": {
+    "headerText": "खोज",
+    "searchBarPlaceHolder": "खोज आइटम",
+    "categorySelectHeader": "एक श्रेणी का चयन करें",
+    "noCategoryText": "कोई श्रेणियां नहीं"
+  },
+  "SearchresultPage": {
+    "headerText": "परिणाम"
+  },
+  "profilePage": {
+    "headertext": "ख़ाका",
+    "logoutButtonText": "लॉग आउट करें"
+  },
+  "productPage": {
+    "headerText": "उपज",
+    "addToCartButtonText": "कार्ट में डालें"
+  },
+  "orderCard": {
+    "id": "औडी",
+    "orderedOn": "आदेश दिया",
+    "deliverTo": "को सुपुर्दगी"
+  },
+  "orderDetails": {
+    "unitPrice": "यूनिट मूल्य",
+    "totalPrice": "कुल कीमत",
+    "count": "गिनती",
+    "removetext": "हटा",
+    "orderSuccess": "आदेश सफलता ",
+    "orderSuccessMessage": "आपका आदेश सफलतापूर्वक रखा गया है"
+  },
+  "orderListPage": {
+    "pageHeader": "आदेश ",
+    "empthOrderList": "आपकी आदेश सूची रिक्त है! ",
+    "shopping": "कैसे कुछ खरीदारी के बारे में "
+  },
+  "homePage": {
+    "headerText": "घर",
+    "locationpermNotGranted": "स्थान की अनुमति नहीं दी गई ",
+    "grantPermission": "अनुदान अनुमति",
+    "lates": "नवीनतम उत्पाद",
+    "trending": "ट्रेंडिंग प्रोडक्ट्स"
+  },
+  "addresspage": {
+    "makeDefault": "डिफ़ॉल्ट बनाना ",
+    "noAddress": "आपका कोई पता नहीं है"
+  },
+  "checkoutPage": {
+    "checkoutText": "चेक आउट",
+    "totalText": "कुल",
+    "placeOrder": "आदेश देना"
+  },
+  "cartPage": {
+    "headerText": "टोकरी ",
+    "empthCart": "आपकी टोकरी खाली है!",
+    "shopping": "कैसे कुछ खरीदारी के बारे में"
+  },
+  "addAddress": {
+    "headertext": "पता जोड़ें ",
+    "addressline1": "पता पंक्ति 1",
+    "addressline2": "पता पंक्ति 2",
+    "locality": "इलाका",
+    "city": "शहर",
+    "district": "जिला",
+    "state": "राज्य",
+    "country": "देश",
+    "picCode": "पिन कोड"
+  }
+}

@@ -29,6 +29,7 @@ function NavbarHeader(props) {
 
     return (
       <div>
+        {/* props.modalisopen.loading */}
         <div id="simpleModal" className={`account-modal ${props.modalisopen.loading?"dblock":"dnone"}`}>
           <div className="account-modal-content">
             <span className="closeBtn" onClick={()=> props.modal(false)}>&times;</span>
@@ -52,7 +53,7 @@ function NavbarHeader(props) {
                 </li>
 
                 <li className="nav-item hoverable">
-                  <Link style={myaccount_item} className="nav-link spc" onClick={()=>handleLogout()}>Logout</Link>
+                  <Link style={myaccount_item} className="nav-link spc" to="#" onClick={()=>handleLogout()}>Logout</Link>
                 </li>
 
                 <li className="nav-item mr-2">
