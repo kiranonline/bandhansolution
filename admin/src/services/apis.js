@@ -2,7 +2,7 @@ const envoirnment = process.env.NODE_ENV;
 const apis = {
 
     BASE_LOCAL_URL : envoirnment === "development" ? "http://localhost:7000" : "",
-    BASE_SERVER_URL : envoirnment === "development"? "http://localhost:4500": "https://bandhansolutions.herokuapp.com",
+    BASE_SERVER_URL : envoirnment === "development"? "http://localhost:4500": "",
     
     LOGIN_WITH_EMAIL_AND_PASSWORD : "/apis/v1/login-with-email-password",
     GET_USER_DETAILS:"/apis/v1/userdetails",
