@@ -45,7 +45,7 @@ const Home: React.FC = (props: any) => {
         <HomePageTrending />
         <HomePageLates />
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <a href="https://api.whatsapp.com/send?phone=9563152391">
+          <a href="https://api.whatsapp.com/send?phone=6292209495">
             <IonFabButton className="whatsapp-share-button">
               <IonIcon icon={logoWhatsapp} />
             </IonFabButton>
